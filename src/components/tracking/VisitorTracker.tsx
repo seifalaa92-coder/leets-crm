@@ -110,29 +110,36 @@ export function VisitorTracker({ pageUrl, pageTitle }: VisitorTrackerProps) {
     }
   }, []);
 
-  // Track page visit on mount
+  // Track page visit on mount - using setTimeout to not block initial render
   useEffect(() => {
-    const track = async () => {
+    const timer = setTimeout(async () => {
       const url = pageUrl || window.location.href;
       const title = pageTitle || document.title;
       
       const result = await trackVisit(url, title);
       if (result?.trackingId) {
         trackingIdRef.current = result.trackingId;
-        // Store tracking ID in sessionStorage for this page
         sessionStorage.setItem("currentTrackingId", result.trackingId);
+      }
+    }, 1500);
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+      
+      if (scrollPercent > scrollDepthRef.current) {
+        scrollDepthRef.current = scrollPercent;
       }
     };
 
-    track();
-
-    // Add scroll listener
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [pageUrl, pageTitle, handleScroll]);
+  }, [pageUrl, pageTitle]);
 
   // Update duration on unmount (page navigation)
   useEffect(() => {

@@ -62,7 +62,7 @@ const PlayIcon = () => (
   </svg>
 );
 
-// Feature images using 5 different padel court photos
+// Feature images - reduced for performance
 const features = [
   { 
     title: "QR Access Control", 
@@ -85,27 +85,6 @@ const features = [
     color: "#F59E0B",
     image: "/images/padel-court-3.jpg"
   },
-  { 
-    title: "Expert Coaching", 
-    description: "Learn from professional coaches.", 
-    Icon: UserIcon, 
-    color: "#8B5CF6",
-    image: "/images/padel-court-4.jpg"
-  },
-  { 
-    title: "Real-time Analytics", 
-    description: "Track your progress and stats.", 
-    Icon: ChartIcon, 
-    color: "#3B82F6",
-    image: "/images/padel-court-5.jpg"
-  },
-  { 
-    title: "Secure Access", 
-    description: "Safe and secure facility access.", 
-    Icon: ShieldIcon, 
-    color: "#10B981",
-    image: "/images/padel-court-1.jpg"
-  },
 ];
 
 const stats = [
@@ -115,7 +94,7 @@ const stats = [
   { value: "24/7", label: "Support" },
 ];
 
-// Gallery images - 5 different padel court photos
+// Gallery images - reduced for performance
 const galleryImages = [
   { 
     src: "/images/padel-court-1.jpg", 
@@ -132,36 +111,12 @@ const galleryImages = [
     alt: "Indoor padel court facility",
     span: "col-span-1 row-span-1"
   },
-  { 
-    src: "/images/padel-court-4.jpg", 
-    alt: "Padel court detail",
-    span: "col-span-1 row-span-1"
-  },
-  { 
-    src: "/images/padel-court-5.jpg", 
-    alt: "Padel court surface",
-    span: "col-span-1 row-span-1"
-  },
 ];
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({});
   const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
-
-  // Auto-open lead form after 5 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // Only show if user hasn't seen it this session
-      const hasSeenForm = sessionStorage.getItem("hasSeenLeadForm");
-      if (!hasSeenForm) {
-        setIsLeadFormOpen(true);
-        sessionStorage.setItem("hasSeenLeadForm", "true");
-      }
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -391,6 +346,7 @@ export default function Home() {
                   src={img.src}
                   alt={img.alt}
                   fill
+                  loading="lazy"
                   className={`object-cover transition-transform duration-700 group-hover:scale-110 ${
                     imageLoaded[`gallery-${index}`] ? 'opacity-100' : 'opacity-0'
                   }`}
@@ -440,6 +396,7 @@ export default function Home() {
                     src={feature.image}
                     alt={feature.title}
                     fill
+                    loading="lazy"
                     className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
                       imageLoaded[`feature-${index}`] ? 'opacity-100' : 'opacity-0'
                     }`}
