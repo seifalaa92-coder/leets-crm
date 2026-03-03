@@ -1,12 +1,12 @@
 /**
  * Sign Up Page
  * 
- * Member registration with phone OTP or email.
+ * Member registration with full profile information.
  */
 
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -16,26 +16,40 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function SignupPage() {
   const router = useRouter();
   const supabase = createClient();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   const [step, setStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     phone: "",
+    age: "",
     password: "",
     confirmPassword: "",
   });
+  const [profilePicture, setProfilePicture] = useState<File | null>(null);
+  const [profilePreview, setProfilePreview] = useState<string | null>(null);
   const [otp, setOtp] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setProfilePicture(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleInitialSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
-    // Validation
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       setIsLoading(false);
@@ -56,8 +70,9 @@ export default function SignupPage() {
         phone: formData.phone,
         options: {
           data: {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
+            full_name: formData.fullName,
+            phone: formData.phone,
+            age: formData.age || null,
             role: "member",
           },
         },
@@ -66,16 +81,51 @@ export default function SignupPage() {
       if (authError) throw authError;
 
       if (authData.user) {
+        // Upload profile picture if provided
+        let profileImageUrl = null;
+        if (profilePicture) {
+          const fileExt = profilePicture.name.split('.').pop();
+          const fileName = `${authData.user.id}-${Date.now()}.${fileExt}`;
+          const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('profiles')
+            .upload(fileName, profilePicture);
+
+          if (!uploadError && uploadData) {
+            const { data: { publicUrl } } = supabase.storage
+              .from('profiles')
+              .getPublicUrl(fileName);
+            profileImageUrl = publicUrl;
+          }
+        }
+
         // Create client record
         const { error: clientError } = await supabase.from("clients").insert({
           user_id: authData.user.id,
-          first_name: formData.firstName,
-          last_name: formData.lastName,
+          first_name: formData.fullName.split(' ').slice(0, -1).join(' ') || formData.fullName,
+          last_name: formData.fullName.split(' ').slice(-1).join(' ') || "",
           email: formData.email,
           phone: formData.phone,
+          age: formData.age ? parseInt(formData.age) : null,
+          profile_image: profileImageUrl,
         });
 
         if (clientError) throw clientError;
+
+        // Send email notification to management
+        try {
+          await fetch('/api/signup-notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: formData.fullName,
+              email: formData.email,
+              phone: formData.phone,
+              age: formData.age,
+            }),
+          });
+        } catch (notifyError) {
+          console.error('Failed to send notification:', notifyError);
+        }
 
         // If phone provided, send OTP
         if (formData.phone) {
@@ -84,7 +134,6 @@ export default function SignupPage() {
           });
           setStep(2);
         } else {
-          // Email verification - redirect to login
           router.push("/auth/login?message=Check your email to verify your account");
         }
       }
@@ -118,7 +167,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-8">
       {/* Back to Home Button */}
       <a 
         href="/" 
@@ -150,20 +199,37 @@ export default function SignupPage() {
 
           {step === 1 ? (
             <form onSubmit={handleInitialSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <Input
-                  label="First Name"
-                  value={formData.firstName}
-                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                  required
+              {/* Profile Picture */}
+              <div className="flex flex-col items-center mb-4">
+                <div 
+                  className="w-24 h-24 rounded-full bg-gray-200 border-4 border-orange-100 overflow-hidden cursor-pointer flex items-center justify-center"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  {profilePreview ? (
+                    <img src={profilePreview} alt="Profile" className="w-full h-full object-cover" />
+                  ) : (
+                    <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  )}
+                </div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePictureChange}
+                  className="hidden"
                 />
-                <Input
-                  label="Last Name"
-                  value={formData.lastName}
-                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  required
-                />
+                <p className="text-xs text-gray-500 mt-2">Add photo (optional)</p>
               </div>
+
+              <Input
+                label="Full Name"
+                placeholder="Enter your full name"
+                value={formData.fullName}
+                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                required
+              />
 
               <Input
                 label="Email"
@@ -175,12 +241,23 @@ export default function SignupPage() {
               />
 
               <Input
-                label="Phone (optional)"
+                label="Phone Number"
                 type="tel"
-                placeholder="+971 XX XXX XXXX"
+                placeholder="+966 XX XXX XXXX"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                helperText="For OTP login"
+                required
+                helperText="Required for booking notifications"
+              />
+
+              <Input
+                label="Age"
+                type="number"
+                placeholder="Your age (optional)"
+                value={formData.age}
+                onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                min="1"
+                max="150"
               />
 
               <Input
@@ -189,6 +266,7 @@ export default function SignupPage() {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
+                helperText="At least 6 characters"
               />
 
               <Input
