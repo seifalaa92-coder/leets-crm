@@ -284,6 +284,13 @@ export default function SignupPage() {
               >
                 Create Account
               </Button>
+
+              <p className="mt-6 text-center text-sm text-gray-600">
+                Already have an account?{' '}
+                <a href="/auth/login" className="text-primary font-medium hover:underline">
+                  Sign in
+                </a>
+              </p>
             </form>
           ) : (
             <form onSubmit={verifyOtp} className="space-y-4">
