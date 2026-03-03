@@ -279,18 +279,18 @@ export default function SignupPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-bold"
+                className="w-full bg-[#EA553B] hover:bg-[#D14028] text-white py-4 px-6 rounded-xl font-bold text-lg"
                 isLoading={isLoading}
               >
                 Create Account
               </Button>
 
-              <p className="mt-6 text-center text-sm text-gray-600">
+              <div className="mt-6 text-center text-sm text-gray-600">
                 Already have an account?{' '}
-                <a href="/auth/login" className="text-orange-500 font-medium hover:underline">
-                  Sign in
+                <a href="/auth/login" className="text-[#EA553B] font-bold hover:underline">
+                  Sign in here
                 </a>
-              </p>
+              </div>
             </form>
           ) : (
             <form onSubmit={verifyOtp} className="space-y-4">
@@ -325,13 +325,6 @@ export default function SignupPage() {
               </button>
             </form>
           )}
-
-          <p className="mt-6 text-center text-sm text-gray-600">
-            Already have an account?{' '}
-            <a href="/auth/login" className="text-primary font-medium hover:underline">
-              Sign in
-            </a>
-          </p>
         </CardContent>
       </Card>
     </div>
