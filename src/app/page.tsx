@@ -63,6 +63,7 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="font-body text-sm text-white/80 hover:text-[#EA553B] transition-colors">Features</a>
               <Link href="/auth/login" className="font-body text-sm text-white/80 hover:text-[#EA553B] transition-colors">Sign In</Link>
+              <Link href="/auth/signup" className="font-body text-sm text-white/80 hover:text-[#EA553B] transition-colors">Sign Up</Link>
             </div>
 
             <div className="flex items-center gap-3">
@@ -125,6 +126,9 @@ export default function Home() {
             </Link>
             <Link href="/classes/book-coach" className="flex items-center gap-3 bg-transparent hover:bg-white/10 text-white border-2 border-white/40 hover:border-white px-8 py-4 rounded-xl font-display text-lg tracking-wide transition-all w-full sm:w-auto justify-center">
               Book a Coach
+            </Link>
+            <Link href="/auth/signup" className="flex items-center gap-3 bg-white hover:bg-gray-100 text-black px-8 py-4 rounded-xl font-display text-lg tracking-wide transition-all w-full sm:w-auto justify-center">
+              Sign Up
             </Link>
           </div>
 
@@ -216,6 +220,7 @@ export default function Home() {
               <Link href="/classes/book-court" className="font-body text-sm text-white/60 hover:text-[#EA553B] transition-colors">Book Court</Link>
               <Link href="/classes/book-coach" className="font-body text-sm text-white/60 hover:text-[#EA553B] transition-colors">Book Coach</Link>
               <Link href="/auth/login" className="font-body text-sm text-white/60 hover:text-[#EA553B] transition-colors">Sign In</Link>
+              <Link href="/auth/signup" className="font-body text-sm text-white/60 hover:text-[#EA553B] transition-colors">Sign Up</Link>
             </div>
             <p className="font-body text-xs text-white/40">© 2026 Leets Sports. All rights reserved.</p>
           </div>
