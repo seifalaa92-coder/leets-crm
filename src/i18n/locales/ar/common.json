@@ -1,0 +1,396 @@
+{
+  "app": {
+    "name": "ليتس سبورتس",
+    "tagline": "تجربة بادل متميزة",
+    "welcome": "أهلاً بك في ليتس",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "retry": "إعادة المحاولة",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "create": "إنشاء",
+    "search": "بحث",
+    "filter": "تصفية",
+    "clear": "مسح",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "submit": "إرسال",
+    "confirm": "تأكيد",
+    "yes": "نعم",
+    "no": "لا"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "signup": "إنشاء حساب",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "phone": "رقم الهاتف",
+    "otp": "رمز التحقق",
+    "sendOtp": "إرسال الرمز",
+    "verifyOtp": "تحقق من الرمز",
+    "loginWithEmail": "تسجيل الدخول بالبريد",
+    "loginWithPhone": "تسجيل الدخول بالهاتف",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "loginSuccess": "تم تسجيل الدخول بنجاح",
+    "loginError": "بيانات الدخول غير صحيحة",
+    "logoutSuccess": "تم تسجيل الخروج بنجاح",
+    "sessionExpired": "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى.",
+    "unauthorized": "ليس لديك صلاحية الوصول لهذه الصفحة"
+  },
+  "roles": {
+    "super_admin": "مدير النظام",
+    "manager": "مدير",
+    "coach": "مدرب",
+    "front_desk": "استقبال",
+    "member": "عضو"
+  },
+  "navigation": {
+    "dashboard": "لوحة التحكم",
+    "clients": "العملاء",
+    "memberships": "العضويات",
+    "classes": "الحصص",
+    "bookings": "الحجوزات",
+    "payments": "المدفوعات",
+    "staff": "الموظفين",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "profile": "الملف الشخصي",
+    "accessControl": "التحكم في الوصول",
+    "loyalty": "نقاط الولاء",
+    "leads": "العملاء المحتملين",
+    "admin": "لوحة الإدارة"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "welcome": "أهلاً بعودتك",
+    "overview": "نظرة عامة",
+    "metrics": {
+      "activeMembers": "الأعضاء النشطون",
+      "expiringSoon": "تنتهي هذا الأسبوع",
+      "expired": "انتهت هذا الشهر",
+      "newSignups": "تسجيلات جديدة",
+      "todayRevenue": "إيرادات اليوم",
+      "classesToday": "حصص اليوم",
+      "staffOnDuty": "الموظفون في العمل",
+      "attendanceToday": "تسجيلات الدخول اليوم"
+    },
+    "recentActivity": "النشاط الأخير",
+    "quickActions": "إجراءات سريعة",
+    "viewAll": "عرض الكل"
+  },
+  "clients": {
+    "title": "العملاء",
+    "newClient": "عميل جديد",
+    "editClient": "تعديل العميل",
+    "clientDetails": "تفاصيل العميل",
+    "membershipStatus": "حالة العضوية",
+    "personalInfo": "المعلومات الشخصية",
+    "contactInfo": "معلومات الاتصال",
+    "emergencyContact": "جهة الاتصال في الطوارئ",
+    "notes": "ملاحظات",
+    "searchPlaceholder": "البحث في العملاء بالاسم أو البريد أو الهاتف...",
+    "noClients": "لم يتم العثور على عملاء",
+    "fields": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "firstNameAr": "الاسم الأول (عربي)",
+      "lastNameAr": "اسم العائلة (عربي)",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "dateOfBirth": "تاريخ الميلاد",
+      "gender": "الجنس",
+      "nationality": "الجنسية",
+      "photo": "الصورة"
+    },
+    "gender": {
+      "male": "ذكر",
+      "female": "أنثى",
+      "other": "آخر"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "tabs": {
+      "profile": "الملف الشخصي",
+      "membership": "العضوية",
+      "bookings": "الحجوزات",
+      "payments": "المدفوعات",
+      "loyalty": "نقاط الولاء",
+      "attendance": "الحضور"
+    }
+  },
+  "memberships": {
+    "title": "العضويات",
+    "newMembership": "عضوية جديدة",
+    "renewMembership": "تجديد العضوية",
+    "upgradeMembership": "ترقية العضوية",
+    "tiers": "فئات العضوية",
+    "status": {
+      "active": "نشطة",
+      "expired": "منتهية",
+      "suspended": "معلقة",
+      "cancelled": "ملغاة",
+      "pending": "معلقة"
+    },
+    "types": {
+      "monthly": "شهرية",
+      "annual": "سنوية",
+      "dayPass": "يومية",
+      "corporate": "شركات"
+    },
+    "fields": {
+      "tier": "فئة العضوية",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "price": "السعر",
+      "status": "الحالة",
+      "autoRenew": "تجديد تلقائي",
+      "companyName": "اسم الشركة"
+    },
+    "alerts": {
+      "expiringIn7Days": "تنتهي العضوية خلال 7 أيام",
+      "expiringIn1Day": "تنتهي العضوية غداً",
+      "expired": "انتهت صلاحية العضوية"
+    }
+  },
+  "qrCode": {
+    "title": "رمز الدخول",
+    "showQr": "عرض رمز QR",
+    "scanQr": "مسح رمز QR",
+    "scanning": "جاري المسح...",
+    "pointCamera": "وجه الكاميرا نحو رمز QR",
+    "validUntil": "صالح حتى",
+    "refreshDaily": "يتم التحديث يومياً لأمان",
+    "accessGranted": "تم السماح بالدخول",
+    "accessDenied": "تم رفض الدخول",
+    "expiredMembership": "انتهت صلاحية العضوية",
+    "invalidQr": "رمز QR غير صالح",
+    "lastScanned": "آخر مسح",
+    "memberName": "العضو",
+    "membershipType": "نوع العضوية"
+  },
+  "classes": {
+    "title": "الحصص والجدول",
+    "newClass": "حصة جديدة",
+    "editClass": "تعديل الحصة",
+    "schedule": "الجدول",
+    "mySchedule": "جدولي",
+    "types": {
+      "group": "حصة جماعية",
+      "private": "حصة خاصة",
+      "openPlay": "لعب مفتوح",
+      "tournament": "بطولة"
+    },
+    "status": {
+      "scheduled": "مجدولة",
+      "inProgress": "جارية",
+      "completed": "مكتملة",
+      "cancelled": "ملغاة"
+    },
+    "fields": {
+      "name": "اسم الحصة",
+      "type": "نوع الحصة",
+      "court": "الملعب",
+      "coach": "المدرب",
+      "date": "التاريخ",
+      "startTime": "وقت البدء",
+      "endTime": "وقت الانتهاء",
+      "duration": "المدة",
+      "maxCapacity": "السعة القصوى",
+      "price": "السعر",
+      "description": "الوصف",
+      "isRecurring": "حصة متكررة"
+    },
+    "bookings": {
+      "title": "الحجوزات",
+      "bookNow": "احجز الآن",
+      "joinWaitlist": "انضم لقائمة الانتظار",
+      "cancelBooking": "إلغاء الحجز",
+      "status": {
+        "confirmed": "مؤكد",
+        "cancelled": "ملغى",
+        "waitlist": "قائمة انتظار",
+        "attended": "حضر",
+        "noShow": "لم يحضر"
+      },
+      "capacity": "{{current}} / {{max}} تم الحجز",
+      "availableSpots": "{{count}} أماكن متاحة",
+      "cancellationPolicy": "يسمح بالإلغاء قبل {{hours}} ساعة من الحصة"
+    }
+  },
+  "payments": {
+    "title": "المدفوعات",
+    "newPayment": "تسجيل دفعة",
+    "paymentHistory": "سجل المدفوعات",
+    "receipt": "إيصال",
+    "printReceipt": "طباعة الإيصال",
+    "emailReceipt": "إرسال الإيصال بالبريد",
+    "methods": {
+      "cash": "نقداً",
+      "card": "بطاقة ائتمان",
+      "bankTransfer": "تحويل بنكي",
+      "check": "شيك",
+      "other": "أخرى"
+    },
+    "categories": {
+      "membership": "عضوية",
+      "class": "حصة",
+      "dayPass": "يومية",
+      "merchandise": "منتجات",
+      "other": "أخرى"
+    },
+    "status": {
+      "completed": "مكتمل",
+      "pending": "معلق",
+      "failed": "فاشل",
+      "refunded": "مسترد"
+    },
+    "fields": {
+      "client": "العميل",
+      "amount": "المبلغ",
+      "method": "طريقة الدفع",
+      "category": "الفئة",
+      "referenceNumber": "رقم المرجع",
+      "notes": "ملاحظات"
+    },
+    "dailySummary": "ملخص النقدية اليومي",
+    "outstandingBalance": "الرصيد المستحق",
+    "refunds": {
+      "title": "المبالغ المستردة",
+      "requestRefund": "طلب استرداد",
+      "reason": "سبب الاسترداد",
+      "pendingApproval": "بانتظار الموافقة",
+      "approved": "تمت الموافقة",
+      "rejected": "تم الرفض"
+    }
+  },
+  "loyalty": {
+    "title": "نقاط الولاء",
+    "yourPoints": "نقاطك",
+    "pointsBalance": "رصيد النقاط",
+    "earnPoints": "كيفية كسب النقاط",
+    "redeemPoints": "استبدال النقاط",
+    "rewardsCatalog": "كتالوج المكافآت",
+    "transactionHistory": "سجل المعاملات",
+    "leaderboard": "لوحة المتصدرين",
+    "waysToEarn": {
+      "spending": "{{amount}} نقطة لكل {{currency}} تنفقها",
+      "referral": "{{amount}} نقطة لكل إحالة ناجحة",
+      "attendanceStreak": "{{amount}} نقاط إضافية لـ {{days}} أيام حضور متتالية"
+    },
+    "transactions": {
+      "earned": "مكتسبة",
+      "redeemed": "مستبدلة",
+      "adjusted": "معدلة",
+      "bonus": "مكافأة"
+    }
+  },
+  "staff": {
+    "title": "إدارة الموظفين",
+    "newStaff": "موظف جديد",
+    "attendance": "الحضور",
+    "clockIn": "تسجيل الدخول",
+    "clockOut": "تسجيل الخروج",
+    "alreadyClockedIn": "تم تسجيل الدخول بالفعل",
+    "notClockedIn": "لم يتم تسجيل الدخول",
+    "attendanceHistory": "سجل الحضور",
+    "monthlySummary": "الملخص الشهري",
+    "lateArrivals": "التأخيرات",
+    "absences": "الغيابات"
+  },
+  "leads": {
+    "title": "العملاء المحتملين",
+    "newLead": "عميل محتمل جديد",
+    "pipeline": "خط المبيعات",
+    "sources": {
+      "walkIn": "زائر",
+      "referral": "إحالة",
+      "socialMedia": "وسائل التواصل",
+      "website": "الموقع",
+      "phone": "هاتف",
+      "other": "أخرى"
+    },
+    "status": {
+      "new": "جديد",
+      "contacted": "تم التواصل",
+      "trialScheduled": "مجرب مقرر",
+      "trialCompleted": "تم التجربة",
+      "converted": "تم التحويل",
+      "churned": "منسحب",
+      "lost": "مفقود"
+    },
+    "fields": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "interest": "نوع الاهتمام",
+      "source": "المصدر",
+      "status": "الحالة",
+      "assignedTo": "معين إلى",
+      "notes": "ملاحظات",
+      "followUpDate": "تاريخ المتابعة"
+    }
+  },
+  "reports": {
+    "title": "التقارير",
+    "revenue": "تقرير الإيرادات",
+    "attendance": "تقرير الحضور",
+    "membership": "تقرير العضويات",
+    "export": "تصدير التقرير",
+    "dateRange": "نطاق التاريخ",
+    "filters": "عوامل التصفية"
+  },
+  "admin": {
+    "title": "لوحة الإدارة",
+    "users": "إدارة المستخدمين",
+    "settings": "إعدادات النظام",
+    "venueSettings": "إعدادات المنشأة",
+    "loyaltySettings": "إعدادات الولاء",
+    "notificationCenter": "مركز الإشعارات",
+    "activityLog": "سجل النشاطات",
+    "fields": {
+      "venueName": "اسم المنشأة",
+      "address": "العنوان",
+      "timezone": "المنطقة الزمنية",
+      "currency": "العملة",
+      "operatingHours": "ساعات العمل"
+    }
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "يرجى إدخال بريد إلكتروني صحيح",
+    "phone": "يرجى إدخال رقم هاتف صحيح",
+    "minLength": "يجب أن يكون {{min}} أحرف على الأقل",
+    "maxLength": "يجب أن يكون {{max}} أحرف كحد أقصى",
+    "passwordMatch": "كلمتا المرور غير متطابقتين",
+    "invalidDate": "يرجى إدخال تاريخ صحيح",
+    "invalidTime": "يرجى إدخال وقت صحيح"
+  },
+  "errors": {
+    "generic": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "notFound": "الصفحة غير موجودة",
+    "serverError": "خطأ في الخادم. يرجى المحاولة لاحقاً.",
+    "networkError": "خطأ في الشبكة. يرجى التحقق من الاتصال.",
+    "unauthorized": "ليس لديك صلاحية تنفيذ هذا الإجراء",
+    "conflict": "يتعارض هذا الإجراء مع البيانات الموجودة"
+  },
+  "success": {
+    "saved": "تم الحفظ بنجاح",
+    "created": "تم الإنشاء بنجاح",
+    "updated": "تم التحديث بنجاح",
+    "deleted": "تم الحذف بنجاح",
+    "sent": "تم الإرسال بنجاح",
+    "exported": "تم التصدير بنجاح"
+  }
+}
