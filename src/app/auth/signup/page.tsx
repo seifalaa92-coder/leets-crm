@@ -279,7 +279,7 @@ export default function SignupPage() {
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-bold"
                 isLoading={isLoading}
               >
                 Create Account
@@ -287,7 +287,7 @@ export default function SignupPage() {
 
               <p className="mt-6 text-center text-sm text-gray-600">
                 Already have an account?{' '}
-                <a href="/auth/login" className="text-primary font-medium hover:underline">
+                <a href="/auth/login" className="text-orange-500 font-medium hover:underline">
                   Sign in
                 </a>
               </p>
