@@ -160,7 +160,7 @@ const COURTS: Court[] = [
   },
   {
     id: "court-3",
-    name: "Terracotta Court",
+    name: "Ahmed Alaa's Zalata Court",
     number: 3,
     type: "outdoor",
     features: ["Open Air", "Professional Grade"],
