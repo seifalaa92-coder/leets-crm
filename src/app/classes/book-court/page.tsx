@@ -278,6 +278,37 @@ export default function BookCourtPage() {
               </div>
             </div>
 
+            {/* Booking Summary */}
+            {selectedDate && selectedTime && (
+              <div className="bg-orange-50 border-2 border-orange-200 rounded-xl p-4 mb-6">
+                <h3 className="font-bold text-orange-800 mb-3">Your Booking Summary</h3>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="text-orange-600">Court</p>
+                    <p className="font-bold text-gray-900">{selectedCourt?.name}</p>
+                  </div>
+                  <div>
+                    <p className="text-orange-600">Date</p>
+                    <p className="font-bold text-gray-900">{selectedDate}</p>
+                  </div>
+                  <div>
+                    <p className="text-orange-600">Time</p>
+                    <p className="font-bold text-gray-900">{selectedTime}</p>
+                  </div>
+                  <div>
+                    <p className="text-orange-600">Price</p>
+                    <p className="font-bold text-orange-600">{selectedCourt?.hourlyRate} SAR/hour</p>
+                  </div>
+                </div>
+                <div className="mt-3 pt-3 border-t border-orange-200">
+                  <div className="flex justify-between items-center">
+                    <span className="font-bold text-gray-900">Total</span>
+                    <span className="font-bold text-2xl text-orange-600">{selectedCourt?.hourlyRate} SAR</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <button
               onClick={handleBook}
               disabled={!selectedDate || !selectedTime || isLoading}
