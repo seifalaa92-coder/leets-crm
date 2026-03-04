@@ -178,7 +178,7 @@ export default function LoginPage() {
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full bg-orange-500 hover:bg-orange-600"
                 isLoading={isLoading}
               >
                 Sign In
@@ -198,7 +198,7 @@ export default function LoginPage() {
                   />
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full bg-orange-500 hover:bg-orange-600"
                     isLoading={isLoading}
                   >
                     Send Code
@@ -217,7 +217,7 @@ export default function LoginPage() {
                   />
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full bg-orange-500 hover:bg-orange-600"
                     isLoading={isLoading}
                   >
                     Verify Code
