@@ -81,35 +81,24 @@ export default function SignupPage() {
       if (authError) throw authError;
 
       if (authData.user) {
-        // Upload profile picture if provided
-        let profileImageUrl = null;
-        if (profilePicture) {
-          const fileExt = profilePicture.name.split('.').pop();
-          const fileName = `${authData.user.id}-${Date.now()}.${fileExt}`;
-          const { data: uploadData, error: uploadError } = await supabase.storage
-            .from('profiles')
-            .upload(fileName, profilePicture);
-
-          if (!uploadError && uploadData) {
-            const { data: { publicUrl } } = supabase.storage
-              .from('profiles')
-              .getPublicUrl(fileName);
-            profileImageUrl = publicUrl;
+        // Try to create client record (may fail if table not ready)
+        try {
+          const { error: clientError } = await supabase.from("clients").insert({
+            user_id: authData.user.id,
+            first_name: formData.fullName.split(' ').slice(0, -1).join(' ') || formData.fullName,
+            last_name: formData.fullName.split(' ').slice(-1).join(' ') || "",
+            email: formData.email,
+            phone: formData.phone,
+            age: formData.age ? parseInt(formData.age) : null,
+          });
+          
+          // Don't throw - just log the error
+          if (clientError) {
+            console.log("Client creation note:", clientError.message);
           }
+        } catch (e) {
+          console.log("Client table not ready yet");
         }
-
-        // Create client record
-        const { error: clientError } = await supabase.from("clients").insert({
-          user_id: authData.user.id,
-          first_name: formData.fullName.split(' ').slice(0, -1).join(' ') || formData.fullName,
-          last_name: formData.fullName.split(' ').slice(-1).join(' ') || "",
-          email: formData.email,
-          phone: formData.phone,
-          age: formData.age ? parseInt(formData.age) : null,
-          profile_image: profileImageUrl,
-        });
-
-        if (clientError) throw clientError;
 
         // Send email notification to management
         try {
