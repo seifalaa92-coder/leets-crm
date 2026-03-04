@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 interface Court {
   id: string;
@@ -74,10 +75,14 @@ const TIME_SLOTS = [
 ];
 
 export default function BookCourtPage() {
+  const router = useRouter();
+  const supabase = createClient();
   const [selectedCourt, setSelectedCourt] = useState<Court | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [step, setStep] = useState<1 | 2>(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const today = new Date();
   const dates = Array.from({ length: 14 }, (_, i) => {
@@ -92,13 +97,75 @@ export default function BookCourtPage() {
     }
   };
 
-  const handleBook = () => {
-    alert(`Booking confirmed!\n\nCourt: ${selectedCourt?.name}\nDate: ${selectedDate}\nTime: ${selectedTime}\nPrice: ${selectedCourt?.hourlyRate} SAR`);
+  const handleBook = async () => {
+    if (!selectedCourt || !selectedDate || !selectedTime) return;
+    
+    setIsLoading(true);
+    
+    try {
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        alert("Please sign in to book a court");
+        router.push("/auth/login");
+        return;
+      }
+
+      // Save booking to database
+      const { error } = await supabase.from("bookings").insert({
+        user_id: user.id,
+        court_id: selectedCourt.id,
+        court_name: selectedCourt.name,
+        booking_date: selectedDate,
+        booking_time: selectedTime,
+        hourly_rate: selectedCourt.hourlyRate,
+        status: "confirmed",
+      });
+
+      if (error) {
+        console.error("Booking error:", error);
+        alert("Failed to book. Please try again.");
+      } else {
+        setSuccess(true);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  if (success) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Booking Confirmed!</h2>
+          <p className="text-gray-600 mb-6">
+            Your court has been booked for {selectedDate} at {selectedTime}
+          </p>
+          <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left">
+            <p><strong>Court:</strong> {selectedCourt?.name}</p>
+            <p><strong>Date:</strong> {selectedDate}</p>
+            <p><strong>Time:</strong> {selectedTime}</p>
+            <p><strong>Price:</strong> {selectedCourt?.hourlyRate} SAR</p>
+          </div>
+          <Link href="/dashboard" className="block w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg">
+            Go to Dashboard
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Simple Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -112,7 +179,6 @@ export default function BookCourtPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-8">
-        {/* Progress */}
         <div className="flex items-center gap-2 mb-8">
           <div className={`flex items-center gap-2 px-4 py-2 rounded-full ${step >= 1 ? "bg-orange-500 text-white" : "bg-gray-200"}`}>
             <span className="font-medium">1. Select Court</span>
@@ -177,7 +243,6 @@ export default function BookCourtPage() {
               <h1 className="text-2xl font-bold">Complete Your Booking</h1>
             </div>
 
-            {/* Selected Court Summary */}
             <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-6">
               <div className="flex justify-between items-center">
                 <div>
@@ -191,7 +256,6 @@ export default function BookCourtPage() {
               </div>
             </div>
 
-            {/* Date Selection */}
             <div className="mb-6">
               <h2 className="font-bold text-lg mb-3">Select Date</h2>
               <div className="flex gap-2 overflow-x-auto pb-2">
@@ -218,7 +282,6 @@ export default function BookCourtPage() {
               </div>
             </div>
 
-            {/* Time Selection */}
             <div className="mb-6">
               <h2 className="font-bold text-lg mb-3">Select Time</h2>
               <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
@@ -243,19 +306,18 @@ export default function BookCourtPage() {
               </div>
             </div>
 
-            {/* Book Button */}
             <button
               onClick={handleBook}
-              disabled={!selectedDate || !selectedTime}
+              disabled={!selectedDate || !selectedTime || isLoading}
               className={`
                 w-full py-4 rounded-xl font-bold text-lg transition-all
-                ${selectedDate && selectedTime
+                ${selectedDate && selectedTime && !isLoading
                   ? "bg-orange-500 hover:bg-orange-600 text-white" 
                   : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }
               `}
             >
-              {selectedDate && selectedTime 
+              {isLoading ? "Booking..." : selectedDate && selectedTime 
                 ? `Book for ${selectedDate} at ${selectedTime} - ${selectedCourt?.hourlyRate} SAR`
                 : "Select date and time to continue"
               }
