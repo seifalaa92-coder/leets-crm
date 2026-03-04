@@ -1,12 +1,12 @@
 /**
  * Sign Up Page
  * 
- * Member registration with full profile information.
+ * Member registration - simplified version
  */
 
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -55,14 +55,6 @@ export default function SignupPage() {
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
-        options: {
-          data: {
-            full_name: formData.fullName,
-            phone: formData.phone,
-            age: formData.age || null,
-            role: "member",
-          },
-        },
       });
 
       if (authError) {
@@ -70,40 +62,24 @@ export default function SignupPage() {
         throw new Error(authError.message);
       }
 
-      // Try to create client record
-      if (authData.user) {
-        try {
-          await supabase.from("clients").insert({
-            user_id: authData.user.id,
-            first_name: formData.fullName.split(' ').slice(0, -1).join(' ') || formData.fullName,
-            last_name: formData.fullName.split(' ').slice(-1).join(' ') || "",
+      // Try to send notification (may fail if SMTP not configured)
+      try {
+        await fetch('/api/signup-notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: formData.fullName,
             email: formData.email,
             phone: formData.phone,
-            age: formData.age ? parseInt(formData.age) : null,
-          });
-        } catch (e) {
-          console.log("Client table note");
-        }
-
-        // Send email notification
-        try {
-          await fetch('/api/signup-notify', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: formData.fullName,
-              email: formData.email,
-              phone: formData.phone,
-              age: formData.age,
-            }),
-          });
-        } catch (notifyError) {
-          console.log('Notification error');
-        }
+            age: formData.age,
+          }),
+        });
+      } catch (notifyError) {
+        console.log('Notification error - continuing');
       }
 
       // Redirect to login
-      router.push("/auth/login?message=Account created! Please check your email to verify.");
+      router.push("/auth/login?message=Account created!");
     } catch (err: any) {
       console.error("Signup error:", err);
       setError(err.message || "Failed to create account");
