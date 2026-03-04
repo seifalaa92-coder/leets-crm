@@ -1,40 +1,29 @@
-/**
- * Sign Up Page
- * 
- * Member registration - simplified version
- */
-
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function SignupPage() {
   const router = useRouter();
-  const supabase = createClient();
-  
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
-    age: "",
     password: "",
-    confirmPassword: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
+    setMessage("");
 
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+    if (!formData.fullName || !formData.email || !formData.password || !formData.phone) {
+      setError("Please fill in all required fields");
       setIsLoading(false);
       return;
     }
@@ -45,148 +34,139 @@ export default function SignupPage() {
       return;
     }
 
-    if (!formData.fullName || !formData.email || !formData.phone) {
-      setError("Name, email, and phone are required");
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          data: {
+            full_name: formData.fullName,
+            phone: formData.phone,
+          }
+        }),
       });
 
-      if (authError) {
-        console.error("Auth error:", authError.message);
-        throw new Error(authError.message);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.msg || "Failed to create account");
       }
 
-      // Try to send notification (may fail if SMTP not configured)
-      try {
-        await fetch('/api/signup-notify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: formData.fullName,
-            email: formData.email,
-            phone: formData.phone,
-            age: formData.age,
-          }),
-        });
-      } catch (notifyError) {
-        console.log('Notification error - continuing');
-      }
+      setMessage("Account created! You can now sign in.");
+      setTimeout(() => {
+        router.push("/auth/login");
+      }, 2000);
 
-      // Redirect to login
-      router.push("/auth/login?message=Account created!");
     } catch (err: any) {
-      console.error("Signup error:", err);
-      setError(err.message || "Failed to create account");
+      setError(err.message || "Something went wrong");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-8">
-      <a 
-        href="/" 
-        className="fixed top-4 left-4 flex items-center gap-2 text-gray-600 hover:text-gray-900"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        Back to Home
-      </a>
-
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="mx-auto w-16 h-16 bg-orange-500 rounded-xl flex items-center justify-center mb-4">
-            <span className="text-white text-2xl font-bold">L</span>
-          </div>
-          <CardTitle className="text-2xl">Create Account</CardTitle>
-          <CardDescription>Join Leets Sports today</CardDescription>
-        </CardHeader>
-        
-        <CardContent>
-          {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
-              {error}
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
+        <div className="text-center mb-8">
+          <Link href="/" className="inline-block">
+            <div className="w-16 h-16 bg-orange-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <span className="text-white text-2xl font-bold">L</span>
             </div>
-          )}
+          </Link>
+          <h1 className="text-2xl font-bold text-gray-900">Create Account</h1>
+          <p className="text-gray-500 mt-1">Join Leets Sports</p>
+        </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              label="Full Name *"
-              placeholder="Enter your full name"
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+            {error}
+          </div>
+        )}
+
+        {message && (
+          <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+            {message}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Full Name *
+            </label>
+            <input
+              type="text"
               value={formData.fullName}
               onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              placeholder="Your full name"
               required
             />
+          </div>
 
-            <Input
-              label="Email *"
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email *
+            </label>
+            <input
               type="email"
-              placeholder="you@example.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              placeholder="your@email.com"
               required
             />
+          </div>
 
-            <Input
-              label="Phone Number *"
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Phone *
+            </label>
+            <input
               type="tel"
-              placeholder="+966 XX XXX XXXX"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              placeholder="+966..."
               required
             />
+          </div>
 
-            <Input
-              label="Age"
-              type="number"
-              placeholder="Your age (optional)"
-              value={formData.age}
-              onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-              min="1"
-              max="150"
-            />
-
-            <Input
-              label="Password *"
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Password *
+            </label>
+            <input
               type="password"
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              required
-              helperText="At least 6 characters"
-            />
-
-            <Input
-              label="Confirm Password *"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              placeholder="At least 6 characters"
               required
             />
+          </div>
 
-            <Button
-              type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 px-6 rounded-xl font-bold text-lg"
-              isLoading={isLoading}
-            >
-              Create Account
-            </Button>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors disabled:opacity-50"
+          >
+            {isLoading ? "Creating Account..." : "Create Account"}
+          </button>
+        </form>
 
-            <div className="mt-6 text-center text-sm text-gray-600">
-              Already have an account?{' '}
-              <a href="/auth/login" className="text-orange-500 font-bold hover:underline">
-                Sign in here
-              </a>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+        <p className="mt-6 text-center text-gray-600">
+          Already have an account?{" "}
+          <Link href="/auth/login" className="text-orange-500 font-medium hover:underline">
+            Sign in
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
