@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
@@ -21,6 +21,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -28,6 +29,44 @@ export default function ProfilePage() {
     age: "",
   });
   const [message, setMessage] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !profile) return;
+
+    setUploading(true);
+    try {
+      // Upload to storage
+      const fileName = `${profile.id}-${Date.now()}.${file.name.split('.').pop()}`;
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('profiles')
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('profiles')
+        .getPublicUrl(fileName);
+
+      // Update profile
+      const { error: updateError } = await supabase
+        .from('clients')
+        .update({ profile_image: publicUrl })
+        .eq('id', profile.id);
+
+      if (updateError) throw updateError;
+
+      setProfile({ ...profile, profile_image: publicUrl });
+      setMessage("Profile picture updated!");
+    } catch (error) {
+      console.error("Upload error:", error);
+      setMessage("Failed to upload image");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   useEffect(() => {
     loadProfile();
@@ -134,15 +173,30 @@ export default function ProfilePage() {
 
           {/* Profile Picture */}
           <div className="flex items-center gap-6 mb-8">
-            <div className="w-24 h-24 rounded-full bg-orange-100 flex items-center justify-center">
-              {profile?.profile_image ? (
+            <div 
+              className="w-24 h-24 rounded-full bg-orange-100 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity relative overflow-hidden"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              {uploading ? (
+                <div className="text-orange-500">Uploading...</div>
+              ) : profile?.profile_image ? (
                 <img src={profile.profile_image} alt="Profile" className="w-24 h-24 rounded-full object-cover" />
               ) : (
                 <span className="text-3xl font-bold text-orange-500">
                   {(profile?.first_name || profile?.email || "?")[0].toUpperCase()}
                 </span>
               )}
+              <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs py-1 text-center">
+                Change
+              </div>
             </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
             <div>
               <h2 className="text-xl font-bold text-gray-900">
                 {profile?.first_name} {profile?.last_name}
