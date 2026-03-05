@@ -3,9 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
   const router = useRouter();
+  const supabase = createClient();
+  
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -35,35 +38,39 @@ export default function SignupPage() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-          data: {
-            full_name: formData.fullName,
-            phone: formData.phone,
-          }
-        }),
+      // Sign up with Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.msg || "Failed to create account");
+      if (authError) {
+        throw new Error(authError.message);
       }
 
-      setMessage("Account created! You can now sign in.");
+      if (authData.user) {
+        // Save to clients table
+        const nameParts = formData.fullName.split(" ");
+        const firstName = nameParts.slice(0, -1).join(" ") || formData.fullName;
+        const lastName = nameParts.slice(-1).join("") || "";
+
+        await supabase.from("clients").insert({
+          user_id: authData.user.id,
+          first_name: firstName,
+          last_name: lastName,
+          email: formData.email,
+          phone: formData.phone,
+        });
+      }
+
+      setMessage("Account created! Please check your email to verify.");
       setTimeout(() => {
         router.push("/auth/login");
       }, 2000);
 
     } catch (err: any) {
-      setError(err.message || "Something went wrong");
+      console.error("Signup error:", err);
+      setError(err.message || "Failed to create account");
     } finally {
       setIsLoading(false);
     }
@@ -96,9 +103,7 @@ export default function SignupPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
             <input
               type="text"
               value={formData.fullName}
@@ -110,9 +115,7 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
             <input
               type="email"
               value={formData.email}
@@ -124,9 +127,7 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Phone *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
             <input
               type="tel"
               value={formData.phone}
@@ -138,9 +139,7 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password *</label>
             <input
               type="password"
               value={formData.password}

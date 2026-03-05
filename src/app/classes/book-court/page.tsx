@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
 
 interface Court {
   id: string;
@@ -28,6 +29,7 @@ const TIME_SLOTS = [
 ];
 
 export default function BookCourtPage() {
+  const supabase = createClient();
   const [selectedCourt, setSelectedCourt] = useState<Court | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTimes, setSelectedTimes] = useState<string[]>([]);
@@ -52,13 +54,42 @@ export default function BookCourtPage() {
     if (step === 1 && selectedCourt) setStep(2);
   };
 
-  const handleBook = () => {
+  const handleBook = async () => {
     if (!selectedCourt || !selectedDate || selectedTimes.length === 0) return;
     setIsLoading(true);
-    setTimeout(() => {
+
+    try {
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (!user) {
+        alert("Please sign in to book a court");
+        return;
+      }
+
+      // Save booking to database
+      const { error } = await supabase.from("bookings").insert({
+        user_id: user.id,
+        court_name: selectedCourt.name,
+        booking_date: selectedDate,
+        booking_times: selectedTimes,
+        total_hours: selectedTimes.length,
+        total_price: selectedCourt.hourlyRate * selectedTimes.length,
+        status: "confirmed",
+      });
+
+      if (error) {
+        console.error("Booking error:", error);
+        alert("Failed to book. Please try again.");
+      } else {
+        setSuccess(true);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong");
+    } finally {
       setIsLoading(false);
-      setSuccess(true);
-    }, 1000);
+    }
   };
 
   if (success) {
