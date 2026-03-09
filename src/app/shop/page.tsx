@@ -9,7 +9,7 @@ const products = [
     id: 1,
     name: "Performance Padel Racket",
     price: 299,
-    image: "/images/shop/racket.jpg",
+    image: "https://images.unsplash.com/photo-1617083934555-ac7b4d0c8be2?w=400&h=400&fit=crop",
     category: "Equipment",
     onSale: false,
   },
@@ -17,7 +17,7 @@ const products = [
     id: 2,
     name: "Pro Tour Padel Ball (3-Pack)",
     price: 45,
-    image: "/images/shop/balls.jpg",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
     category: "Accessories",
     onSale: true,
     salePrice: 35,
@@ -26,7 +26,7 @@ const products = [
     id: 3,
     name: "Elite Grip Tape",
     price: 25,
-    image: "/images/shop/grip.jpg",
+    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop",
     category: "Accessories",
     onSale: false,
   },
@@ -34,7 +34,7 @@ const products = [
     id: 4,
     name: "Leets Sports Hoodie",
     price: 120,
-    image: "/images/shop/hoodie.jpg",
+    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
     category: "Apparel",
     onSale: false,
   },
@@ -42,7 +42,7 @@ const products = [
     id: 5,
     name: "Performance Training Shirt",
     price: 65,
-    image: "/images/shop/shirt.jpg",
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
     category: "Apparel",
     onSale: true,
     salePrice: 49,
@@ -51,7 +51,7 @@ const products = [
     id: 6,
     name: "Sports Water Bottle",
     price: 35,
-    image: "/images/shop/bottle.jpg",
+    image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
     category: "Accessories",
     onSale: false,
   },
@@ -59,7 +59,7 @@ const products = [
     id: 7,
     name: "Leets Cap",
     price: 45,
-    image: "/images/shop/cap.jpg",
+    image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop",
     category: "Apparel",
     onSale: false,
   },
@@ -67,7 +67,7 @@ const products = [
     id: 8,
     name: "Court Shoes Pro",
     price: 189,
-    image: "/images/shop/shoes.jpg",
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",
     category: "Footwear",
     onSale: true,
     salePrice: 149,
@@ -165,11 +165,13 @@ export default function ShopPage() {
             {filteredProducts.map((product) => (
               <div key={product.id} className="group">
                 <div className="relative aspect-square bg-gray-100 rounded-2xl overflow-hidden mb-4">
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                    <svg className="w-16 h-16" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
                   {product.onSale && (
                     <div className="absolute top-3 left-3 bg-[#EA553B] text-white text-xs font-semibold px-3 py-1 rounded-full">
                       SALE
