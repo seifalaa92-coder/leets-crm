@@ -62,15 +62,19 @@ export default function Home() {
 
             <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="font-body text-sm text-white/80 hover:text-[#EA553B] transition-colors">Features</a>
+              <Link href="/shop" className="font-body text-sm text-white/80 hover:text-[#EA553B] transition-colors">Shop</Link>
               <Link href="/auth/login" className="font-body text-sm text-white/80 hover:text-[#EA553B] transition-colors">Sign In</Link>
               <Link href="/auth/signup" className="font-body text-sm text-white/80 hover:text-[#EA553B] transition-colors">Sign Up</Link>
             </div>
 
             <div className="flex items-center gap-3">
+              <Link href="/shop" className="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-3 rounded-lg font-display text-base tracking-wide transition-all font-bold">
+                🛒 SHOP
+              </Link>
               <Link href="/classes/book-court" className="hidden sm:flex items-center gap-2 bg-[#EA553B] hover:bg-[#D14028] text-white px-5 py-2.5 rounded-lg font-display text-sm tracking-wide transition-all">
                 Book Court
               </Link>
-              <Link href="/classes/book-coach" className="flex items-center gap-2 bg-white hover:bg-gray-100 text-black px-4 py-2.5 rounded-lg font-display text-sm tracking-wide transition-all">
+              <Link href="/classes/book-coach" className="hidden md:flex items-center gap-2 bg-white hover:bg-gray-100 text-black px-4 py-2.5 rounded-lg font-display text-sm tracking-wide transition-all">
                 Book Coach
               </Link>
             </div>
