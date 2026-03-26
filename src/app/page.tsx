@@ -69,7 +69,7 @@ export default function Home() {
 
             <div className="flex items-center gap-3">
               <Link href="/shop" className="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-3 rounded-lg font-display text-base tracking-wide transition-all font-bold">
-                🛒 SHOP
+                🛒 SHOP+
               </Link>
               <Link href="/classes/book-court" className="hidden sm:flex items-center gap-2 bg-[#EA553B] hover:bg-[#D14028] text-white px-5 py-2.5 rounded-lg font-display text-sm tracking-wide transition-all">
                 Book Court
