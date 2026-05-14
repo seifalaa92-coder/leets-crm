@@ -51,6 +51,7 @@ const navigation = {
     { name: "Staff", href: "/staff", icon: "UserCog" },
     { name: "Leads", href: "/leads", icon: "Target" },
     { name: "Reports", href: "/reports", icon: "BarChart3" },
+    { name: "Kids Reg", href: "/dashboard/kids-registrations", icon: "Target" },
     { name: "Admin", href: "/admin", icon: "Settings" },
   ],
   manager: [
