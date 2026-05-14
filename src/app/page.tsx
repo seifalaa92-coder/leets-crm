@@ -111,17 +111,17 @@ export default function Home() {
           </div>
 
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-white mb-6">
-            The New
-            <span className="block text-[#EA553B] mt-2">Luxury Social Club</span>
-            <span className="block text-white/90 mt-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Experience in Saudi Arabia</span>
+            Saudi Arabia's
+            <span className="block text-[#EA553B] mt-2">Premier Kids Padel</span>
+            <span className="block text-white/90 mt-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Academy</span>
           </h1>
 
           <p className="font-body text-lg md:text-xl text-white/80 mb-4 max-w-3xl mx-auto">
-            The Complete CRM Platform for Modern Sports Venues
+            Where Young Athletes Become Champions
           </p>
           
           <p className="font-body text-sm md:text-base text-white/60 mb-10 max-w-2xl mx-auto">
-            Book courts, hire coaches, track progress, and manage your memberships all in one place.
+            Professional padel coaching for kids ages 4-18. Book a trial session today.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
