@@ -244,11 +244,11 @@ export default function Home() {
           className="group flex items-center gap-2"
         >
           <span className="bg-white text-green-600 text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity mr-2 whitespace-nowrap">
-            Chat with us
+            Contact LEETS
           </span>
           <div className="w-14 h-14 bg-[#25D366] hover:bg-[#20BD5A] text-white rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] flex items-center justify-center transition-all hover:scale-110 hover:shadow-[0_6px_25px_rgba(37,211,102,0.6)] border-2 border-white">
-            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
           </div>
         </a>
@@ -259,11 +259,11 @@ export default function Home() {
           className="group flex items-center gap-2"
         >
           <span className="bg-white text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity mr-2 whitespace-nowrap">
-            Join Our Group
+            Join Padel Group
           </span>
           <div className="w-14 h-14 bg-[#128C7E] hover:bg-[#075E54] text-white rounded-full shadow-[0_4px_20px_rgba(18,140,126,0.4)] flex items-center justify-center transition-all hover:scale-110 hover:shadow-[0_6px_25px_rgba(18,140,126,0.6)] border-2 border-white">
-            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.524 3.666 1.438 5.189L2 22l4.811-1.438A9.965 9.965 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.89 0-3.666-.524-5.189-1.438l-.372-.224-2.866.857.857-2.866-.224-.372A7.965 7.965 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8zm4-6.5c-.25-.125-1.475-.725-1.7-.825-.225-.1-.4-.15-.575.15-.175.3-.675.825-.825 1-.15.175-.3.2-.55.075-.25-.125-1.05-.425-1.975-1.25-.75-.675-1.25-1.5-1.4-1.75-.15-.25-.025-.375.1-.5.1-.1.225-.275.35-.425.125-.15.175-.25.25-.425.075-.175.025-.3-.025-.425-.05-.125-.575-1.4-.775-1.9-.2-.5-.4-.425-.55-.425-.15 0-.325-.01-.5-.01s-.45.075-.675.325c-.225.25-.9.875-.9 2.125s.9 2.45 1.025 2.625c.125.175 1.775 2.8 4.325 3.9.6.275 1.075.425 1.45.55.6.2 1.15.175 1.575.1.5-.075 1.5-.625 1.7-1.225.2-.6.2-1.125.15-1.225-.075-.1-.25-.175-.5-.3z"/>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
         </a>
