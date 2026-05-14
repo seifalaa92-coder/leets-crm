@@ -1,1 +1,0 @@
-{"query":"CREATE POLICY leads_insert_public_policy ON leads FOR INSERT TO PUBLIC WITH CHECK (true);"}
