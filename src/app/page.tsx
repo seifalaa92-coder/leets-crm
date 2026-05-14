@@ -154,6 +154,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Kids Registration */}
+      <KidsRegistrationForm />
+
       {/* Features Section */}
       <section id="features" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
@@ -209,9 +212,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Kids Registration */}
-      <KidsRegistrationForm />
 
       {/* Footer */}
       <footer className="bg-[#111111] border-t border-white/10 px-4 sm:px-6 lg:px-8 py-12">
