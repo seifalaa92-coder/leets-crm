@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
         interest_type: "kids_registration",
         notes: `Child: ${data.kidName}, Age: ${data.kidAge}, Sport: ${data.sportInterest}${data.notes ? `, Notes: ${data.notes}` : ""}`,
         status: "new",
-        source: "kids_registration_form",
+
 
       })
       .select()
