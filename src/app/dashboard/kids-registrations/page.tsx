@@ -1,30 +1,41 @@
-import { createClient } from "@supabase/supabase-js";
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const dynamic = 'force-dynamic';
-
-async function getKidsRegistrations() {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-
-  const { data, error } = await supabase
-    .from("leads")
-    .select("*")
-    .eq("interest_type", "kids_registration")
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error("Error fetching kids registrations:", error);
-    return [];
-  }
-
-  return data;
+interface Registration {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  notes: string;
+  created_at: string;
 }
 
-export default async function KidsRegistrationsPage() {
-  const registrations = await getKidsRegistrations();
+export default function KidsRegistrationsPage() {
+  const [registrations, setRegistrations] = useState<Registration[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchRegistrations = useCallback(async () => {
+    try {
+      const res = await fetch("/api/kids-registration");
+      const data = await res.json();
+      if (data.registrations) {
+        setRegistrations(data.registrations);
+      }
+    } catch (err) {
+      console.error("Failed to fetch:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchRegistrations();
+    const interval = setInterval(fetchRegistrations, 5000);
+    return () => clearInterval(interval);
+  }, [fetchRegistrations]);
 
   return (
     <div className="space-y-6">
@@ -33,6 +44,8 @@ export default async function KidsRegistrationsPage() {
           <h1 className="text-2xl font-bold text-gray-900">Kids Registrations</h1>
           <p className="text-gray-500 mt-1">
             {registrations.length} registration{registrations.length !== 1 ? "s" : ""}
+            {loading && <span className="ml-2 text-blue-500 text-sm">Loading...</span>}
+            {!loading && <span className="ml-2 text-green-500 text-sm">Auto-refreshing every 5s</span>}
           </p>
         </div>
       </div>
@@ -61,7 +74,7 @@ export default async function KidsRegistrationsPage() {
                     </td>
                   </tr>
                 ) : (
-                  registrations.map((reg: any) => (
+                  registrations.map((reg) => (
                     <tr key={reg.id} className="border-b border-gray-100 hover:bg-gray-50">
                       <td className="py-3 px-2">
                         <div className="font-medium text-gray-900">{reg.first_name} {reg.last_name}</div>
