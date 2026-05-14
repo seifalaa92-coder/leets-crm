@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { UAParser } from "ua-parser-js";
 
+export const dynamic = 'force-dynamic';
+
 // Helper to parse user agent
 function parseUserAgent(userAgent: string) {
   const parser = new UAParser(userAgent);

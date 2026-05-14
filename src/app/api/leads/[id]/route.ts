@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 // PATCH /api/leads/[id] - Update a lead
 export async function PATCH(
   request: NextRequest,

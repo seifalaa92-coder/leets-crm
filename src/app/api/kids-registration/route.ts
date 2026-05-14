@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+export const dynamic = 'force-dynamic';
+
 const kidsRegistrationSchema = z.object({
   parentFirstName: z.string().min(2, "First name is required"),
   parentLastName: z.string().min(2, "Last name is required"),
