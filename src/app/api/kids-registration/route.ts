@@ -31,17 +31,17 @@ export async function POST(request: NextRequest) {
     const data = validationResult.data;
 
     const { data: registration, error } = await supabase
-      .from("kids_registrations")
+      .from("leads")
       .insert({
-        parent_first_name: data.parentFirstName,
-        parent_last_name: data.parentLastName,
-        parent_email: data.parentEmail,
-        parent_phone: data.parentPhone,
-        kid_name: data.kidName,
-        kid_age: parseInt(data.kidAge),
-        sport_interest: data.sportInterest,
-        notes: data.notes || null,
+        first_name: data.parentFirstName,
+        last_name: data.parentLastName,
+        email: data.parentEmail,
+        phone: data.parentPhone,
+        interest_type: "kids_registration",
+        notes: `Child: ${data.kidName}, Age: ${data.kidAge}, Sport: ${data.sportInterest}${data.notes ? `, Notes: ${data.notes}` : ""}`,
         status: "new",
+        source: "kids_registration_form",
+        form_location: "homepage_kids_registration",
       })
       .select()
       .single();
