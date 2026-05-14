@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error("Error creating kids registration:", error);
       return NextResponse.json(
-        { error: "Failed to create registration" },
+        { error: error.message },
         { status: 500 }
       );
     }
@@ -57,10 +57,10 @@ export async function POST(request: NextRequest) {
       message: "Registration created successfully",
       registrationId: registration.id,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in kids-registration API:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: error.message || "Internal server error" },
       { status: 500 }
     );
   }

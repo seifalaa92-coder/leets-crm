@@ -50,6 +50,7 @@ export function KidsRegistrationForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -98,6 +99,7 @@ export function KidsRegistrationForm() {
 
     setIsSubmitting(true);
     setSubmitStatus("idle");
+    setErrorMessage("");
 
     try {
       const response = await fetch("/api/kids-registration", {
@@ -105,6 +107,8 @@ export function KidsRegistrationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+
+      const result = await response.json();
 
       if (response.ok) {
         setSubmitStatus("success");
@@ -120,9 +124,11 @@ export function KidsRegistrationForm() {
         });
       } else {
         setSubmitStatus("error");
+        setErrorMessage(result.error || "Something went wrong. Please try again.");
       }
-    } catch {
+    } catch (err) {
       setSubmitStatus("error");
+      setErrorMessage("Network error. Please check your connection.");
     } finally {
       setIsSubmitting(false);
     }
@@ -288,7 +294,7 @@ export function KidsRegistrationForm() {
 
                 {submitStatus === "error" && (
                   <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-center">
-                    <p className="text-red-400 text-sm">Something went wrong. Please try again.</p>
+                    <p className="text-red-400 text-sm">{errorMessage}</p>
                   </div>
                 )}
 
