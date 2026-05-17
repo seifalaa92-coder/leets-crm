@@ -34,26 +34,26 @@ function AnimatedSection({ children, className = "", delay = 0 }: { children: Re
 }
 
 const STATS = [
-  { value: "500+", label: "Active Members" },
+  { value: "500+", label: "Active Players" },
   { value: "12", label: "Pro Courts" },
   { value: "8+", label: "Expert Coaches" },
-  { value: "96%", label: "Satisfaction" },
+  { value: "50+", label: "Weekly Sessions" },
 ];
 
 const FEATURES = [
-  { icon: "🎾", title: "Pro Padel Courts", desc: "12 world-class indoor & outdoor courts with premium lighting and surface" },
-  { icon: "🏋️", title: "Functional Fitness", desc: "Full strength & conditioning gym with dedicated padel-specific training zones" },
-  { icon: "🧘", title: "Pilates & Yoga", desc: "Mind-body studios for recovery, flexibility, and mental focus" },
-  { icon: "🏊", title: "Swimming Pool", desc: "Olympic-size lap pool with kids' splash zone and swim coaching" },
-  { icon: "🎮", title: "Kids Activity Zone", desc: "Supervised play area with games, crafts, and sports for ages 4-14" },
-  { icon: "🍽️", title: "F&B Lounge", desc: "Healthy café with smoothies, protein bowls, and post-match recovery meals" },
+  { icon: "🎾", title: "Padel Coaching", desc: "One-on-one and group coaching for all levels — beginner to advanced match play" },
+  { icon: "🏋️", title: "Padel-Specific Fitness", desc: "Strength, agility & footwork programs designed to elevate your court performance" },
+  { icon: "⚡", title: "Speed & Agility", desc: "Ladder drills, cone work, and reaction training to sharpen your movement" },
+  { icon: "🧘", title: "Recovery & Mobility", desc: "Stretching routines and mobility work to prevent injuries and stay game-ready" },
+  { icon: "📊", title: "Video Analysis", desc: "Record and review your technique with frame-by-frame coach feedback" },
+  { icon: "🏆", title: "Match Play & Tournaments", desc: "Regular competitive play, club tournaments, and league participation" },
 ];
 
 const GALLERY = [
-  { src: "/images/padel-court-hero.jpg", alt: "Main padel court", span: "col-span-2 row-span-2" },
-  { src: "/images/padel-court-2.jpg", alt: "Evening padel session", span: "col-span-1 row-span-1" },
-  { src: "/images/padel-court-3.jpg", alt: "Coaching session", span: "col-span-1 row-span-1" },
-  { src: "/images/padel-court-4.jpg", alt: "Court action shot", span: "col-span-2 row-span-1" },
+  { src: "/images/padel-court-hero.jpg", alt: "Main training court", span: "col-span-2 row-span-2" },
+  { src: "/images/padel-court-2.jpg", alt: "Evening coaching session", span: "col-span-1 row-span-1" },
+  { src: "/images/padel-court-3.jpg", alt: "One-on-one coaching", span: "col-span-1 row-span-1" },
+  { src: "/images/padel-court-4.jpg", alt: "Match play action", span: "col-span-2 row-span-1" },
 ];
 
 export default function Home() {
@@ -121,20 +121,20 @@ export default function Home() {
             <span className="w-2 h-2 rounded-full bg-[#EA553B] animate-pulse" />
             <span className="text-[#EA553B] text-sm font-semibold tracking-wider uppercase">PRACTICE &gt; ACHIEVE &gt; INSPIRE</span>
           </div>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-white mb-6">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-white mb-6">
             Saudi Arabia's
-            <span className="block text-[#EA553B] mt-2">Premier Kids Padel</span>
+            <span className="block text-[#EA553B] mt-2">Premier Padel Coaching</span>
             <span className="block text-white/90 mt-2 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Academy</span>
           </h1>
           <p className="font-body text-lg md:text-xl text-white/80 mb-4 max-w-3xl mx-auto">
-            Where Young Athletes Become Champions
+            Train Smarter. Play Stronger. Win More.
           </p>
           <p className="font-body text-sm md:text-base text-white/60 mb-10 max-w-2xl mx-auto">
-            Professional padel coaching for kids ages 4-18. Register your child below.
+            Expert padel coaching and sport-specific fitness training for all levels
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a href="#register" className="bg-[#EA553B] hover:bg-[#D14028] text-white px-8 py-3.5 rounded-lg font-display text-sm tracking-wide transition-all shadow-[0_4px_20px_rgba(234,85,59,0.4)]">
-              Register Now
+              Start Training
             </a>
             <a href="#gallery" className="border border-white/30 hover:border-white/60 text-white/90 hover:text-white px-8 py-3.5 rounded-lg font-display text-sm tracking-wide transition-all">
               Explore Facilities
@@ -162,9 +162,9 @@ export default function Home() {
         <AnimatedSection className="max-w-7xl mx-auto">
           <div className="text-center mb-12 pt-4">
             <span className="text-[#EA553B] text-sm font-semibold tracking-widest uppercase">Our Facilities</span>
-            <h2 className="font-display text-5xl md:text-7xl text-white mt-2">World-Class Venue</h2>
+            <h2 className="font-display text-5xl md:text-7xl text-white mt-2">Padel Training Center</h2>
             <p className="text-white/40 text-sm mt-3 max-w-xl mx-auto">
-              Premium courts, expert coaching, and a community that pushes you to be your best
+              Premium courts, expert coaching, and fitness built for padel athletes
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
@@ -191,10 +191,10 @@ export default function Home() {
       <section id="features" className="bg-[#F5F5F5] px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection className="text-center mb-16">
-            <span className="text-[#EA553B] text-sm font-semibold tracking-widest uppercase">Everything You Need</span>
-            <h2 className="font-display text-5xl md:text-7xl text-[#0F172A] mt-2">Premium Facilities</h2>
+            <span className="text-[#EA553B] text-sm font-semibold tracking-widest uppercase">Train Like a Pro</span>
+            <h2 className="font-display text-5xl md:text-7xl text-[#0F172A] mt-2">Coaching & Fitness</h2>
             <p className="text-gray-500 text-sm mt-3 max-w-xl mx-auto">
-              More than padel — a complete sports & lifestyle destination
+              Everything you need to take your padel game to the next level
             </p>
           </AnimatedSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -221,16 +221,16 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
           </div>
           <div className="relative z-10 max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-5xl md:text-7xl text-white mb-4">Ready to Play?</h2>
+            <h2 className="font-display text-5xl md:text-7xl text-white mb-4">Ready to Level Up?</h2>
             <p className="text-white/80 text-sm md:text-base mb-8 max-w-xl mx-auto">
-              Book your first session today and experience Saudi Arabia's premier padel academy
+              Book a coaching session or fitness assessment and start your padel journey today
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link href="/classes/book-court" className="bg-white text-[#EA553B] hover:bg-gray-100 px-8 py-3.5 rounded-lg font-display text-sm tracking-wide transition-all">
-                Book a Court
-              </Link>
-              <Link href="/classes/book-coach" className="border-2 border-white/40 text-white hover:bg-white/10 px-8 py-3.5 rounded-lg font-display text-sm tracking-wide transition-all">
+              <Link href="/classes/book-coach" className="bg-white text-[#EA553B] hover:bg-gray-100 px-8 py-3.5 rounded-lg font-display text-sm tracking-wide transition-all">
                 Book a Coach
+              </Link>
+              <Link href="/classes/book-court" className="border-2 border-white/40 text-white hover:bg-white/10 px-8 py-3.5 rounded-lg font-display text-sm tracking-wide transition-all">
+                Book a Court
               </Link>
             </div>
           </div>
@@ -251,12 +251,12 @@ export default function Home() {
                 <img src="/leets-logo.png" alt="Leets Logo" className="w-10 h-10 object-contain" />
                 <div>
                   <span className="font-display text-xl text-white tracking-tight">LEETS</span>
-                  <p className="text-[#EA553B] text-xs uppercase tracking-wider">Sports CRM</p>
+                  <p className="text-[#EA553B] text-xs uppercase tracking-wider">Padel Academy</p>
                 </div>
               </div>
               <p className="text-white/40 text-sm max-w-md">
-                Saudi Arabia's premier kids padel academy and multi-sport destination in Jeddah. 
-                Professional coaching, world-class facilities, and a community that inspires.
+                Saudi Arabia's premier padel coaching academy in Jeddah. 
+                Expert coaching, padel-specific fitness, and a community that trains together.
               </p>
             </div>
             <div>

@@ -3,47 +3,52 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-interface KidFormData {
-  parentFirstName: string;
-  parentLastName: string;
-  parentEmail: string;
-  parentPhone: string;
-  kidName: string;
-  kidAge: string;
-  sportInterest: string;
+interface LeadFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  interest: string;
+  level: string;
   notes: string;
 }
 
 interface FormErrors {
-  parentFirstName?: string;
-  parentLastName?: string;
-  parentEmail?: string;
-  parentPhone?: string;
-  kidName?: string;
-  kidAge?: string;
-  sportInterest?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  interest?: string;
+  level?: string;
 }
 
-const sportOptions = [
-  { value: "", label: "Select a sport" },
-  { value: "padel", label: "Padel" },
-  { value: "tennis", label: "Tennis" },
-  { value: "swimming", label: "Swimming" },
-  { value: "football", label: "Football" },
-  { value: "basketball", label: "Basketball" },
-  { value: "multi_sport", label: "Multi-Sport" },
+const interestOptions = [
+  { value: "", label: "Select an option" },
+  { value: "private_coaching", label: "Private Coaching" },
+  { value: "group_sessions", label: "Group Sessions" },
+  { value: "fitness_training", label: "Padel-Specific Fitness" },
+  { value: "beginners_course", label: "Beginners Course" },
+  { value: "tournament_prep", label: "Tournament Preparation" },
+  { value: "kids_program", label: "Kids Program (Ages 6-14)" },
   { value: "other", label: "Other" },
 ];
 
+const levelOptions = [
+  { value: "", label: "Select your level" },
+  { value: "beginner", label: "Beginner — Never played" },
+  { value: "novice", label: "Novice — Played a few times" },
+  { value: "intermediate", label: "Intermediate — Can rally and keep score" },
+  { value: "advanced", label: "Advanced — Competitive player" },
+];
+
 export function KidsRegistrationForm() {
-  const [formData, setFormData] = useState<KidFormData>({
-    parentFirstName: "",
-    parentLastName: "",
-    parentEmail: "",
-    parentPhone: "",
-    kidName: "",
-    kidAge: "",
-    sportInterest: "",
+  const [formData, setFormData] = useState<LeadFormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    interest: "",
+    level: "",
     notes: "",
   });
 
@@ -65,28 +70,25 @@ export function KidsRegistrationForm() {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
-    if (!formData.parentFirstName.trim() || formData.parentFirstName.length < 2) {
-      newErrors.parentFirstName = "Required";
+    if (!formData.firstName.trim() || formData.firstName.length < 2) {
+      newErrors.firstName = "Required";
     }
-    if (!formData.parentLastName.trim() || formData.parentLastName.length < 2) {
-      newErrors.parentLastName = "Required";
+    if (!formData.lastName.trim() || formData.lastName.length < 2) {
+      newErrors.lastName = "Required";
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.parentEmail.trim() || !emailRegex.test(formData.parentEmail)) {
-      newErrors.parentEmail = "Valid email required";
+    if (!formData.email.trim() || !emailRegex.test(formData.email)) {
+      newErrors.email = "Valid email required";
     }
     const phoneRegex = /^[+]?[\d\s-]{8,}$/;
-    if (!formData.parentPhone.trim() || !phoneRegex.test(formData.parentPhone)) {
-      newErrors.parentPhone = "Valid phone required";
+    if (!formData.phone.trim() || !phoneRegex.test(formData.phone)) {
+      newErrors.phone = "Valid phone required";
     }
-    if (!formData.kidName.trim() || formData.kidName.length < 2) {
-      newErrors.kidName = "Required";
+    if (!formData.interest) {
+      newErrors.interest = "Please select an option";
     }
-    if (!formData.kidAge.trim()) {
-      newErrors.kidAge = "Required";
-    }
-    if (!formData.sportInterest) {
-      newErrors.sportInterest = "Please select a sport";
+    if (!formData.level) {
+      newErrors.level = "Please select your level";
     }
 
     setErrors(newErrors);
@@ -113,13 +115,12 @@ export function KidsRegistrationForm() {
       if (response.ok) {
         setSubmitStatus("success");
         setFormData({
-          parentFirstName: "",
-          parentLastName: "",
-          parentEmail: "",
-          parentPhone: "",
-          kidName: "",
-          kidAge: "",
-          sportInterest: "",
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          interest: "",
+          level: "",
           notes: "",
         });
       } else {
@@ -161,14 +162,14 @@ export function KidsRegistrationForm() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#EA553B]/10 border border-[#EA553B]/30 mb-6">
               <span className="w-2 h-2 rounded-full bg-[#EA553B] animate-pulse" />
               <span className="text-[#EA553B] text-sm font-semibold tracking-wider uppercase">
-                Now Enrolling
+                Start Your Journey
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-white mb-4">
-              Kids Sports Programs
+              Book a Coaching Session
             </h2>
             <p className="font-body text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
-              Give your child the gift of sports. Professional coaching in a fun, safe environment.
+              Tell us about your goals and we&apos;ll match you with the right coach and program.
             </p>
           </motion.div>
         </div>
@@ -194,75 +195,63 @@ export function KidsRegistrationForm() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="font-display text-2xl text-white mb-2">Registration Received!</h3>
-                <p className="text-white/60">We&apos;ll reach out with kids program details soon.</p>
+                <h3 className="font-display text-2xl text-white mb-2">Thank You!</h3>
+                <p className="text-white/60">We&apos;ll reach out to schedule your first session.</p>
               </motion.div>
             )}
 
             {submitStatus !== "success" && (
               <>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Parent Info */}
+                  {/* Personal Info */}
                   <div className="space-y-5">
                     <h3 className="font-display text-xl text-white mb-4 flex items-center gap-2">
                       <svg className="w-5 h-5 text-[#EA553B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
-                      Parent / Guardian Info
+                      Your Info
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-white/80 text-sm font-medium mb-2">First Name *</label>
-                        <input type="text" name="parentFirstName" value={formData.parentFirstName} onChange={handleInputChange} className={inputClass("parentFirstName")} placeholder="Ahmed" />
-                        {errors.parentFirstName && <p className="mt-1 text-red-400 text-xs">{errors.parentFirstName}</p>}
+                        <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} className={inputClass("firstName")} placeholder="Ahmed" />
+                        {errors.firstName && <p className="mt-1 text-red-400 text-xs">{errors.firstName}</p>}
                       </div>
                       <div>
                         <label className="block text-white/80 text-sm font-medium mb-2">Last Name *</label>
-                        <input type="text" name="parentLastName" value={formData.parentLastName} onChange={handleInputChange} className={inputClass("parentLastName")} placeholder="Al-Saud" />
-                        {errors.parentLastName && <p className="mt-1 text-red-400 text-xs">{errors.parentLastName}</p>}
+                        <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} className={inputClass("lastName")} placeholder="Al-Saud" />
+                        {errors.lastName && <p className="mt-1 text-red-400 text-xs">{errors.lastName}</p>}
                       </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-white/80 text-sm font-medium mb-2">Email *</label>
-                        <input type="email" name="parentEmail" value={formData.parentEmail} onChange={handleInputChange} className={inputClass("parentEmail")} placeholder="parent@example.com" />
-                        {errors.parentEmail && <p className="mt-1 text-red-400 text-xs">{errors.parentEmail}</p>}
+                        <input type="email" name="email" value={formData.email} onChange={handleInputChange} className={inputClass("email")} placeholder="you@example.com" />
+                        {errors.email && <p className="mt-1 text-red-400 text-xs">{errors.email}</p>}
                       </div>
                       <div>
                         <label className="block text-white/80 text-sm font-medium mb-2">Phone *</label>
-                        <input type="tel" name="parentPhone" value={formData.parentPhone} onChange={handleInputChange} className={inputClass("parentPhone")} placeholder="+966 50 123 4567" />
-                        {errors.parentPhone && <p className="mt-1 text-red-400 text-xs">{errors.parentPhone}</p>}
+                        <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className={inputClass("phone")} placeholder="+966 50 123 4567" />
+                        {errors.phone && <p className="mt-1 text-red-400 text-xs">{errors.phone}</p>}
                       </div>
                     </div>
                   </div>
 
-                  {/* Kid Info */}
+                  {/* Training Info */}
                   <div className="space-y-5">
                     <h3 className="font-display text-xl text-white mb-4 flex items-center gap-2">
                       <svg className="w-5 h-5 text-[#EA553B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
-                      Child&apos;s Info
+                      Training Details
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-white/80 text-sm font-medium mb-2">Child&apos;s Name *</label>
-                        <input type="text" name="kidName" value={formData.kidName} onChange={handleInputChange} className={inputClass("kidName")} placeholder="Faisal" />
-                        {errors.kidName && <p className="mt-1 text-red-400 text-xs">{errors.kidName}</p>}
-                      </div>
-                      <div>
-                        <label className="block text-white/80 text-sm font-medium mb-2">Age *</label>
-                        <input type="number" name="kidAge" value={formData.kidAge} onChange={handleInputChange} className={inputClass("kidAge")} placeholder="8" min="3" max="18" />
-                        {errors.kidAge && <p className="mt-1 text-red-400 text-xs">{errors.kidAge}</p>}
-                      </div>
-                    </div>
                     <div>
-                      <label className="block text-white/80 text-sm font-medium mb-2">Sport Interest *</label>
+                      <label className="block text-white/80 text-sm font-medium mb-2">I&apos;m interested in *</label>
                       <select
-                        name="sportInterest"
-                        value={formData.sportInterest}
+                        name="interest"
+                        value={formData.interest}
                         onChange={handleInputChange}
-                        className={`${inputClass("sportInterest")} appearance-none cursor-pointer`}
+                        className={`${inputClass("interest")} appearance-none cursor-pointer`}
                         style={{
                           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
                           backgroundRepeat: "no-repeat",
@@ -270,13 +259,35 @@ export function KidsRegistrationForm() {
                           backgroundSize: "1.5rem",
                         }}
                       >
-                        {sportOptions.map((opt) => (
+                        {interestOptions.map((opt) => (
                           <option key={opt.value} value={opt.value} className="bg-[#0F172A] text-white">
                             {opt.label}
                           </option>
                         ))}
                       </select>
-                      {errors.sportInterest && <p className="mt-1 text-red-400 text-xs">{errors.sportInterest}</p>}
+                      {errors.interest && <p className="mt-1 text-red-400 text-xs">{errors.interest}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-white/80 text-sm font-medium mb-2">Current Level *</label>
+                      <select
+                        name="level"
+                        value={formData.level}
+                        onChange={handleInputChange}
+                        className={`${inputClass("level")} appearance-none cursor-pointer`}
+                        style={{
+                          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "right 1rem center",
+                          backgroundSize: "1.5rem",
+                        }}
+                      >
+                        {levelOptions.map((opt) => (
+                          <option key={opt.value} value={opt.value} className="bg-[#0F172A] text-white">
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.level && <p className="mt-1 text-red-400 text-xs">{errors.level}</p>}
                     </div>
                     <div>
                       <label className="block text-white/80 text-sm font-medium mb-2">Additional Notes</label>
@@ -286,7 +297,7 @@ export function KidsRegistrationForm() {
                         onChange={handleInputChange}
                         rows={3}
                         className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:border-[#EA553B] focus:outline-none focus:ring-1 focus:ring-[#EA553B]/50 transition-all resize-none"
-                        placeholder="Any special requirements or questions..."
+                        placeholder="Any questions or preferences..."
                       />
                     </div>
                   </div>
@@ -298,28 +309,28 @@ export function KidsRegistrationForm() {
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-5 rounded-2xl bg-gradient-to-r from-[#EA553B] to-[#D14028] hover:from-[#D14028] hover:to-[#C03020] text-white font-display text-xl tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg shadow-[#EA553B]/20"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      Register My Child
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </>
-                  )}
-                </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-5 rounded-2xl bg-gradient-to-r from-[#EA553B] to-[#D14028] hover:from-[#D14028] hover:to-[#C03020] text-white font-display text-xl tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg shadow-[#EA553B]/20"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        Get Started
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      </>
+                    )}
+                  </button>
 
                 <p className="text-center text-white/40 text-xs">
                   By submitting, you agree to our privacy policy
@@ -338,10 +349,10 @@ export function KidsRegistrationForm() {
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
         >
           {[
-            { icon: "🎾", text: "Professional Coaching" },
-            { icon: "🏊", text: "Safe Environment" },
-            { icon: "🏆", text: "Ages 4-18" },
-            { icon: "📅", text: "Flexible Schedules" },
+            { icon: "🎾", text: "Expert Coaches" },
+            { icon: "🏋️", text: "Padel-Specific Fitness" },
+            { icon: "📊", text: "Video Analysis" },
+            { icon: "🏆", text: "All Levels Welcome" },
           ].map((benefit, i) => (
             <div key={i} className="text-center p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <div className="text-3xl mb-2">{benefit.icon}</div>

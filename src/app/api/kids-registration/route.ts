@@ -4,14 +4,13 @@ import { z } from "zod";
 
 export const dynamic = 'force-dynamic';
 
-const kidsRegistrationSchema = z.object({
-  parentFirstName: z.string().min(2, "First name is required"),
-  parentLastName: z.string().min(2, "Last name is required"),
-  parentEmail: z.string().email("Valid email is required"),
-  parentPhone: z.string().min(8, "Phone number is required"),
-  kidName: z.string().min(2, "Child name is required"),
-  kidAge: z.string().min(1, "Age is required"),
-  sportInterest: z.string().min(1, "Sport interest is required"),
+const coachingSchema = z.object({
+  firstName: z.string().min(2, "First name is required"),
+  lastName: z.string().min(2, "Last name is required"),
+  email: z.string().email("Valid email is required"),
+  phone: z.string().min(8, "Phone number is required"),
+  interest: z.string().min(1, "Interest is required"),
+  level: z.string().min(1, "Level is required"),
   notes: z.string().optional(),
 });
 
@@ -47,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    const validationResult = kidsRegistrationSchema.safeParse(body);
+    const validationResult = coachingSchema.safeParse(body);
     if (!validationResult.success) {
       return NextResponse.json(
         { error: "Validation failed", details: validationResult.error.issues },
@@ -60,12 +59,12 @@ export async function POST(request: NextRequest) {
     const { data: registration, error } = await supabase
       .from("leads")
       .insert({
-        first_name: data.parentFirstName,
-        last_name: data.parentLastName,
-        email: data.parentEmail,
-        phone: data.parentPhone,
-        interest_type: "kids_registration",
-        notes: `Child: ${data.kidName}, Age: ${data.kidAge}, Sport: ${data.sportInterest}${data.notes ? `, Notes: ${data.notes}` : ""}`,
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        interest_type: data.interest,
+        notes: `Level: ${data.level}.${data.notes ? ` Notes: ${data.notes}` : ""}`,
         status: "new",
       })
       .select()
