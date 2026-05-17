@@ -85,6 +85,8 @@ const navigation = {
     { name: "Book Class", href: "/classes", icon: "Calendar" },
     { name: "My Bookings", href: "/classes/my-bookings", icon: "BookOpen" },
     { name: "Loyalty", href: "/loyalty", icon: "Gift" },
+    { name: "Marketplace", href: "/marketplace", icon: "Target" },
+    { name: "My Listings", href: "/marketplace/my-listings", icon: "BookOpen" },
     { name: "Profile", href: "/profile", icon: "User" },
   ],
 };

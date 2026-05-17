@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import LeadCaptureWidget from "@/components/LeadCaptureWidget";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="en" dir="ltr">
       <body className={`${inter.variable} ${bebasNeue.variable} font-body antialiased bg-neutral-off-white text-neutral-charcoal`}>
         {children}
+        <LeadCaptureWidget />
       </body>
     </html>
   );

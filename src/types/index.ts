@@ -498,6 +498,32 @@ export interface FormInputProps {
 // DASHBOARD TYPES
 // ============================================================================
 
+// ============================================================================
+// MARKETPLACE TYPES
+// ============================================================================
+
+export type ProductCondition = "new" | "like_new" | "good" | "fair";
+export type ProductStatus = "active" | "sold" | "removed";
+
+export interface MarketplaceProduct {
+  id: string;
+  seller_id: string;
+  seller_name: string;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  condition: ProductCondition;
+  images: string[];
+  status: ProductStatus;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MarketplaceMetrics {
+  totalActive: number;
+}
+
 export interface DashboardMetrics {
   totalActiveMembers: number;
   expiringThisWeek: number;
