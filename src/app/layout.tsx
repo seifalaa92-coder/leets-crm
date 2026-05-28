@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
-import { Inter, Bebas_Neue } from "next/font/google";
+import { Barlow_Condensed, Sora } from "next/font/google";
 import "./globals.css";
 import LeadCaptureWidget from "@/components/LeadCaptureWidget";
 
-const inter = Inter({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-barlow",
   display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-bebas",
+  variable: "--font-sora",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Leets | PRACTICE > ACHIEVE > INSPIRE",
-  description: "Leets Sports - Premier Padel Academy, Functional Fitness, Pilates & Yoga Studios, Swimming Pool, Kids Area & F&B in Jeddah, Saudi Arabia",
-  keywords: ["Leets", "Padel", "Sports", "Fitness", "Jeddah", "Saudi Arabia", "Gym", "Yoga", "Swimming"],
+  title: "Leets | Practice > Achieve > Inspire",
+  description: "Saudi Arabia's premier padel coaching academy in Jeddah — expert coaching, padel-specific fitness, and a community that trains together.",
+  keywords: ["Leets", "Padel", "Sports", "Fitness", "Jeddah", "Saudi Arabia", "Padel Coaching"],
 };
 
 export default function RootLayout({
@@ -29,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="ltr">
-      <body className={`${inter.variable} ${bebasNeue.variable} font-body antialiased bg-neutral-off-white text-neutral-charcoal`}>
+      <body className={`${barlowCondensed.variable} ${sora.variable} font-body antialiased`}>
         {children}
         <LeadCaptureWidget />
       </body>

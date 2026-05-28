@@ -144,9 +144,9 @@ export function KidsRegistrationForm() {
     <section className="relative py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A] via-[#0F172A] to-[#0F172A]" />
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#EA553B]/15 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#EA553B]/10 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-dark via-neutral-dark to-neutral-dark" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-brand/15 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-brand/10 rounded-full blur-[100px]" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
       </div>
 
@@ -157,11 +157,11 @@ export function KidsRegistrationForm() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#EA553B]/10 border border-[#EA553B]/30 mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#EA553B] animate-pulse" />
-              <span className="text-[#EA553B] text-sm font-semibold tracking-wider uppercase">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/30 mb-6">
+              <span className="w-2 h-2 rounded-full bg-brand" />
+              <span className="text-brand font-label">
                 Start Your Journey
               </span>
             </div>
@@ -178,7 +178,7 @@ export function KidsRegistrationForm() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative bg-[#0F172A] border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-[#EA553B]/15 via-transparent to-[#EA553B]/10 pointer-events-none" />
@@ -312,7 +312,7 @@ export function KidsRegistrationForm() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-5 rounded-2xl bg-gradient-to-r from-[#EA553B] to-[#D14028] hover:from-[#D14028] hover:to-[#C03020] text-white font-display text-xl tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg shadow-[#EA553B]/20"
+                    className="w-full py-5 rounded-2xl bg-brand hover:bg-brand-dark text-white font-display text-xl tracking-wide transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg shadow-brand/20"
                   >
                     {isSubmitting ? (
                       <>
@@ -345,7 +345,7 @@ export function KidsRegistrationForm() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
         >
           {[

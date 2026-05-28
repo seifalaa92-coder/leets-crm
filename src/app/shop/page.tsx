@@ -211,7 +211,7 @@ export default function ShopPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#111111] border-t border-white/10 px-4 sm:px-6 lg:px-8 py-12 mt-12">
+      <footer className="bg-neutral-dark border-t border-white/10 px-4 sm:px-6 lg:px-8 py-12 mt-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">

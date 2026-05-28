@@ -1,10 +1,10 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Leets Design System Configuration
- * Brand: PRACTICE > ACHIEVE > INSPIRE
- * Primary: #E8461A (Leets Orange-Red)
- * Fonts: Bebas Neue (display) + Inter (body)
+ * Leets Design System
+ * Brand: Practice > Achieve > Inspire
+ * Primary: #EA553B (Leets Orange-Red)
+ * Fonts: Barlow Condensed (display) + Sora (body)
  */
 
 const config: Config = {
@@ -16,7 +16,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Nike-inspired Brand Colors
         brand: {
           DEFAULT: '#EA553B',
           light: '#FF6B4F',
@@ -27,16 +26,23 @@ const config: Config = {
           600: '#D14028',
           700: '#B53520',
         },
-        // Nike Neutral Colors
+        secondary: {
+          DEFAULT: '#F97316',
+          50: '#FFF7ED',
+          100: '#FFEDD5',
+          500: '#F97316',
+        },
         neutral: {
           white: '#FFFFFF',
           'off-white': '#F5F5F5',
-          cream: '#E5E5E5',
-          black: '#000000',
-          dark: '#111111',
-          charcoal: '#2D2D2D',
+          cream: '#E8E4DF',
+          black: '#0A0A0A',
+          dark: '#0F172A',
+          'dark-alt': '#0A0F1E',
+          charcoal: '#1E293B',
+          gray: '#64748B',
+          'gray-light': '#94A3B8',
         },
-        // Zone Colors
         zone: {
           padel: '#C85A2A',
           'padel-bg': '#F0EBE3',
@@ -46,54 +52,47 @@ const config: Config = {
           kids: '#F28C38',
           fb: '#F5F0E8',
         },
-        // Semantic Colors
         success: {
-          DEFAULT: '#2ECC71',
-          light: 'rgba(46, 204, 113, 0.15)',
+          DEFAULT: '#22C55E',
+          light: 'rgba(34, 197, 94, 0.15)',
         },
         warning: {
-          DEFAULT: '#F39C12',
-          light: 'rgba(243, 156, 18, 0.15)',
+          DEFAULT: '#F59E0B',
+          light: 'rgba(245, 158, 11, 0.15)',
         },
         error: {
-          DEFAULT: '#E74C3C',
-          light: 'rgba(231, 76, 60, 0.12)',
+          DEFAULT: '#EF4444',
+          light: 'rgba(239, 68, 68, 0.12)',
         },
         info: {
-          DEFAULT: '#3498DB',
+          DEFAULT: '#3B82F6',
         },
-        // Utility
         border: {
-          DEFAULT: '#E0D9CF',
-          dark: '#3A3A3A',
+          DEFAULT: '#E2E8F0',
+          dark: '#1E293B',
         },
       },
       fontFamily: {
-        sans: ['Bebas Neue', 'sans-serif'],
-        display: ['Bebas Neue', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['var(--font-barlow)', 'Barlow Condensed', 'system-ui', 'sans-serif'],
+        body: ['var(--font-sora)', 'Sora', 'system-ui', 'sans-serif'],
         arabic: ['Noto Sans Arabic', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        // Display - Extra large headlines matching M3 Academy style
-        'display-2xl': ['clamp(48px, 8vw, 80px)', { lineHeight: '0.95', letterSpacing: '0.02em' }],
-        'display-xl': ['clamp(40px, 6vw, 64px)', { lineHeight: '0.95', letterSpacing: '0.02em' }],
-        'display-lg': ['clamp(32px, 4vw, 48px)', { lineHeight: '1', letterSpacing: '0.01em' }],
-        // Headings - Bold condensed uppercase style
-        'h1': ['clamp(40px, 5vw, 72px)', { lineHeight: '0.95', letterSpacing: '0.02em' }],
-        'h2': ['clamp(32px, 4vw, 48px)', { lineHeight: '1', letterSpacing: '0.02em' }],
-        'h3': ['clamp(24px, 3vw, 36px)', { lineHeight: '1.1', letterSpacing: '0.02em' }],
-        'h4': ['24px', { lineHeight: '1.2', letterSpacing: '0.01em' }],
-        'h5': ['20px', { lineHeight: '1.2', letterSpacing: '0.01em' }],
+        'display-2xl': ['clamp(48px, 8vw, 80px)', { lineHeight: '0.95', letterSpacing: '-0.02em' }],
+        'display-xl': ['clamp(40px, 6vw, 64px)', { lineHeight: '0.95', letterSpacing: '-0.02em' }],
+        'display-lg': ['clamp(32px, 4vw, 48px)', { lineHeight: '1', letterSpacing: '-0.01em' }],
+        'h1': ['clamp(40px, 5vw, 72px)', { lineHeight: '0.95', letterSpacing: '-0.02em' }],
+        'h2': ['clamp(32px, 4vw, 48px)', { lineHeight: '1', letterSpacing: '-0.01em' }],
+        'h3': ['clamp(24px, 3vw, 36px)', { lineHeight: '1.1', letterSpacing: '-0.01em' }],
+        'h4': ['24px', { lineHeight: '1.2' }],
+        'h5': ['20px', { lineHeight: '1.2' }],
         'h6': ['18px', { lineHeight: '1.3' }],
-        // Body text - Clean and readable
         'body-lg': ['18px', { lineHeight: '1.6' }],
         'body-md': ['16px', { lineHeight: '1.6' }],
         'body-sm': ['14px', { lineHeight: '1.5' }],
         'body-xs': ['12px', { lineHeight: '1.5' }],
-        // Small text/captions
         'caption': ['14px', { lineHeight: '1.5', letterSpacing: '0.02em' }],
-        'label': ['11px', { lineHeight: '1.4', letterSpacing: '0.1em' }],
+        'label': ['11px', { lineHeight: '1.4', letterSpacing: '0.12em' }],
       },
       spacing: {
         '1': '4px',
@@ -120,16 +119,16 @@ const config: Config = {
         '2xl': '24px',
       },
       boxShadow: {
-        'sm': '0 1px 3px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06)',
-        'md': '0 4px 12px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08)',
-        'lg': '0 10px 30px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.10)',
-        'xl': '0 20px 60px rgba(0,0,0,0.20), 0 8px 24px rgba(0,0,0,0.12)',
-        'brand': '0 4px 20px rgba(232, 70, 26, 0.35)',
-        'brand-lg': '0 8px 40px rgba(232, 70, 26, 0.45)',
+        'sm': '0 1px 2px rgba(15, 23, 42, 0.06)',
+        'md': '0 4px 12px rgba(15, 23, 42, 0.08)',
+        'lg': '0 10px 30px rgba(15, 23, 42, 0.12)',
+        'xl': '0 20px 60px rgba(15, 23, 42, 0.16)',
+        'brand': '0 4px 24px rgba(234, 85, 59, 0.35)',
+        'brand-lg': '0 8px 40px rgba(234, 85, 59, 0.45)',
       },
       transitionTimingFunction: {
         'spring': 'cubic-bezier(0.16, 1, 0.3, 1)',
-        'bounce-subtle': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'out': 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
       transitionDuration: {
         'fast': '150ms',
@@ -138,10 +137,9 @@ const config: Config = {
         'slower': '500ms',
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-        'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-        'slide-in': 'slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'fade-in': 'fadeIn 0.5s ease-out',
+        'slide-up': 'slideUp 0.5s ease-out',
+        'slide-in': 'slideIn 0.3s ease-out',
         'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
