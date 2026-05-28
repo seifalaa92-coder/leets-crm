@@ -154,7 +154,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* Gallery Section */}
-      <section id="gallery" className="bg-[#0F172A] px-4 sm:px-6 lg:px-8 pb-20">
+      <section id="gallery" className="px-4 sm:px-6 lg:px-8 pb-20">
         <AnimatedSection className="max-w-7xl mx-auto">
           <div className="text-center mb-12 pt-4">
             <span className="text-[#EA553B] text-sm font-semibold tracking-widest uppercase">Our Facilities</span>
@@ -163,12 +163,13 @@ export default function Home() {
               Premium courts, expert coaching, and fitness built for padel athletes
             </p>
           </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <div className="relative rounded-2xl overflow-hidden">
             <video
               ref={videoRef}
               className="w-full aspect-video object-cover"
               autoPlay
               muted
+              loop
               playsInline
               preload="auto"
             >
