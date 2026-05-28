@@ -110,7 +110,7 @@ export default function Home() {
           </div>
           <h1 className="font-display-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.9] text-white mb-6">
             Saudi Arabia&apos;s
-            <span className="block text-brand mt-2">Premier Padel Coaching</span>
+            <span className="block text-brand mt-2">Elevate Your Game</span>
             <span className="block text-white/90 mt-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">Academy</span>
           </h1>
           <p className="font-body-medium text-lg md:text-xl text-white/80 mb-3 max-w-3xl mx-auto">
