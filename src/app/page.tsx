@@ -58,24 +58,10 @@ export default function Home() {
 
   useEffect(() => {
     setLoaded(true);
+    videoRef.current?.play();
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    const unmute = () => {
-      const v = videoRef.current;
-      if (v) { v.muted = false; v.volume = 0.5; }
-      document.removeEventListener("scroll", unmute);
-      document.removeEventListener("click", unmute);
-      document.removeEventListener("touchstart", unmute);
-    };
-    document.addEventListener("scroll", unmute);
-    document.addEventListener("click", unmute);
-    document.addEventListener("touchstart", unmute);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("scroll", unmute);
-      document.removeEventListener("click", unmute);
-      document.removeEventListener("touchstart", unmute);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
