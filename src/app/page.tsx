@@ -174,7 +174,7 @@ export default function Home() {
               playsInline
               preload="auto"
             >
-              <source src="/Videos/dunes-kids-academy.mp4" type="video/mp4" />
+              <source src="/training.mp4" type="video/mp4" />
             </video>
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-gradient-to-t from-black/60 via-black/20 to-transparent p-4 rounded-xl pointer-events-none">
               <div className="text-white">
