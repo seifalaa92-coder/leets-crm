@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { KidsRegistrationForm } from "@/components/forms/KidsRegistrationForm";
 
 function useInView(threshold = 0.15) {
@@ -62,8 +62,8 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     const timer = setTimeout(() => {
       const v = videoRef.current;
-      if (v) { v.volume = 0.5; v.play().catch(() => {}); }
-    }, 3000);
+      if (v) { v.volume = 0.5; v.muted = false; }
+    }, 2000);
     return () => {
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(timer);
@@ -174,8 +174,10 @@ export default function Home() {
             <video
               ref={videoRef}
               className="w-full aspect-video object-cover"
-              controls
+              autoPlay
+              muted
               playsInline
+              loop
               preload="auto"
             >
               <source src="/Videos/dunes-kids-academy.mp4" type="video/mp4" />
