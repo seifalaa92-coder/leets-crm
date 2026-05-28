@@ -169,7 +169,7 @@ export default function Home() {
               playsInline
               poster="/images/padel-court-hero.jpg"
             >
-              <source src="/videos/padel-training.mp4" type="video/mp4" />
+              <source src="/Videos/Dunes Kids Academy.mp4" type="video/mp4" />
             </video>
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-gradient-to-t from-black/60 via-black/20 to-transparent p-4 rounded-xl pointer-events-none">
               <div className="text-white">
