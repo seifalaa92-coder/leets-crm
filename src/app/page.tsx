@@ -62,7 +62,19 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     const timer = setTimeout(() => {
       const v = videoRef.current;
-      if (v) { v.volume = 0.5; v.muted = false; }
+      if (!v) return;
+      v.volume = 0.5;
+      v.play().catch(() => {
+        const playOnInteraction = () => {
+          v.play();
+          document.removeEventListener("click", playOnInteraction);
+          document.removeEventListener("touchstart", playOnInteraction);
+          document.removeEventListener("scroll", playOnInteraction);
+        };
+        document.addEventListener("click", playOnInteraction);
+        document.addEventListener("touchstart", playOnInteraction);
+        document.addEventListener("scroll", playOnInteraction);
+      });
     }, 2000);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -174,10 +186,7 @@ export default function Home() {
             <video
               ref={videoRef}
               className="w-full aspect-video object-cover"
-              autoPlay
-              muted
               playsInline
-              loop
               preload="auto"
             >
               <source src="/Videos/dunes-kids-academy.mp4" type="video/mp4" />
