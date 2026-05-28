@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { KidsRegistrationForm } from "@/components/forms/KidsRegistrationForm";
 
 function useInView(threshold = 0.15) {
@@ -54,12 +54,20 @@ const FEATURES = [
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setLoaded(true);
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const timer = setTimeout(() => {
+      const v = videoRef.current;
+      if (v) { v.volume = 0.5; v.play().catch(() => {}); }
+    }, 3000);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -164,12 +172,13 @@ export default function Home() {
           </div>
           <div className="relative rounded-2xl overflow-hidden bg-black shadow-2xl">
             <video
+              ref={videoRef}
               className="w-full aspect-video object-cover"
               controls
               playsInline
-              poster="/images/padel-court-hero.jpg"
+              preload="auto"
             >
-              <source src="/Videos/Dunes Kids Academy.mp4" type="video/mp4" />
+              <source src="/Videos/dunes-kids-academy.mp4" type="video/mp4" />
             </video>
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-gradient-to-t from-black/60 via-black/20 to-transparent p-4 rounded-xl pointer-events-none">
               <div className="text-white">
