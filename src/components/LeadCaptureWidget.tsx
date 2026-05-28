@@ -12,7 +12,7 @@ const STEPS = [
 ];
 
 export default function LeadCaptureWidget() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({ name: "", age: "", interest: "", phone: "" });
   const [submitting, setSubmitting] = useState(false);

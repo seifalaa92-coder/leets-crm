@@ -49,12 +49,7 @@ const FEATURES = [
   { icon: "🏆", title: "Match Play & Tournaments", desc: "Regular competitive play, club tournaments, and league participation" },
 ];
 
-const GALLERY = [
-  { src: "/images/padel-court-hero.jpg", alt: "Main training court", span: "col-span-2 row-span-2" },
-  { src: "/images/padel-court-2.jpg", alt: "Evening coaching session", span: "col-span-1 row-span-1" },
-  { src: "/images/padel-court-3.jpg", alt: "One-on-one coaching", span: "col-span-1 row-span-1" },
-  { src: "/images/padel-court-4.jpg", alt: "Match play action", span: "col-span-2 row-span-1" },
-];
+
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -167,22 +162,21 @@ export default function Home() {
               Premium courts, expert coaching, and fitness built for padel athletes
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {GALLERY.map((img, i) => (
-              <div key={i} className={`${img.span} overflow-hidden rounded-xl group relative`}>
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  width={800}
-                  height={600}
-                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-3 left-3 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {img.alt}
-                </div>
+          <div className="relative rounded-2xl overflow-hidden bg-black shadow-2xl">
+            <video
+              className="w-full aspect-video object-cover"
+              controls
+              playsInline
+              poster="/images/padel-court-hero.jpg"
+            >
+              <source src="/videos/padel-training.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-gradient-to-t from-black/60 via-black/20 to-transparent p-4 rounded-xl pointer-events-none">
+              <div className="text-white">
+                <p className="font-display text-lg">Padel Training at Leets</p>
+                <p className="text-white/60 text-xs">Watch our coaching program in action</p>
               </div>
-            ))}
+            </div>
           </div>
         </AnimatedSection>
       </section>
