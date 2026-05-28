@@ -60,16 +60,7 @@ export default function Home() {
     setLoaded(true);
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    const timer = setTimeout(() => {
-      const v = videoRef.current;
-      if (!v) return;
-      v.volume = 0.5;
-      v.muted = false;
-    }, 2000);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(timer);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -172,10 +163,10 @@ export default function Home() {
               Premium courts, expert coaching, and fitness built for padel athletes
             </p>
           </div>
-          <div className="relative rounded-2xl overflow-hidden bg-black shadow-2xl max-w-3xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
             <video
               ref={videoRef}
-              className="w-full aspect-video object-contain"
+              className="w-full aspect-video object-cover"
               autoPlay
               muted
               playsInline
