@@ -18,6 +18,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/', '/((?!_next|favicon.ico|public).*)'],
+  matcher: '/:path*',
 }
-
