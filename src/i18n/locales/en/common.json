@@ -1,0 +1,396 @@
+{
+  "app": {
+    "name": "Leets Sports",
+    "tagline": "Premier Padel Experience",
+    "welcome": "Welcome to Leets",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "signup": "Sign Up",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "phone": "Phone Number",
+    "otp": "Verification Code",
+    "sendOtp": "Send Code",
+    "verifyOtp": "Verify Code",
+    "loginWithEmail": "Login with Email",
+    "loginWithPhone": "Login with Phone",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginSuccess": "Login successful",
+    "loginError": "Invalid credentials",
+    "logoutSuccess": "Logged out successfully",
+    "sessionExpired": "Session expired. Please login again.",
+    "unauthorized": "You don't have permission to access this page"
+  },
+  "roles": {
+    "super_admin": "Super Admin",
+    "manager": "Manager",
+    "coach": "Coach",
+    "front_desk": "Front Desk",
+    "member": "Member"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "memberships": "Memberships",
+    "classes": "Classes",
+    "bookings": "Bookings",
+    "payments": "Payments",
+    "staff": "Staff",
+    "reports": "Reports",
+    "settings": "Settings",
+    "profile": "Profile",
+    "accessControl": "Access Control",
+    "loyalty": "Loyalty Program",
+    "leads": "Leads",
+    "admin": "Admin Panel"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "overview": "Overview",
+    "metrics": {
+      "activeMembers": "Active Members",
+      "expiringSoon": "Expiring This Week",
+      "expired": "Expired This Month",
+      "newSignups": "New Sign-ups",
+      "todayRevenue": "Today's Revenue",
+      "classesToday": "Classes Today",
+      "staffOnDuty": "Staff on Duty",
+      "attendanceToday": "Check-ins Today"
+    },
+    "recentActivity": "Recent Activity",
+    "quickActions": "Quick Actions",
+    "viewAll": "View All"
+  },
+  "clients": {
+    "title": "Clients",
+    "newClient": "New Client",
+    "editClient": "Edit Client",
+    "clientDetails": "Client Details",
+    "membershipStatus": "Membership Status",
+    "personalInfo": "Personal Information",
+    "contactInfo": "Contact Information",
+    "emergencyContact": "Emergency Contact",
+    "notes": "Notes",
+    "searchPlaceholder": "Search clients by name, email, or phone...",
+    "noClients": "No clients found",
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "firstNameAr": "First Name (Arabic)",
+      "lastNameAr": "Last Name (Arabic)",
+      "email": "Email",
+      "phone": "Phone",
+      "dateOfBirth": "Date of Birth",
+      "gender": "Gender",
+      "nationality": "Nationality",
+      "photo": "Photo"
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "tabs": {
+      "profile": "Profile",
+      "membership": "Membership",
+      "bookings": "Bookings",
+      "payments": "Payments",
+      "loyalty": "Loyalty",
+      "attendance": "Attendance"
+    }
+  },
+  "memberships": {
+    "title": "Memberships",
+    "newMembership": "New Membership",
+    "renewMembership": "Renew Membership",
+    "upgradeMembership": "Upgrade Membership",
+    "tiers": "Membership Tiers",
+    "status": {
+      "active": "Active",
+      "expired": "Expired",
+      "suspended": "Suspended",
+      "cancelled": "Cancelled",
+      "pending": "Pending"
+    },
+    "types": {
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "dayPass": "Day Pass",
+      "corporate": "Corporate"
+    },
+    "fields": {
+      "tier": "Membership Tier",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "price": "Price",
+      "status": "Status",
+      "autoRenew": "Auto Renew",
+      "companyName": "Company Name"
+    },
+    "alerts": {
+      "expiringIn7Days": "Membership expires in 7 days",
+      "expiringIn1Day": "Membership expires tomorrow",
+      "expired": "Membership has expired"
+    }
+  },
+  "qrCode": {
+    "title": "Access QR Code",
+    "showQr": "Show QR Code",
+    "scanQr": "Scan QR Code",
+    "scanning": "Scanning...",
+    "pointCamera": "Point camera at QR code",
+    "validUntil": "Valid until",
+    "refreshDaily": "Refreshes daily for security",
+    "accessGranted": "Access Granted",
+    "accessDenied": "Access Denied",
+    "expiredMembership": "Membership Expired",
+    "invalidQr": "Invalid QR Code",
+    "lastScanned": "Last scanned",
+    "memberName": "Member",
+    "membershipType": "Membership Type"
+  },
+  "classes": {
+    "title": "Classes & Schedule",
+    "newClass": "New Class",
+    "editClass": "Edit Class",
+    "schedule": "Schedule",
+    "mySchedule": "My Schedule",
+    "types": {
+      "group": "Group Session",
+      "private": "Private Lesson",
+      "openPlay": "Open Play",
+      "tournament": "Tournament"
+    },
+    "status": {
+      "scheduled": "Scheduled",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "fields": {
+      "name": "Class Name",
+      "type": "Class Type",
+      "court": "Court",
+      "coach": "Coach",
+      "date": "Date",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "duration": "Duration",
+      "maxCapacity": "Max Capacity",
+      "price": "Price",
+      "description": "Description",
+      "isRecurring": "Recurring Class"
+    },
+    "bookings": {
+      "title": "Bookings",
+      "bookNow": "Book Now",
+      "joinWaitlist": "Join Waitlist",
+      "cancelBooking": "Cancel Booking",
+      "status": {
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled",
+        "waitlist": "Waitlist",
+        "attended": "Attended",
+        "noShow": "No Show"
+      },
+      "capacity": "{{current}} / {{max}} spots filled",
+      "availableSpots": "{{count}} spots available",
+      "cancellationPolicy": "Cancellation allowed up to {{hours}} hours before class"
+    }
+  },
+  "payments": {
+    "title": "Payments",
+    "newPayment": "Record Payment",
+    "paymentHistory": "Payment History",
+    "receipt": "Receipt",
+    "printReceipt": "Print Receipt",
+    "emailReceipt": "Email Receipt",
+    "methods": {
+      "cash": "Cash",
+      "card": "Credit Card",
+      "bankTransfer": "Bank Transfer",
+      "check": "Check",
+      "other": "Other"
+    },
+    "categories": {
+      "membership": "Membership",
+      "class": "Class",
+      "dayPass": "Day Pass",
+      "merchandise": "Merchandise",
+      "other": "Other"
+    },
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "failed": "Failed",
+      "refunded": "Refunded"
+    },
+    "fields": {
+      "client": "Client",
+      "amount": "Amount",
+      "method": "Payment Method",
+      "category": "Category",
+      "referenceNumber": "Reference Number",
+      "notes": "Notes"
+    },
+    "dailySummary": "Daily Cash Summary",
+    "outstandingBalance": "Outstanding Balance",
+    "refunds": {
+      "title": "Refunds",
+      "requestRefund": "Request Refund",
+      "reason": "Reason for Refund",
+      "pendingApproval": "Pending Approval",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    }
+  },
+  "loyalty": {
+    "title": "Loyalty Program",
+    "yourPoints": "Your Points",
+    "pointsBalance": "Points Balance",
+    "earnPoints": "How to Earn Points",
+    "redeemPoints": "Redeem Points",
+    "rewardsCatalog": "Rewards Catalog",
+    "transactionHistory": "Transaction History",
+    "leaderboard": "Leaderboard",
+    "waysToEarn": {
+      "spending": "{{amount}} points per {{currency}} spent",
+      "referral": "{{amount}} points for each successful referral",
+      "attendanceStreak": "{{amount}} bonus points for {{days}} day attendance streak"
+    },
+    "transactions": {
+      "earned": "Earned",
+      "redeemed": "Redeemed",
+      "adjusted": "Adjusted",
+      "bonus": "Bonus"
+    }
+  },
+  "staff": {
+    "title": "Staff Management",
+    "newStaff": "New Staff Member",
+    "attendance": "Attendance",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out",
+    "alreadyClockedIn": "Already Clocked In",
+    "notClockedIn": "Not Clocked In",
+    "attendanceHistory": "Attendance History",
+    "monthlySummary": "Monthly Summary",
+    "lateArrivals": "Late Arrivals",
+    "absences": "Absences"
+  },
+  "leads": {
+    "title": "Sales Leads",
+    "newLead": "New Lead",
+    "pipeline": "Sales Pipeline",
+    "sources": {
+      "walkIn": "Walk-in",
+      "referral": "Referral",
+      "socialMedia": "Social Media",
+      "website": "Website",
+      "phone": "Phone",
+      "other": "Other"
+    },
+    "status": {
+      "new": "New",
+      "contacted": "Contacted",
+      "trialScheduled": "Trial Scheduled",
+      "trialCompleted": "Trial Completed",
+      "converted": "Converted",
+      "churned": "Churned",
+      "lost": "Lost"
+    },
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "interest": "Interest Type",
+      "source": "Source",
+      "status": "Status",
+      "assignedTo": "Assigned To",
+      "notes": "Notes",
+      "followUpDate": "Follow-up Date"
+    }
+  },
+  "reports": {
+    "title": "Reports",
+    "revenue": "Revenue Report",
+    "attendance": "Attendance Report",
+    "membership": "Membership Report",
+    "export": "Export Report",
+    "dateRange": "Date Range",
+    "filters": "Filters"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "users": "User Management",
+    "settings": "System Settings",
+    "venueSettings": "Venue Settings",
+    "loyaltySettings": "Loyalty Settings",
+    "notificationCenter": "Notification Center",
+    "activityLog": "Activity Log",
+    "fields": {
+      "venueName": "Venue Name",
+      "address": "Address",
+      "timezone": "Timezone",
+      "currency": "Currency",
+      "operatingHours": "Operating Hours"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email",
+    "phone": "Please enter a valid phone number",
+    "minLength": "Must be at least {{min}} characters",
+    "maxLength": "Must be at most {{max}} characters",
+    "passwordMatch": "Passwords do not match",
+    "invalidDate": "Please enter a valid date",
+    "invalidTime": "Please enter a valid time"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "notFound": "Page not found",
+    "serverError": "Server error. Please try again later.",
+    "networkError": "Network error. Please check your connection.",
+    "unauthorized": "You are not authorized to perform this action",
+    "conflict": "This action conflicts with existing data"
+  },
+  "success": {
+    "saved": "Saved successfully",
+    "created": "Created successfully",
+    "updated": "Updated successfully",
+    "deleted": "Deleted successfully",
+    "sent": "Sent successfully",
+    "exported": "Exported successfully"
+  }
+}
