@@ -25,7 +25,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto px-6 text-center">
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-8">
               <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              <span className="font-label text-white/80">Jeddah&apos;s Premier Padel Academy</span>
+              <span className="font-label text-white/80">Complete Sports Experience</span>
             </div>
             <h1 className="font-display-bold text-display-2xl text-white mb-6">
               Practice &gt; Achieve &gt; Inspire
