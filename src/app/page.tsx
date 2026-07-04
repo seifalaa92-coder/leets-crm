@@ -109,9 +109,9 @@ export default function Home() {
             <span className="text-brand text-sm font-semibold tracking-wider uppercase">PRACTICE &gt; ACHIEVE &gt; INSPIRE</span>
           </div>
           <h1 className="font-display-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.9] text-white mb-6">
-            Saudi Arabia&apos;s
-            <span className="block text-brand mt-2">Top Padel Academy</span>
-            <span className="block text-white/90 mt-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">Academy</span>
+            The Complete
+            <span className="block text-brand mt-2">Sports Lifetime</span>
+            <span className="block text-white/90 mt-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">Experience</span>
           </h1>
           <p className="font-body-medium text-lg md:text-xl text-white/80 mb-3 max-w-3xl mx-auto">
             Train Smarter. Play Stronger. Win More.
