@@ -12,32 +12,76 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-neutral-off-white">
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-neutral-black via-neutral-dark to-neutral-dark-alt overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: `radial-gradient(circle at 25% 50%, #EA553B 0%, transparent 50%), radial-gradient(circle at 75% 50%, #F97316 0%, transparent 50%)`
-        }} />
-        <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32 text-center">
-          <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-5 py-2 mb-8">
-            <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-            <span className="font-label text-white/60">Jeddah&apos;s Premier Padel Academy</span>
+      <section className="relative h-[90vh] min-h-[600px] overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/images/padel-court-hero.jpg"
+            alt="Padel court"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/70" />
+        </div>
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-8">
+              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+              <span className="font-label text-white/80">Jeddah&apos;s Premier Padel Academy</span>
+            </div>
+            <h1 className="font-display-bold text-display-2xl text-white mb-6">
+              Practice &gt; Achieve &gt; Inspire
+            </h1>
+            <p className="font-body text-body-lg text-white/70 max-w-2xl mx-auto mb-10">
+              Saudi Arabia&apos;s premier padel coaching academy — expert coaching,
+              padel-specific fitness, and a community that trains together.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/classes/book-court" className="btn-primary">
+                Book a Court
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/auth/signup" className="btn-ghost">
+                Join Leets
+              </Link>
+            </div>
           </div>
-          <h1 className="font-display-bold text-display-2xl text-white mb-6">
-            Practice &gt; Achieve &gt; Inspire
-          </h1>
-          <p className="font-body text-body-lg text-white/60 max-w-2xl mx-auto mb-10">
-            Saudi Arabia&apos;s premier padel coaching academy — expert coaching,
-            padel-specific fitness, and a community that trains together.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/classes/book-court" className="btn-primary">
-              Book a Court
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-            <Link href="/auth/signup" className="btn-ghost">
-              Join Leets
-            </Link>
+        </div>
+      </section>
+
+      {/* Courts Gallery */}
+      <section className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="text-center mb-12">
+          <h2 className="font-display text-h2 text-neutral-black mb-3">Our Courts</h2>
+          <p className="font-body text-body-md text-neutral-gray">World-class padel facilities in the heart of Jeddah.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden">
+            <img src="/images/padel-court-2.jpg" alt="Court view" className="w-full h-full object-cover" />
+          </div>
+          <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden">
+            <img src="/images/padel-court-3.jpg" alt="Court view" className="w-full h-full object-cover" />
+          </div>
+          <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden md:col-span-2">
+            <img src="/images/padel-court-4.jpg" alt="Court view" className="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
+
+      {/* Training Video */}
+      <section className="bg-neutral-black py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-h2 text-white mb-3">Train with the Best</h2>
+            <p className="font-body text-body-md text-neutral-gray">See what it&apos;s like to train at Leets.</p>
+          </div>
+          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl">
+            <video
+              className="w-full h-full object-cover"
+              src="/training.mp4"
+              controls
+              poster="/images/padel-court-hero.jpg"
+            />
           </div>
         </div>
       </section>
@@ -58,6 +102,24 @@ export default function Home() {
               <p className="font-body text-body-sm text-neutral-gray">{link.desc}</p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Kids Academy Video */}
+      <section className="bg-gradient-to-br from-[#F28C38]/10 to-transparent py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-h2 text-neutral-black mb-3">Kids Academy</h2>
+            <p className="font-body text-body-md text-neutral-gray">Building the next generation of padel champions.</p>
+          </div>
+          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl">
+            <video
+              className="w-full h-full object-cover"
+              src="/Videos/dunes-kids-academy.mp4"
+              controls
+              poster="/images/padel-court-hero.jpg"
+            />
+          </div>
         </div>
       </section>
 
