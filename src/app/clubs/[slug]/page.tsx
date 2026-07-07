@@ -1,27 +1,9 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
 import type { Club } from "@/data/company";
 
-const IMAGE_EXT = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
-const VIDEO_EXT = [".mp4", ".webm", ".mov"];
-
-function getMedia(slug: string) {
-  const dir = path.join(process.cwd(), "public", "clubs", slug);
-  let files: string[] = [];
-  try {
-    files = fs.readdirSync(dir).filter((f) => !f.startsWith("."));
-  } catch {
-    files = [];
-  }
-  const images = files.filter((f) => IMAGE_EXT.includes(path.extname(f).toLowerCase()));
-  const videos = files.filter((f) => VIDEO_EXT.includes(path.extname(f).toLowerCase()));
-  return { images, videos };
-}
-
-const CLUBS: Club[] = [
+const CLUBS: (Club & { localVideos?: string[]; localImages?: string[] })[] = [
   {
     slug: "pyramids-park-view",
     name: "Pyramids Park View",
@@ -54,6 +36,7 @@ const CLUBS: Club[] = [
     short: "Club operations and coaching programs in New Cairo.",
     about: "Padel Ace in New Cairo was operated by Leets Sports, with our team handling day-to-day club management, coaching programs and player development across all levels.",
     videoUrls: [],
+    localVideos: ["Padel ACe 1.mp4", "Padel Ace 2.mp4", "Padel Ace 3.mp4"],
   },
 ];
 
@@ -75,7 +58,8 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
   const club = CLUBS.find((c) => c.slug === slug);
   if (!club) notFound();
 
-  const { images, videos } = getMedia(club.slug);
+  const videos = club.localVideos ?? [];
+  const images = club.localImages ?? [];
   const hasMedia = images.length > 0 || videos.length > 0 || (club.videoUrls?.length ?? 0) > 0;
 
   return (
