@@ -24,7 +24,6 @@ export default function QRScannerPage() {
   const [scanResult, setScanResult] = useState<ScanResult | null>(null);
   const [accessType, setAccessType] = useState<"entry" | "exit">("entry");
   const videoRef = useRef<HTMLVideoElement>(null);
-  const supabase = createClient();
 
   const startScanning = async () => {
     try {
@@ -60,6 +59,7 @@ export default function QRScannerPage() {
   };
 
   const handleScan = async (qrData: string) => {
+    const supabase = createClient();
     try {
       const parsed = JSON.parse(qrData);
       

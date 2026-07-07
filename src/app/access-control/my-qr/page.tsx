@@ -18,7 +18,6 @@ export default function MyQRCodePage() {
   const [expiresAt, setExpiresAt] = useState<Date | null>(null);
   const [membershipStatus, setMembershipStatus] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
-  const supabase = createClient();
 
   useEffect(() => {
     generateQRCode();
@@ -30,6 +29,7 @@ export default function MyQRCodePage() {
   const generateQRCode = async () => {
     try {
       setIsLoading(true);
+      const supabase = createClient();
       
       // Get current user
       const { data: { user } } = await supabase.auth.getUser();
