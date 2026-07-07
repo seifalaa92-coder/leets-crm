@@ -25,6 +25,7 @@ const CLUBS: (Club & { localVideos?: string[]; localImages?: string[] })[] = [
     short: "Full club operation inside Westmark Mall, Sheikh Zayed.",
     about: "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation — bookings, coaching staff, academies and events — turning a mall location into a destination for the local padel community.",
     videoUrls: [],
+    localVideos: ["Westmark 1.mp4", "Westmark 2.mp4", "Westmark 3.mp4"],
   },
   {
     slug: "padel-ace",
