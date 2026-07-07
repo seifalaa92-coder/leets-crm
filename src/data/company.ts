@@ -1,10 +1,10 @@
 export const COMPANY = {
   name: "Leets Sports",
   tagline: "Sports Management Company",
-  heroLine1: "We build, own and operate",
-  heroLine2: "padel clubs.",
+  heroLine1: "We own and operate",
+  heroLine2: "sports facilities.",
   heroSub:
-    "Leets Sports is a sports management company running padel clubs across Egypt and Saudi Arabia — from ground-up builds to full club operations, coaching programs and academies.",
+    "Leets Sports is a sports management company that builds, owns and operates sports facilities across Egypt and Saudi Arabia — padel clubs, academies and boutique fitness studios, from ground-up builds to full daily operations.",
   phone: "+20 122 228 8617",
   email: "info@leetssports.com",
   instagram: "https://instagram.com/leets.sports",
@@ -12,7 +12,7 @@ export const COMPANY = {
 };
 
 export const STATS = [
-  { value: "3", label: "Clubs delivered & operated" },
+  { value: "3", label: "Facilities delivered & operated" },
   { value: "2", label: "Countries" },
   { value: "1", label: "Academy — Jeddah, KSA" },
 ];
@@ -81,4 +81,4 @@ export const FOUNDER = {
 };
 
 export const COMPANY_PROFILE_INTRO =
-  "Leets Sports is a sports management company founded in Egypt and headquartered in Jeddah, Saudi Arabia. We take padel projects from concept to daily operation: club builds, coaching structures, academies, tournaments and community growth. Our track record covers three clubs across Cairo and an academy in Jeddah.";
+  "Leets Sports is a sports management company founded in Egypt and headquartered in Jeddah, Saudi Arabia. We take sports facilities from concept to daily operation: builds and fit-outs, coaching structures, academies, tournaments and community growth. Our track record covers three clubs across Cairo and a padel academy in Jeddah.";

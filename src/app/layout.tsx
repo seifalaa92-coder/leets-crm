@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     default: "Leets Sports — Sports Management Company | Padel Clubs in Egypt & KSA",
     template: "%s | Leets Sports",
   },
-  description: "Leets Sports builds, owns and operates padel clubs across Egypt and Saudi Arabia — club operations, academies, coaching programs and tournaments.",
+  description: "Leets Sports owns and operates sports facilities across Egypt and Saudi Arabia — padel clubs, academies and boutique fitness studios.",
   openGraph: {
     title: "Leets Sports — Sports Management Company",
-    description: "Leets Sports builds, owns and operates padel clubs across Egypt and Saudi Arabia.",
+    description: "Leets Sports owns and operates sports facilities across Egypt and Saudi Arabia — padel clubs, academies and boutique fitness studios.",
     url: "https://www.leetssports.com",
     siteName: "Leets Sports",
     locale: "en_US",

@@ -43,16 +43,16 @@ export default function ClubPage({ params }: { params: { slug: string } }) {
   const hasMedia = images.length > 0 || videos.length > 0;
 
   return (
-    <div className="min-h-screen bg-[#0B1420] text-white">
+    <div className="min-h-screen bg-[#0F172A] text-white">
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-4 py-16">
-        <Link href="/clubs" className="text-sm font-semibold text-[#2E7CF6] hover:underline">
-          ← All clubs
+        <Link href="/clubs" className="text-sm font-semibold text-[#EA553B] hover:underline">
+          ← All facilities
         </Link>
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <StatusBadge status={club.status} />
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#2E7CF6]">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#EA553B]">
             {club.role}
           </span>
         </div>

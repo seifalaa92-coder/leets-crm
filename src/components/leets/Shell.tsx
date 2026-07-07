@@ -11,13 +11,14 @@ const NAV = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0B1420]/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0F172A]/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link
           href="/"
-          className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-2xl font-bold uppercase tracking-widest text-white"
+          className="flex items-center gap-2 font-[family-name:var(--font-display,'Barlow_Condensed')] text-2xl font-bold uppercase tracking-widest text-white"
         >
-          Leets<span className="text-[#2E7CF6]">Sports</span>
+          <img src="/leets-logo.png" alt="Leets Logo" className="h-8 w-8 object-contain" />
+          Leets<span className="text-[#EA553B]">Sports</span>
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
           {NAV.map((item) => (
@@ -31,14 +32,14 @@ export function SiteHeader() {
           ))}
           <Link
             href="/auth/login"
-            className="rounded-md bg-[#2E7CF6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#4A90F8]"
+            className="rounded-md bg-[#EA553B] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#FF6B4F]"
           >
             Log in
           </Link>
         </nav>
         <Link
           href="/clubs"
-          className="rounded-md bg-[#2E7CF6] px-3 py-2 text-sm font-semibold text-white md:hidden"
+          className="rounded-md bg-[#EA553B] px-3 py-2 text-sm font-semibold text-white md:hidden"
         >
           Clubs
         </Link>
@@ -49,12 +50,15 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[#0B1420] py-10 text-white">
+    <footer className="border-t border-white/10 bg-[#0F172A] py-10 text-white">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-3">
         <div>
-          <p className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-xl font-bold uppercase tracking-widest">
-            Leets<span className="text-[#2E7CF6]">Sports</span>
-          </p>
+          <div className="mb-2 flex items-center gap-2">
+            <img src="/leets-logo.png" alt="Leets Logo" className="h-8 w-8 object-contain" />
+            <p className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-xl font-bold uppercase tracking-widest">
+              Leets<span className="text-[#EA553B]">Sports</span>
+            </p>
+          </div>
           <p className="mt-2 text-sm text-white/60">{COMPANY.tagline}</p>
           <p className="mt-1 text-sm text-white/60">{COMPANY.locations}</p>
         </div>

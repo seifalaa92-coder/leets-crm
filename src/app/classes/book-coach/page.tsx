@@ -9,6 +9,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { LeetsIcon } from "@/components/ui/LeetsLogo";
+import { SiteHeader } from "@/components/leets/Shell";
 
 const StarIcon = () => (
   <svg className="w-4 h-4 text-yellow-500 inline mr-1" fill="currentColor" viewBox="0 0 24 24">
@@ -244,33 +245,7 @@ export default function BookCoachingPage() {
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] pb-20">
-      {/* Top Navigation Bar with Logo */}
-      <div className="bg-white border-b border-gray-200 px-4 py-3">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo - Links to Dashboard */}
-          <Link 
-            href="/dashboard" 
-            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-          >
-            <LeetsIcon className="w-10 h-10" />
-            <div className="hidden sm:block">
-              <span className="font-display text-xl text-black tracking-tight">LEETS</span>
-              <span className="block font-body text-[10px] text-[#EA553B] uppercase tracking-wider">Sports CRM</span>
-            </div>
-          </Link>
-
-          {/* Back Button */}
-          <Link 
-            href="/dashboard"
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors"
-          >
-            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            <span className="font-body text-sm text-gray-700 hidden sm:inline">Dashboard</span>
-          </Link>
-        </div>
-      </div>
+<SiteHeader />
 
       {/* Page Header */}
       <header className="bg-white border-b border-gray-200 px-4 py-4">

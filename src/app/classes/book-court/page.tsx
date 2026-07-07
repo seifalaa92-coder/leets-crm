@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { SiteHeader } from "@/components/leets/Shell";
 
 interface Court {
   id: string;
@@ -116,12 +117,7 @@ export default function BookCourtPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2"><img src="/leets-logo.png" alt="Leets" className="w-8 h-8" /><span className="font-bold text-xl">LEETS</span></Link>
-          <Link href="/dashboard" className="text-gray-600 hover:text-gray-900">Back to Dashboard</Link>
-        </div>
-      </header>
+<SiteHeader />
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         <div className="flex items-center gap-2 mb-8">
