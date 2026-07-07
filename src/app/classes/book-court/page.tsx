@@ -15,9 +15,9 @@ interface Court {
 }
 
 const COURTS: Court[] = [
-  { id: "court-1", name: "Clay Court Alpha", number: 1, type: "indoor", features: ["Climate Controlled", "Premium Surface"], hourlyRate: 180, isAvailable: true },
-  { id: "court-2", name: "Clay Court Beta", number: 2, type: "indoor", features: ["Climate Controlled", "Premium Surface"], hourlyRate: 180, isAvailable: true },
-  { id: "court-3", name: "Ahmed Alaa's Zalata Court", number: 3, type: "outdoor", features: ["Open Air", "Professional Grade"], hourlyRate: 150, isAvailable: true },
+  { id: "court-1", name: "Club de Padel Alpha", number: 1, type: "indoor", features: ["Climate Controlled", "Premium Surface"], hourlyRate: 180, isAvailable: true },
+  { id: "court-2", name: "Club de Padel Beta", number: 2, type: "indoor", features: ["Climate Controlled", "Premium Surface"], hourlyRate: 180, isAvailable: true },
+  { id: "court-3", name: "Club de Padel Premier", number: 3, type: "outdoor", features: ["Open Air", "Professional Grade"], hourlyRate: 150, isAvailable: true },
   { id: "court-4", name: "Sunset Court", number: 4, type: "outdoor", features: ["Open Air", "Evening Lights"], hourlyRate: 150, isAvailable: false },
 ];
 

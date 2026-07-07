@@ -68,13 +68,13 @@ const coaches = [
     bio: "Professional padel coach specializing in technique improvement and match strategy. Former national team player with extensive tournament experience.",
     availability: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     rating: 4.9,
-    reviews: 127,
+    reviews: 0,
     languages: ["English", "Arabic"],
   },
   {
-    id: "ahmed",
-    name: "Ahmed",
-    fullName: "Coach Ahmed",
+    id: "alvaro",
+    name: "Alvaro",
+    fullName: "Coach Alvaro",
     specialty: "Advanced Techniques",
     experience: "5+ years",
     certifications: ["Padel Coach Level 2"],
@@ -84,7 +84,7 @@ const coaches = [
     bio: "Specialized in advanced padel techniques and competitive play preparation. Focus on improving power shots and defensive positioning.",
     availability: ["Sun", "Mon", "Wed", "Fri"],
     rating: 4.7,
-    reviews: 89,
+    reviews: 0,
     languages: ["Arabic", "English"],
   },
   {
@@ -100,7 +100,7 @@ const coaches = [
     bio: "Patient and encouraging coach perfect for beginners and intermediate players. Specializes in building strong fundamentals and confidence.",
     availability: ["Tue", "Thu", "Sat", "Sun"],
     rating: 4.8,
-    reviews: 156,
+    reviews: 0,
     languages: ["English", "Spanish"],
   },
 ];
@@ -325,7 +325,9 @@ export default function BookCoachingPage() {
                         <span className="font-body text-gray-500 flex items-center">
                           <StarIcon /> {coach.rating}
                         </span>
+                        {coach.reviews > 0 && (
                         <span className="font-body text-gray-500">({coach.reviews} reviews)</span>
+                        )}
                         <span className="font-body text-gray-500">{coach.experience}</span>
                       </div>
                       <div className="flex flex-wrap gap-2 mt-2">

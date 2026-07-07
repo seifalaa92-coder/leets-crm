@@ -22,13 +22,13 @@ const sora = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.leetssports.com"),
   title: {
-    default: "Leets | Practice > Achieve > Inspire",
+    default: "Leets Sports — Sports Management Company | Padel Clubs in Egypt & KSA",
     template: "%s | Leets Sports",
   },
-  description: "Saudi Arabia's premier padel coaching academy in Jeddah — expert coaching, padel-specific fitness, and a community that trains together.",
+  description: "Leets Sports builds, owns and operates padel clubs across Egypt and Saudi Arabia — club operations, academies, coaching programs and tournaments.",
   openGraph: {
-    title: "Leets Sports — Padel Academy Jeddah",
-    description: "Expert padel coaching, fitness, and community in Jeddah.",
+    title: "Leets Sports — Sports Management Company",
+    description: "Leets Sports builds, owns and operates padel clubs across Egypt and Saudi Arabia.",
     url: "https://www.leetssports.com",
     siteName: "Leets Sports",
     locale: "en_US",
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Leets Sports — Padel Academy Jeddah",
-    description: "Expert padel coaching, fitness, and community in Jeddah.",
+    title: "Leets Sports — Sports Management Company",
+    description: "Leets Sports builds, owns and operates padel clubs across Egypt and Saudi Arabia.",
   },
   robots: { index: true, follow: true },
 };

@@ -1,0 +1,84 @@
+export const COMPANY = {
+  name: "Leets Sports",
+  tagline: "Sports Management Company",
+  heroLine1: "We build, own and operate",
+  heroLine2: "padel clubs.",
+  heroSub:
+    "Leets Sports is a sports management company running padel clubs across Egypt and Saudi Arabia — from ground-up builds to full club operations, coaching programs and academies.",
+  phone: "+20 122 228 8617",
+  email: "info@leetssports.com",
+  instagram: "https://instagram.com/leets.sports",
+  locations: "Jeddah, KSA · Cairo, Egypt",
+};
+
+export const STATS = [
+  { value: "3", label: "Clubs delivered & operated" },
+  { value: "2", label: "Countries" },
+  { value: "1", label: "Academy — Jeddah, KSA" },
+];
+
+export type Club = {
+  slug: string;
+  name: string;
+  city: string;
+  country: string;
+  status: "active" | "delivered";
+  role: string;
+  short: string;
+  about: string;
+};
+
+export const CLUBS: Club[] = [
+  {
+    slug: "pyramids-park-view",
+    name: "Pyramids Park View",
+    city: "Sheikh Zayed, Cairo",
+    country: "Egypt",
+    status: "active",
+    role: "Owned & Operated by Leets",
+    short: "Our flagship club in Sheikh Zayed — courts, coaching and community.",
+    about:
+      "Pyramids Park View is the Leets flagship in Sheikh Zayed, Cairo. Built and run end-to-end by Leets Sports, the club covers everything from court operations and maintenance to coaching programs, tournaments and a growing members' community.",
+  },
+  {
+    slug: "westmark-mall",
+    name: "Westmark Mall Club",
+    city: "Sheikh Zayed, Cairo",
+    country: "Egypt",
+    status: "delivered",
+    role: "Operated by Leets",
+    short: "Full club operation inside Westmark Mall, Sheikh Zayed.",
+    about:
+      "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation — bookings, coaching staff, academies and events — turning a mall location into a destination for the local padel community.",
+  },
+  {
+    slug: "padel-ace",
+    name: "Padel Ace",
+    city: "New Cairo",
+    country: "Egypt",
+    status: "delivered",
+    role: "Operated by Leets",
+    short: "Club operations and coaching programs in New Cairo.",
+    about:
+      "Padel Ace in New Cairo was operated by Leets Sports, with our team handling day-to-day club management, coaching programs and player development across all levels.",
+  },
+];
+
+export const ACADEMY = {
+  name: "Leets Padel Academy",
+  city: "Obhur, North Jeddah — Saudi Arabia",
+  blurb:
+    "Our academy in Jeddah runs structured coaching programs, court bookings and player development for all levels — led by professional coaches.",
+  bookCourtHref: "/classes/book-court",
+  bookCoachHref: "/classes/book-coach",
+};
+
+export const FOUNDER = {
+  name: "Seif Alaa",
+  title: "Founder & CEO",
+  bio: "Founder & CEO of Leets Sports. Competitive padel player with a Premier Padel debut in 2024, building and operating padel clubs across Egypt and Saudi Arabia.",
+  photo: "",
+};
+
+export const COMPANY_PROFILE_INTRO =
+  "Leets Sports is a sports management company founded in Egypt and headquartered in Jeddah, Saudi Arabia. We take padel projects from concept to daily operation: club builds, coaching structures, academies, tournaments and community growth. Our track record covers three clubs across Cairo and an academy in Jeddah.";
