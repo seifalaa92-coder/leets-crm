@@ -1,46 +1,63 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
-import { CLUBS } from "@/data/company";
+import type { Club } from "@/data/company";
 
-export const dynamic = "force-static";
-
-const IMAGE_EXT = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
-const VIDEO_EXT = [".mp4", ".webm", ".mov"];
-
-function getMedia(slug: string) {
-  const dir = path.join(process.cwd(), "public", "clubs", slug);
-  let files: string[] = [];
-  try {
-    files = fs.readdirSync(dir).filter((f) => !f.startsWith("."));
-  } catch {
-    files = [];
-  }
-  const images = files.filter((f) => IMAGE_EXT.includes(path.extname(f).toLowerCase()));
-  const videos = files.filter((f) => VIDEO_EXT.includes(path.extname(f).toLowerCase()));
-  return { images, videos };
-}
+const CLUBS: Club[] = [
+  {
+    slug: "pyramids-park-view",
+    name: "Pyramids Park View",
+    city: "Sheikh Zayed, Cairo",
+    country: "Egypt",
+    status: "active",
+    role: "Owned & Operated by Leets",
+    short: "Our flagship club in Sheikh Zayed — courts, coaching and community.",
+    about: "Pyramids Park View is the Leets flagship in Sheikh Zayed, Cairo. Built and run end-to-end by Leets Sports, the club covers everything from court operations and maintenance to coaching programs, tournaments and a growing members' community.",
+    videoUrls: ["https://kvppvvsuynsyvxyzgadt.supabase.co/storage/v1/object/public/club-media/pyramids-main-video.mp4"],
+  },
+  {
+    slug: "westmark-mall",
+    name: "Westmark Mall Club",
+    city: "Sheikh Zayed, Cairo",
+    country: "Egypt",
+    status: "delivered",
+    role: "Operated by Leets",
+    short: "Full club operation inside Westmark Mall, Sheikh Zayed.",
+    about: "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation — bookings, coaching staff, academies and events — turning a mall location into a destination for the local padel community.",
+    videoUrls: [],
+  },
+  {
+    slug: "padel-ace",
+    name: "Padel Ace",
+    city: "New Cairo",
+    country: "Egypt",
+    status: "delivered",
+    role: "Operated by Leets",
+    short: "Club operations and coaching programs in New Cairo.",
+    about: "Padel Ace in New Cairo was operated by Leets Sports, with our team handling day-to-day club management, coaching programs and player development across all levels.",
+    videoUrls: [],
+  },
+];
 
 export function generateStaticParams() {
   return CLUBS.map((c) => ({ slug: c.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const club = CLUBS.find((c) => c.slug === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const club = CLUBS.find((c) => c.slug === slug);
   return {
     title: club ? `${club.name} — Leets Sports` : "Club — Leets Sports",
     description: club?.short ?? "",
   };
 }
 
-export default function ClubPage({ params }: { params: { slug: string } }) {
-  const club = CLUBS.find((c) => c.slug === params.slug);
+export default async function ClubPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const club = CLUBS.find((c) => c.slug === slug);
   if (!club) notFound();
 
-  const { images, videos } = getMedia(club.slug);
-  const hasMedia = images.length > 0 || videos.length > 0 || (club.videoUrls?.length ?? 0) > 0;
+  const hasMedia = (club.videoUrls?.length ?? 0) > 0;
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-white">
@@ -87,37 +104,6 @@ export default function ClubPage({ params }: { params: { slug: string } }) {
                 >
                   <source src={url} />
                 </video>
-              ))}
-            </div>
-          )}
-
-          {videos.length > 0 && (
-            <div className="mb-8 grid gap-6 md:grid-cols-2">
-              {videos.map((v) => (
-                <video
-                  key={v}
-                  controls
-                  playsInline
-                  preload="metadata"
-                  className="w-full rounded-xl border border-white/10"
-                >
-                  <source src={`/clubs/${club.slug}/${v}`} />
-                </video>
-              ))}
-            </div>
-          )}
-
-          {images.length > 0 && (
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-              {images.map((img) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={img}
-                  src={`/clubs/${club.slug}/${img}`}
-                  alt={`${club.name} — ${img}`}
-                  loading="lazy"
-                  className="aspect-[4/3] w-full rounded-xl border border-white/10 object-cover"
-                />
               ))}
             </div>
           )}
