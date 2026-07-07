@@ -98,6 +98,9 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
                 <video
                   key={url}
                   controls
+                  autoPlay
+                  muted
+                  loop
                   playsInline
                   preload="metadata"
                   className="w-full rounded-xl border border-white/10"
