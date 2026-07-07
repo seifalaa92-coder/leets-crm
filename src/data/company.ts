@@ -26,6 +26,7 @@ export type Club = {
   role: string;
   short: string;
   about: string;
+  videoUrls?: string[];
 };
 
 export const CLUBS: Club[] = [
@@ -39,6 +40,7 @@ export const CLUBS: Club[] = [
     short: "Our flagship club in Sheikh Zayed — courts, coaching and community.",
     about:
       "Pyramids Park View is the Leets flagship in Sheikh Zayed, Cairo. Built and run end-to-end by Leets Sports, the club covers everything from court operations and maintenance to coaching programs, tournaments and a growing members' community.",
+    videoUrls: [],
   },
   {
     slug: "westmark-mall",
@@ -50,6 +52,7 @@ export const CLUBS: Club[] = [
     short: "Full club operation inside Westmark Mall, Sheikh Zayed.",
     about:
       "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation — bookings, coaching staff, academies and events — turning a mall location into a destination for the local padel community.",
+    videoUrls: [],
   },
   {
     slug: "padel-ace",
@@ -61,6 +64,7 @@ export const CLUBS: Club[] = [
     short: "Club operations and coaching programs in New Cairo.",
     about:
       "Padel Ace in New Cairo was operated by Leets Sports, with our team handling day-to-day club management, coaching programs and player development across all levels.",
+    videoUrls: [],
   },
 ];
 

@@ -40,7 +40,7 @@ export default function ClubPage({ params }: { params: { slug: string } }) {
   if (!club) notFound();
 
   const { images, videos } = getMedia(club.slug);
-  const hasMedia = images.length > 0 || videos.length > 0;
+  const hasMedia = images.length > 0 || videos.length > 0 || (club.videoUrls?.length ?? 0) > 0;
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-white">
@@ -72,6 +72,22 @@ export default function ClubPage({ params }: { params: { slug: string } }) {
           {!hasMedia && (
             <div className="rounded-xl border border-dashed border-white/15 p-10 text-center text-white/50">
               Media coming soon.
+            </div>
+          )}
+
+          {club.videoUrls && club.videoUrls.length > 0 && (
+            <div className="mb-8 grid gap-6 md:grid-cols-2">
+              {club.videoUrls.map((url) => (
+                <video
+                  key={url}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full rounded-xl border border-white/10"
+                >
+                  <source src={url} />
+                </video>
+              ))}
             </div>
           )}
 
