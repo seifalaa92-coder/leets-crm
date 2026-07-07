@@ -1,7 +1,25 @@
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
 import type { Club } from "@/data/company";
+
+const IMAGE_EXT = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
+const VIDEO_EXT = [".mp4", ".webm", ".mov"];
+
+function getMedia(slug: string) {
+  const dir = path.join(process.cwd(), "public", "clubs", slug);
+  let files: string[] = [];
+  try {
+    files = fs.readdirSync(dir).filter((f) => !f.startsWith("."));
+  } catch {
+    files = [];
+  }
+  const images = files.filter((f) => IMAGE_EXT.includes(path.extname(f).toLowerCase()));
+  const videos = files.filter((f) => VIDEO_EXT.includes(path.extname(f).toLowerCase()));
+  return { images, videos };
+}
 
 const CLUBS: Club[] = [
   {
@@ -57,7 +75,8 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
   const club = CLUBS.find((c) => c.slug === slug);
   if (!club) notFound();
 
-  const hasMedia = (club.videoUrls?.length ?? 0) > 0;
+  const { images, videos } = getMedia(club.slug);
+  const hasMedia = images.length > 0 || videos.length > 0 || (club.videoUrls?.length ?? 0) > 0;
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-white">
@@ -107,6 +126,39 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
                 >
                   <source src={url} />
                 </video>
+              ))}
+            </div>
+          )}
+
+          {videos.length > 0 && (
+            <div className="mb-8 grid gap-6 md:grid-cols-2">
+              {videos.map((v) => (
+                <video
+                  key={v}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="w-full rounded-xl border border-white/10"
+                >
+                  <source src={`/clubs/${club.slug}/${v}`} />
+                </video>
+              ))}
+            </div>
+          )}
+
+          {images.length > 0 && (
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+              {images.map((img) => (
+                <img
+                  key={img}
+                  src={`/clubs/${club.slug}/${img}`}
+                  alt={`${club.name} — ${img}`}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full rounded-xl border border-white/10 object-cover"
+                />
               ))}
             </div>
           )}
