@@ -167,16 +167,16 @@ export default function BookCoachingPage() {
 
   if (showConfirmation) {
     return (
-      <div className="min-h-screen bg-[#F5F5F5] pb-20">
+      <div className="min-h-screen bg-[#0F172A] pb-20">
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 px-4 py-4 sticky top-0 z-40">
+        <header className="bg-white/[0.05] border-b border-white/10 px-4 py-4 sticky top-0 z-40">
           <div className="flex items-center gap-3">
-            <Link href="/dashboard" className="p-2 -ml-2 rounded-full hover:bg-gray-100">
-              <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <Link href="/dashboard" className="p-2 -ml-2 rounded-full hover:bg-white/10">
+              <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </Link>
-            <h1 className="font-display text-xl text-black">Booking Confirmed!</h1>
+            <h1 className="font-display text-xl text-white">Booking Confirmed!</h1>
           </div>
         </header>
 
@@ -184,40 +184,40 @@ export default function BookCoachingPage() {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-white rounded-2xl p-6 text-center border border-gray-200 shadow-lg"
+            className="bg-white/[0.05] rounded-2xl p-6 text-center border border-white/10"
           >
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-20 h-20 bg-emerald-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
               <CheckIcon />
             </div>
             
-            <h2 className="font-display text-2xl text-black mb-2">Booking Successful!</h2>
-            <p className="font-body text-gray-600 mb-6">
+            <h2 className="font-display text-2xl text-white mb-2">Booking Successful!</h2>
+            <p className="font-body text-white/70 mb-6">
               Your coaching session has been booked. Check your email for confirmation.
             </p>
 
-            <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left">
+            <div className="bg-white/[0.03] rounded-xl p-4 mb-6 text-left border border-white/10">
               <div className="flex items-center gap-3 mb-3">
                 <CoachAvatar name={coach?.name || ""} color={coach?.avatarColor} />
                 <div>
-                  <p className="font-display text-lg text-black">{coach?.fullName}</p>
-                  <p className="font-body text-sm text-gray-500">{coach?.specialty}</p>
+                  <p className="font-display text-lg text-white">{coach?.fullName}</p>
+                  <p className="font-body text-sm text-white/50">{coach?.specialty}</p>
                 </div>
               </div>
-              <div className="space-y-2 pt-3 border-t border-gray-200">
+              <div className="space-y-2 pt-3 border-t border-white/10">
                 <div className="flex justify-between">
-                  <span className="font-body text-sm text-gray-500">Date</span>
-                  <span className="font-body text-sm text-black">{selectedDate}</span>
+                  <span className="font-body text-sm text-white/50">Date</span>
+                  <span className="font-body text-sm text-white">{selectedDate}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-body text-sm text-gray-500">Time</span>
-                  <span className="font-body text-sm text-black">{selectedTime}</span>
+                  <span className="font-body text-sm text-white/50">Time</span>
+                  <span className="font-body text-sm text-white">{selectedTime}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-body text-sm text-gray-500">Duration</span>
-                  <span className="font-body text-sm text-black">{durationOption?.label}</span>
+                  <span className="font-body text-sm text-white/50">Duration</span>
+                  <span className="font-body text-sm text-white">{durationOption?.label}</span>
                 </div>
-                <div className="flex justify-between pt-2 border-t border-gray-200">
-                  <span className="font-display text-base text-black">Total</span>
+                <div className="flex justify-between pt-2 border-t border-white/10">
+                  <span className="font-display text-base text-white">Total</span>
                   <span className="font-display text-lg text-[#EA553B]">{calculateTotal()} SAR</span>
                 </div>
               </div>
@@ -232,7 +232,7 @@ export default function BookCoachingPage() {
               </Link>
               <button
                 onClick={resetBooking}
-                className="block w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-body"
+                className="block w-full bg-white/10 text-white/70 py-3 rounded-xl font-body"
               >
                 Book Another Session
               </button>
@@ -244,13 +244,13 @@ export default function BookCoachingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] pb-20">
+    <div className="min-h-screen bg-[#0F172A] pb-20">
 <SiteHeader />
 
       {/* Page Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-4">
+      <header className="bg-white/[0.05] border-b border-white/10 px-4 py-4">
         <div className="max-w-7xl mx-auto flex items-center gap-3">
-          <h1 className="font-display text-2xl text-black">Book Coaching</h1>
+          <h1 className="font-display text-2xl text-white">Book Coaching</h1>
         </div>
       </header>
 
@@ -260,12 +260,12 @@ export default function BookCoachingPage() {
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex items-center gap-2">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center font-display text-sm ${
-                step >= s ? "bg-[#EA553B] text-white" : "bg-gray-200 text-gray-500"
+                step >= s ? "bg-[#EA553B] text-white" : "bg-white/10 text-white/50"
               }`}>
                 {s}
               </div>
               {s < 3 && (
-                <div className={`w-8 h-0.5 ${step > s ? "bg-[#EA553B]" : "bg-gray-200"}`} />
+                <div className={`w-8 h-0.5 ${step > s ? "bg-[#EA553B]" : "bg-white/10"}`} />
               )}
             </div>
           ))}
@@ -274,40 +274,40 @@ export default function BookCoachingPage() {
         {/* Step 1: Select Coach */}
         {step === 1 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-            <h2 className="font-display text-lg text-black mb-4">Select Your Coach</h2>
+            <h2 className="font-display text-lg text-white mb-4">Select Your Coach</h2>
             <div className="space-y-4">
               {coaches.map((coach) => (
                 <button
                   key={coach.id}
                   onClick={() => handleCoachSelect(coach.id)}
-                  className="w-full bg-white rounded-2xl p-4 border border-gray-200 text-left transition-all active:scale-[0.98] hover:border-[#EA553B] hover:shadow-md"
+                  className="w-full bg-white/[0.05] rounded-2xl p-4 border border-white/10 text-left transition-all active:scale-[0.98] hover:border-[#EA553B]/60"
                 >
                   <div className="flex items-start gap-4">
                     <CoachAvatar name={coach.name} color={coach.avatarColor} />
                     <div className="flex-1">
                       <div className="flex items-start justify-between">
                         <div>
-                          <h3 className="font-display text-lg text-black">{coach.fullName}</h3>
+                          <h3 className="font-display text-lg text-white">{coach.fullName}</h3>
                           <p className="font-body text-sm text-[#EA553B]">{coach.specialty}</p>
                         </div>
                         <div className="text-right">
                           <p className="font-display text-xl text-[#EA553B]">{coach.rate} SAR</p>
-                          <p className="font-body text-xs text-gray-500">per hour</p>
+                          <p className="font-body text-xs text-white/50">per hour</p>
                         </div>
                       </div>
-                      <p className="font-body text-sm text-gray-600 mt-2 line-clamp-2">{coach.bio}</p>
+                      <p className="font-body text-sm text-white/70 mt-2 line-clamp-2">{coach.bio}</p>
                       <div className="flex items-center gap-4 mt-3 text-sm">
-                        <span className="font-body text-gray-500 flex items-center">
+                        <span className="font-body text-white/50 flex items-center">
                           <StarIcon /> {coach.rating}
                         </span>
                         {coach.reviews > 0 && (
-                        <span className="font-body text-gray-500">({coach.reviews} reviews)</span>
+                        <span className="font-body text-white/50">({coach.reviews} reviews)</span>
                         )}
-                        <span className="font-body text-gray-500">{coach.experience}</span>
+                        <span className="font-body text-white/50">{coach.experience}</span>
                       </div>
                       <div className="flex flex-wrap gap-2 mt-2">
                         {coach.certifications.map((cert) => (
-                          <span key={cert} className="px-2 py-1 bg-gray-100 rounded text-xs font-body text-gray-600">
+                          <span key={cert} className="px-2 py-1 bg-white/10 rounded text-xs font-body text-white/70">
                             {cert}
                           </span>
                         ))}
@@ -324,16 +324,16 @@ export default function BookCoachingPage() {
         {step === 2 && coach && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
             {/* Selected Coach Summary */}
-            <div className="bg-white rounded-xl p-4 border border-gray-200 mb-6">
+            <div className="bg-white/[0.05] rounded-xl p-4 border border-white/10 mb-6">
               <div className="flex items-center gap-3">
                 <CoachAvatar name={coach.name} color={coach.avatarColor} />
                 <div className="flex-1">
-                  <h3 className="font-display text-lg text-black">{coach.fullName}</h3>
+                  <h3 className="font-display text-lg text-white">{coach.fullName}</h3>
                   <p className="font-body text-sm text-[#EA553B]">{coach.rate} SAR/hour</p>
                 </div>
                 <button
                   onClick={() => setStep(1)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-white/40 hover:text-white/70"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -343,7 +343,7 @@ export default function BookCoachingPage() {
             </div>
 
             {/* Date Selection */}
-            <h2 className="font-display text-lg text-black mb-3">Select Date</h2>
+            <h2 className="font-display text-lg text-white mb-3">Select Date</h2>
             <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide mb-6">
               {dates.map((date) => (
                 <button
@@ -352,14 +352,14 @@ export default function BookCoachingPage() {
                   className={`flex-shrink-0 w-16 h-20 rounded-xl flex flex-col items-center justify-center border-2 transition-all ${
                     selectedDate === date.date
                       ? "border-[#EA553B] bg-[#EA553B]/10"
-                      : "border-gray-200 bg-white"
+                      : "border-white/10 bg-white/[0.05]"
                   }`}
                 >
-                  <span className="font-body text-xs text-gray-500 uppercase">{date.day}</span>
-                  <span className={`font-display text-xl ${selectedDate === date.date ? "text-[#EA553B]" : "text-black"}`}>
+                  <span className="font-body text-xs text-white/50 uppercase">{date.day}</span>
+                  <span className={`font-display text-xl ${selectedDate === date.date ? "text-[#EA553B]" : "text-white"}`}>
                     {date.dayNum}
                   </span>
-                  <span className="font-body text-xs text-gray-500">{date.month}</span>
+                  <span className="font-body text-xs text-white/50">{date.month}</span>
                 </button>
               ))}
             </div>
@@ -367,7 +367,7 @@ export default function BookCoachingPage() {
             {/* Time Selection */}
             {selectedDate && (
               <>
-                <h2 className="font-display text-lg text-black mb-3">Select Time</h2>
+                <h2 className="font-display text-lg text-white mb-3">Select Time</h2>
                 <div className="grid grid-cols-3 gap-2 mb-6">
                   {timeSlots.map((time) => (
                     <button
@@ -376,7 +376,7 @@ export default function BookCoachingPage() {
                       className={`py-3 px-2 rounded-xl font-body text-sm border-2 transition-all ${
                         selectedTime === time
                           ? "border-[#EA553B] bg-[#EA553B] text-white"
-                          : "border-gray-200 bg-white text-black"
+                          : "border-white/10 bg-white/[0.05] text-white"
                       }`}
                     >
                       {time}
@@ -389,7 +389,7 @@ export default function BookCoachingPage() {
             {/* Duration Selection */}
             {selectedTime && (
               <>
-                <h2 className="font-display text-lg text-black mb-3">Duration</h2>
+                <h2 className="font-display text-lg text-white mb-3">Duration</h2>
                 <div className="grid grid-cols-3 gap-2 mb-6">
                   {durations.map((duration) => (
                     <button
@@ -398,13 +398,13 @@ export default function BookCoachingPage() {
                       className={`py-3 px-2 rounded-xl border-2 transition-all ${
                         selectedDuration === duration.value
                           ? "border-[#EA553B] bg-[#EA553B]/10"
-                          : "border-gray-200 bg-white"
+                          : "border-white/10 bg-white/[0.05]"
                       }`}
                     >
-                      <p className={`font-display text-sm ${selectedDuration === duration.value ? "text-[#EA553B]" : "text-black"}`}>
+                      <p className={`font-display text-sm ${selectedDuration === duration.value ? "text-[#EA553B]" : "text-white"}`}>
                         {duration.label}
                       </p>
-                      <p className="font-body text-xs text-gray-500">
+                      <p className="font-body text-xs text-white/50">
                         {Math.round(coach.rate * duration.multiplier)} SAR
                       </p>
                     </button>
@@ -428,40 +428,40 @@ export default function BookCoachingPage() {
         {/* Step 3: Review & Confirm */}
         {step === 3 && coach && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-            <h2 className="font-display text-lg text-black mb-4">Review Booking</h2>
+            <h2 className="font-display text-lg text-white mb-4">Review Booking</h2>
             
-            <div className="bg-white rounded-2xl p-5 border border-gray-200 mb-6">
+            <div className="bg-white/[0.05] rounded-2xl p-5 border border-white/10 mb-6">
               {/* Coach Info */}
-              <div className="flex items-center gap-4 pb-4 border-b border-gray-200">
+              <div className="flex items-center gap-4 pb-4 border-b border-white/10">
                 <CoachAvatar name={coach.name} color={coach.avatarColor} />
                 <div>
-                  <h3 className="font-display text-xl text-black">{coach.fullName}</h3>
-                  <p className="font-body text-sm text-gray-500">{coach.specialty}</p>
+                  <h3 className="font-display text-xl text-white">{coach.fullName}</h3>
+                  <p className="font-body text-sm text-white/50">{coach.specialty}</p>
                 </div>
               </div>
 
               {/* Booking Details */}
               <div className="space-y-4 pt-4">
                 <div className="flex justify-between items-center">
-                  <span className="font-body text-gray-600">Date</span>
-                  <span className="font-display text-black">{selectedDate}</span>
+                  <span className="font-body text-white/70">Date</span>
+                  <span className="font-display text-white">{selectedDate}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="font-body text-gray-600">Time</span>
-                  <span className="font-display text-black">{selectedTime}</span>
+                  <span className="font-body text-white/70">Time</span>
+                  <span className="font-display text-white">{selectedTime}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="font-body text-gray-600">Duration</span>
-                  <span className="font-display text-black">{durationOption?.label}</span>
+                  <span className="font-body text-white/70">Duration</span>
+                  <span className="font-display text-white">{durationOption?.label}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="font-body text-gray-600">Rate</span>
-                  <span className="font-display text-black">{coach.rate} SAR/hour</span>
+                  <span className="font-body text-white/70">Rate</span>
+                  <span className="font-display text-white">{coach.rate} SAR/hour</span>
                 </div>
 
-                <div className="pt-4 border-t border-gray-200">
+                <div className="pt-4 border-t border-white/10">
                   <div className="flex justify-between items-center">
-                    <span className="font-display text-lg text-black">Total Amount</span>
+                    <span className="font-display text-lg text-white">Total Amount</span>
                     <span className="font-display text-2xl text-[#EA553B]">{calculateTotal()} SAR</span>
                   </div>
                 </div>
@@ -470,30 +470,30 @@ export default function BookCoachingPage() {
 
             {/* Payment Methods */}
             <div className="mb-6">
-              <h3 className="font-body text-sm text-gray-600 mb-3">Payment Method</h3>
+              <h3 className="font-body text-sm text-white/70 mb-3">Payment Method</h3>
               <div className="space-y-2">
-                <label className="flex items-center gap-3 bg-white p-4 rounded-xl border-2 border-[#EA553B] cursor-pointer">
+                <label className="flex items-center gap-3 bg-white/[0.05] p-4 rounded-xl border-2 border-[#EA553B] cursor-pointer">
                   <input type="radio" name="payment" defaultChecked className="w-5 h-5 text-[#EA553B]" />
                   <CreditCardIcon />
                   <div className="flex-1">
-                    <p className="font-body text-sm text-black">Credit Card</p>
-                    <p className="font-body text-xs text-gray-500">Visa, Mastercard, Mada</p>
+                    <p className="font-body text-sm text-white">Credit Card</p>
+                    <p className="font-body text-xs text-white/50">Visa, Mastercard, Mada</p>
                   </div>
                 </label>
-                <label className="flex items-center gap-3 bg-white p-4 rounded-xl border-2 border-gray-200 cursor-pointer">
+                <label className="flex items-center gap-3 bg-white/[0.05] p-4 rounded-xl border-2 border-white/10 cursor-pointer">
                   <input type="radio" name="payment" className="w-5 h-5" />
                   <BankIcon />
                   <div className="flex-1">
-                    <p className="font-body text-sm text-black">Bank Transfer</p>
-                    <p className="font-body text-xs text-gray-500">Local bank transfer</p>
+                    <p className="font-body text-sm text-white">Bank Transfer</p>
+                    <p className="font-body text-xs text-white/50">Local bank transfer</p>
                   </div>
                 </label>
-                <label className="flex items-center gap-3 bg-white p-4 rounded-xl border-2 border-gray-200 cursor-pointer">
+                <label className="flex items-center gap-3 bg-white/[0.05] p-4 rounded-xl border-2 border-white/10 cursor-pointer">
                   <input type="radio" name="payment" className="w-5 h-5" />
                   <CashIcon />
                   <div className="flex-1">
-                    <p className="font-body text-sm text-black">Cash at Venue</p>
-                    <p className="font-body text-xs text-gray-500">Pay when you arrive</p>
+                    <p className="font-body text-sm text-white">Cash at Venue</p>
+                    <p className="font-body text-xs text-white/50">Pay when you arrive</p>
                   </div>
                 </label>
               </div>
@@ -501,10 +501,10 @@ export default function BookCoachingPage() {
 
             {/* Notes */}
             <div className="mb-6">
-              <h3 className="font-body text-sm text-gray-600 mb-2">Special Requests (Optional)</h3>
+              <h3 className="font-body text-sm text-white/70 mb-2">Special Requests (Optional)</h3>
               <textarea
                 placeholder="Any specific areas you want to focus on?"
-                className="w-full p-4 rounded-xl border border-gray-200 font-body text-sm resize-none h-24 focus:border-[#EA553B] focus:outline-none"
+                className="w-full p-4 rounded-xl border border-white/10 font-body text-sm resize-none h-24 focus:border-[#EA553B] focus:outline-none"
               />
             </div>
 
@@ -517,7 +517,7 @@ export default function BookCoachingPage() {
             </button>
             <button
               onClick={() => setStep(2)}
-              className="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-body"
+              className="w-full bg-white/10 text-white/70 py-3 rounded-xl font-body"
             >
               Back
             </button>
