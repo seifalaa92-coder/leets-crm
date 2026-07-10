@@ -80,9 +80,9 @@ export const ACADEMY = {
 export const FOUNDER = {
   name: "Seif Alaa",
   title: "Founder & CEO",
-  bio: "Founder & CEO of Leets Sports. Competitive padel player with a Premier Padel debut in 2024, building and operating padel clubs across Egypt and Saudi Arabia.",
+  bio: "Founder & CEO of Leets Sports. With 10 years in Egypt's real estate market, he was a top executive sales director with a proven track record exceeding EGP 10 billion in sales. An accomplished athlete, he ranked among the Top 200 ITF Junior tennis players and currently competes among the Top 300 FIP Padel professionals, with a Premier Padel debut in 2024.",
   photo: "",
 };
 
 export const COMPANY_PROFILE_INTRO =
-  "Leets Sports is a sports management company founded in Egypt and headquartered in Jeddah, Saudi Arabia. We take sports facilities from concept to daily operation: builds and fit-outs, coaching structures, academies, tournaments and community growth. Our track record covers three clubs across Cairo and a padel academy in Jeddah.";
+  "Leets Sports is a sports management company that has built and operated 5 facilities across Cairo, Egypt, and is now expanding into Jeddah, Saudi Arabia. We take sports facilities from concept to daily operation — builds and fit-outs, coaching structures, academies, tournaments and community growth.";
