@@ -12,9 +12,9 @@ export const COMPANY = {
 };
 
 export const STATS = [
-  { value: "3", label: "Facilities delivered & operated" },
+  { value: "5", label: "Facilities delivered & operated" },
   { value: "2", label: "Countries" },
-  { value: "1", label: "Academy — Jeddah, KSA" },
+
 ];
 
 export type Club = {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
-import { COMPANY, STATS, CLUBS, ACADEMY } from "@/data/company";
+import { COMPANY, STATS, CLUBS } from "@/data/company";
 
 export const metadata = {
   title: "Leets Sports — Sports Management Company | Egypt & KSA",
@@ -111,34 +111,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[#EA553B]/20">
-        <div className="mx-auto max-w-6xl px-4 py-20 md:flex md:items-center md:justify-between md:gap-12">
-          <div className="max-w-xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-[#EA553B]">
-              Jeddah · Saudi Arabia
-            </p>
-            <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl font-bold uppercase tracking-tight">
-              {ACADEMY.name}
-            </h2>
-            <p className="mt-2 text-sm text-white/50">{ACADEMY.city}</p>
-            <p className="mt-4 text-white/70">{ACADEMY.blurb}</p>
-          </div>
-          <div className="mt-8 flex shrink-0 flex-col gap-4 md:mt-0">
-            <Link
-              href={ACADEMY.bookCourtHref}
-              className="rounded-lg bg-[#EA553B] px-8 py-3.5 text-center font-[family-name:var(--font-display,'Barlow_Condensed')] text-sm font-bold uppercase tracking-wide text-white shadow-[0_4px_24px_rgba(234,85,59,0.35)] transition hover:bg-[#FF6B4F]"
-            >
-              Book a Court
-            </Link>
-            <Link
-              href={ACADEMY.bookCoachHref}
-              className="rounded-lg border-2 border-white/50 px-8 py-3.5 text-center font-[family-name:var(--font-display,'Barlow_Condensed')] text-sm font-bold uppercase tracking-wide text-white transition hover:border-white hover:bg-white/10"
-            >
-              Book a Coach
-            </Link>
-          </div>
-        </div>
-      </section>
+
 
       <SiteFooter />
     </div>
