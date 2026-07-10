@@ -1,10 +1,10 @@
 export const COMPANY = {
   name: "Leets Sports",
-  tagline: "Sports Management Company",
-  heroLine1: "We own and operate",
-  heroLine2: "sports facilities.",
+  tagline: "A Social Sporty Lifestyle for All the Family",
+  heroLine1: "Elevate your sports",
+  heroLine2: "experience every day.",
   heroSub:
-    "Leets Sports is a sports management company that builds, owns and operates sports facilities across Egypt and Saudi Arabia — padel clubs, academies and boutique fitness studios, from ground-up builds to full daily operations.",
+    "Leets Sports delivers a social and active lifestyle experience across Egypt and Saudi Arabia — padel clubs, academies and boutique fitness studios for the whole family.",
   phone: "+20 122 228 8617",
   email: "info@leetssports.com",
   instagram: "https://instagram.com/leets.sports",
