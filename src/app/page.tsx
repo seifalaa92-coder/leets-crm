@@ -113,7 +113,7 @@ export default function HomePage() {
 
 
 
-      <SiteFooter />
+      <SiteFooter hidePhone />
     </div>
   );
 }
