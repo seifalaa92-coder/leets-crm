@@ -81,6 +81,6 @@ export const ABOUT_STATS = [
 export const VENUES = [
   { name: "Pyramids Park, New Giza", description: "Full facility: 2 padel courts, gym and pool" },
   { name: "Padel Ace", description: "Run by Leets" },
-  { name: "Westmark Mall", description: "Built by Leets" },
-  { name: "Padel Dose", description: "Built by Leets" },
+  { name: "Westmark Mall", description: "Run by Leets" },
+  { name: "Padel Dose", description: "Run by Leets" },
 ];
