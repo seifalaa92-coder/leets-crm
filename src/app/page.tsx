@@ -41,9 +41,7 @@ export default function HomePage() {
             {COMPANY.heroLine1}
             <br />
             <span className="mt-2 block text-[#EA553B]">{COMPANY.heroLine2}</span>
-            <span className="mt-2 block text-4xl text-white/90 md:text-6xl">
-              Experience
-            </span>
+
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-white/80">{COMPANY.heroSub}</p>
           <div className="mt-8 flex flex-wrap gap-4">
