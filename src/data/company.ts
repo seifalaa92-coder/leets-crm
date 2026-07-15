@@ -67,21 +67,21 @@ export const CLUBS: Club[] = [
   },
 ];
 
-export const ACADEMY = {
-  name: "Leets Padel Academy",
-  city: "Obhur, North Jeddah — Saudi Arabia",
-  blurb:
-    "Our academy in Jeddah runs structured coaching programs, court bookings and player development for all levels — led by professional coaches.",
-  bookCourtHref: "/classes/book-court",
-  bookCoachHref: "/classes/book-coach",
-};
+export const COMPANY_PROFILE_INTRO = `Leets Sports is a sports management company. We build, operate and run sports facilities — designing them from the ground up, then running them day to day: coaching, programming, and operations.
 
-export const FOUNDER = {
-  name: "Seif Alaa",
-  title: "Founder & CEO",
-  bio: "Founder & CEO of Leets Sports. With 10 years in Egypt's real estate market, he was a top executive sales director with a proven track record exceeding EGP 10 billion in sales. An accomplished athlete, he ranked among the Top 200 ITF Junior tennis players and currently competes among the Top 300 FIP Padel professionals, with a Premier Padel debut in 2024.",
-  photo: "",
-};
+In the market since 2017, Leets is home of the first certified padel academy in the region, with more than 600 players coached and five venues built across Egypt. Some we built for partners, some we run ourselves — all carry the same standard.`;
 
-export const COMPANY_PROFILE_INTRO =
-  "Leets Sports is a sports management company that has built and operated 5 facilities across Cairo, Egypt, and is now expanding into Jeddah, Saudi Arabia. We take sports facilities from concept to daily operation — builds and fit-outs, coaching structures, academies, tournaments and community growth.";
+export const ABOUT_STATS = [
+  { value: "2017", label: "In the market since" },
+  { value: "5", label: "Venues built" },
+  { value: "600+", label: "Players coached" },
+  { value: "1st", label: "Certified padel academy in the region" },
+];
+
+export const VENUES = [
+  { name: "Gezira Sporting Club", description: "New padel courts, built by Leets" },
+  { name: "Pyramids Park, New Giza", description: "Full facility: 2 padel courts, gym and pool" },
+  { name: "Padel Ace", description: "Run by Leets" },
+  { name: "Westmark Mall", description: "Built by Leets" },
+  { name: "Padel Dose", description: "Built by Leets" },
+];

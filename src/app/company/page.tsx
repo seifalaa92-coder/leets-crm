@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
-import { FOUNDER, COMPANY_PROFILE_INTRO, CLUBS } from "@/data/company";
+import { COMPANY_PROFILE_INTRO, ABOUT_STATS, VENUES, CLUBS } from "@/data/company";
 
 export const metadata = {
-  title: "Company Profile — Leets Sports",
+  title: "About Leets Sports — Sports Management Since 2017",
   description:
-    "Leets Sports company profile: leadership, track record and sports facilities projects across Egypt and Saudi Arabia.",
+    "Leets Sports builds, operates and runs sports facilities. Home of the first certified padel academy in the region. 600+ players coached, 5 venues built in Egypt.",
 };
 
 export default function CompanyPage() {
@@ -17,36 +17,42 @@ export default function CompanyPage() {
           Who we are
         </p>
         <h1 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-bold uppercase tracking-tight">
-          Company Profile
+          About Leets Sports
         </h1>
-        <p className="mt-6 max-w-3xl text-lg text-white/75">{COMPANY_PROFILE_INTRO}</p>
+
+        <div className="mt-6 max-w-3xl space-y-4 text-lg text-white/75">
+          {COMPANY_PROFILE_INTRO.split("\n\n").map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+
+        <div className="mt-10 grid grid-cols-2 gap-6 border-y border-white/10 py-8 md:grid-cols-4">
+          {ABOUT_STATS.map((s) => (
+            <div key={s.label} className="text-center">
+              <p className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl font-bold text-[#EA553B]">
+                {s.value}
+              </p>
+              <p className="mt-1 text-sm text-white/50">{s.label}</p>
+            </div>
+          ))}
+        </div>
 
         <section className="mt-16">
           <h2 className="mb-6 font-[family-name:var(--font-display,'Barlow_Condensed')] text-3xl font-bold uppercase tracking-tight">
-            Leadership
+            Venues Built by Leets
           </h2>
-          <div className="flex flex-col gap-6 rounded-xl border border-white/10 bg-white/[0.03] p-8 md:flex-row md:items-center">
-            {FOUNDER.photo ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={FOUNDER.photo}
-                alt={FOUNDER.name}
-                className="h-28 w-28 rounded-full border border-white/10 object-cover"
-              />
-            ) : (
-              <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-[#EA553B]/15 font-[family-name:var(--font-display,'Barlow_Condensed')] text-3xl font-bold text-[#EA553B]">
-                SA
+          <div className="grid gap-4 md:grid-cols-2">
+            {VENUES.map((v) => (
+              <div
+                key={v.name}
+                className="rounded-xl border border-white/10 bg-white/[0.03] p-5"
+              >
+                <h3 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-xl font-bold uppercase">
+                  {v.name}
+                </h3>
+                <p className="mt-1 text-sm text-white/60">{v.description}</p>
               </div>
-            )}
-            <div>
-              <h3 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-2xl font-bold uppercase">
-                {FOUNDER.name}
-              </h3>
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#EA553B]">
-                {FOUNDER.title}
-              </p>
-              <p className="mt-3 max-w-2xl text-white/70">{FOUNDER.bio}</p>
-            </div>
+            ))}
           </div>
         </section>
 
