@@ -6,7 +6,6 @@ const NAV = [
   { href: "/clubs", label: "Clubs" },
   { href: "/company", label: "Company" },
   { href: "/classes/book-court", label: "Book a Court" },
-  { href: "/classes/book-coach", label: "Book a Coach" },
 ];
 
 export function SiteHeader() {
