@@ -48,7 +48,7 @@ export function SiteHeader() {
   );
 }
 
-export function SiteFooter({ hidePhone }: { hidePhone?: boolean }) {
+export function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-[#0F172A] py-10 text-white">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-3">
@@ -64,7 +64,6 @@ export function SiteFooter({ hidePhone }: { hidePhone?: boolean }) {
         </div>
         <div className="text-sm text-white/60">
           <p className="mb-2 font-semibold uppercase tracking-wide text-white/80">Contact</p>
-          {!hidePhone && <p>{COMPANY.phone}</p>}
           <p>{COMPANY.email}</p>
         </div>
         <div className="text-sm text-white/60">
