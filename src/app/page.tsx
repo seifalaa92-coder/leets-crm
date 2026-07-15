@@ -17,7 +17,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/padel-court-hero.jpg"
+            src="/images/padel-court-hero.jpg?v=2"
             alt="Professional sports facility"
             fill
             priority
