@@ -5,7 +5,7 @@ import { COMPANY_PROFILE_INTRO, ABOUT_STATS, VENUES, CLUBS } from "@/data/compan
 export const metadata = {
   title: "About Leets Sports — Sports Management Since 2017",
   description:
-    "Leets Sports builds, operates and runs sports facilities. Home of the first certified padel academy in the region. 600+ players coached, 5 venues built in Egypt.",
+    "Leets Sports builds, operates and runs sports facilities. Home of the first certified padel academy in the region. 600+ players coached, 4 venues built in Egypt.",
 };
 
 export default function CompanyPage() {

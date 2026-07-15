@@ -69,17 +69,16 @@ export const CLUBS: Club[] = [
 
 export const COMPANY_PROFILE_INTRO = `Leets Sports is a sports management company. We build, operate and run sports facilities — designing them from the ground up, then running them day to day: coaching, programming, and operations.
 
-In the market since 2017, Leets is home of the first certified padel academy in the region, with more than 600 players coached and five venues built across Egypt. Some we built for partners, some we run ourselves — all carry the same standard.`;
+In the market since 2017, Leets is home of the first certified padel academy in the region, with more than 600 players coached and four venues built across Egypt. Some we built for partners, some we run ourselves — all carry the same standard.`;
 
 export const ABOUT_STATS = [
   { value: "2017", label: "In the market since" },
-  { value: "5", label: "Venues built" },
+  { value: "4", label: "Venues built" },
   { value: "600+", label: "Players coached" },
   { value: "1st", label: "Certified padel academy in the region" },
 ];
 
 export const VENUES = [
-  { name: "Gezira Sporting Club", description: "New padel courts, built by Leets" },
   { name: "Pyramids Park, New Giza", description: "Full facility: 2 padel courts, gym and pool" },
   { name: "Padel Ace", description: "Run by Leets" },
   { name: "Westmark Mall", description: "Built by Leets" },
