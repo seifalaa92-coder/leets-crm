@@ -4,7 +4,7 @@ export const COMPANY = {
   heroLine1: "Elevate your sports",
   heroLine2: "experience every day.",
   heroSub:
-    "Leets Sports delivers a social and active lifestyle experience across Egypt and Saudi Arabia — padel clubs, academies and boutique fitness studios for the whole family.",
+    "Leets Sports delivers a social and active lifestyle experience across Egypt — padel clubs, academies and boutique fitness studios for the whole family. Now expanding to Saudi Arabia in 2026",
   email: "info@leetssports.com",
   instagram: "https://instagram.com/leets.sports",
   locations: "Jeddah, KSA · Cairo, Egypt",
