@@ -31,12 +31,7 @@ export default function HomePage() {
           <div className="absolute bottom-1/4 right-[-12rem] h-[600px] w-[600px] rounded-full bg-[#EA553B]/10 blur-[120px]" />
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-32">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#EA553B]/30 bg-[#EA553B]/10 px-4 py-2">
-            <span className="h-2 w-2 rounded-full bg-[#EA553B]" />
-            <span className="text-sm font-semibold uppercase tracking-[0.3em] text-[#EA553B]">
-              {COMPANY.tagline}
-            </span>
-          </div>
+
           <h1 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-bold uppercase leading-[0.9] tracking-tight md:text-7xl">
             {COMPANY.heroLine1}
             <br />
