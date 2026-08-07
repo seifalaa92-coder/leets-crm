@@ -1,0 +1,6 @@
+.venv/
+data/
+__pycache__/
+*.pyc
+*.ex5
+spread_log_*.csv
