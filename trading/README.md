@@ -39,8 +39,18 @@ I have built the package around that target, not the daily-profit target. If you
 | `02-STRATEGY.md` | The concrete strategy specification — entries, exits, filters, parameters, instruments. |
 | `03-RISK.md` | Position sizing, volatility targeting, drawdown governors, kill switches. |
 | `04-EXNESS-MT5-SETUP.md` | Exness account-type economics, MT5 symbol/execution mechanics, and how to give this session a real connection. |
-| `backtest/` | Python research harness. Data-agnostic — reads CSV exported from MT5. |
-| `mql5/` | The EA implementing the specification, for the MT5 Strategy Tester and live. |
+| `backtest/` | Python research harness — engine, walk-forward, parameter surfaces, Monte Carlo, cost reconciliation, 31 integrity tests. Data-agnostic: reads CSV exported from MT5. |
+| `mql5/` | The EA implementing the specification, plus a spread-measurement tool. |
+
+## What has and has not been validated
+
+Being precise about this, because it determines how much weight the numbers deserve:
+
+**Validated.** The harness itself. 31 integrity tests pass, including the ones that matter: indicators are lagged one bar, truncating history cannot change earlier signals, and a driftless random walk must lose exactly the costs (a profit there would prove look-ahead bias).
+
+**Not validated.** The strategy, on real market data. No market data is reachable from the environment this was built in — the network policy denies data-vendor hosts at the gateway. Every performance figure in these documents is a **stated expectation drawn from the literature, not a result measured on your instruments.**
+
+Treat this as a well-founded hypothesis shipped with the tools to test it. The checklist at the end of `02-STRATEGY.md` is what converts it into evidence.
 
 ## Read order
 

@@ -76,6 +76,8 @@ Automatic, mechanical, no discretion. These exist specifically because judgment 
 
 Recovery from the −5% governor: restore full risk only after equity makes a new peak, never on a partial bounce.
 
+**Set these thresholds against the Monte Carlo distribution, not the backtest.** A backtest's max drawdown is one sample from a distribution, not a bound — the same trades in a different order routinely dig a much deeper hole. Run `backtest/run.py --monte-carlo 5000` and size against the **95th-percentile** drawdown. On the smoke dataset the observed path shows ~5.8% while the 95th percentile is ~12.3% and the worst resampled path reaches ~20.6%. If your governors are calibrated to the observed path, they will fire far earlier and more often than you expect.
+
 **Why mechanical.** At −10% every instinct says "size up to recover faster." That instinct is what converts a recoverable drawdown into a terminal one. The governor exists to overrule you, so it must not have an override.
 
 ---
@@ -125,6 +127,17 @@ For a strategy holding positions for weeks, swap is not a rounding error:
 | Quarterly | Full walk-forward re-validation on data including the newest quarter |
 
 The weekly cost review is the one people skip and the one that catches real degradation earliest. If realised costs drift above backtest assumptions, expectancy is quietly eroding — and this shows up in costs long before it shows up in the equity curve.
+
+Use `backtest/reconcile.py` for it:
+
+```bash
+trading/.venv/bin/python -m trading.backtest.reconcile \
+    --history trading/data/history.csv --symbol EURUSD --assumed-cost-points 7.0
+```
+
+It reports realised median and p90 cost per round trip against your model, with a verdict of `OK` (≤1.1×), `DRIFT` (≤1.5× — re-run the backtest at the higher figure), or `BROKEN` (>1.5× — expectancy is likely gone). Note it can only see commission and swap; spread and slippage are baked into `profit` and need requested-vs-fill logging to isolate.
+
+For the monthly live-vs-backtest comparison, `reconcile.tracking_check()` puts live Sharpe against the backtest's 95% confidence interval — and will tell you when the horizon is too short to conclude anything, which for the first year it always is. Judge execution quality and cost drift instead; those converge in weeks rather than years.
 
 ---
 

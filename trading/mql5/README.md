@@ -48,6 +48,12 @@ The EA manages its whole universe from a single chart — you do not attach one 
 | `InpATRMult` | 3.0 | Stop distance |
 | `InpUsdBucketCap` | 0.015 | Net USD-directional risk cap — the one that stops six pairs becoming one 3× dollar bet |
 | `InpDDStopTrading` | 0.10 | Closes everything and halts. **No override by design.** |
+| `InpUseVolTarget` | true | Scale exposure toward `InpTargetVol` using 20-day realised equity volatility |
+| `InpVolScalarMax` | 1.5 | Upper cap on that scaling — see the warning below |
+
+**Effective risk with volatility targeting on:** per-trade risk is `InpRiskPerTrade × RiskMultiplier × VolScalar`. With the defaults that is up to `0.5% × 1.0 × 1.5 = 0.75%`. `OnInit` validates `InpRiskPerTrade ≤ 1%`, so the *effective* ceiling is 1.5% — size accordingly, and note that the bucket caps still bind on realised risk, so the portfolio total cannot exceed `InpTotalCap` regardless.
+
+The `InpVolScalarMax` cap is not cosmetic. Uncapped volatility targeting levers up hardest into quiet markets, which is precisely when volatility regimes break — quiet periods precede violent ones far more often than the reverse.
 
 ## Implementation details worth knowing
 
@@ -65,10 +71,15 @@ The EA manages its whole universe from a single chart — you do not attach one 
 
 **Sizing uses `SYMBOL_TRADE_TICK_VALUE`**, so it works across FX, metals and index CFDs without per-symbol contract-size tables.
 
+**Volatility scaling warm-up.** The scalar needs 10 daily observations before it activates, and returns to 1.0 whenever the EA restarts (the window is in memory, not persisted). That is intentional — a scalar rebuilt from a partial window is worse than no scalar — but it means the first two weeks after any restart run unscaled.
+
+## Compilation status
+
+These files have **not been compiled** — MetaEditor is Windows-only and unavailable in the environment they were written in. Brace and parenthesis structure was checked mechanically, but that is not a substitute for `F7`. Expect to fix compile errors on first build, and report them back if anything is non-obvious.
+
 ## Not implemented here
 
 - **Sleeve B (fix reversion)** — deliberately omitted. Build it only after measuring your realised costs and confirming a positive post-cost expectancy (`../02-STRATEGY.md`, Sleeve B).
-- **Portfolio volatility scaling** — present in the Python engine, not the EA. Add it once you have live volatility data; it is a refinement, not a prerequisite.
 
 ## Before going live
 

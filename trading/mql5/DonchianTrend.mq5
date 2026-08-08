@@ -48,6 +48,13 @@ input double          InpDDStopTrading   = 0.10;    // Halt entirely below this 
 input double          InpDailyLossLimit  = 0.03;    // Stop for the day
 input double          InpMaxSpreadMult   = 3.0;     // Skip if spread > N x median
 
+//--- Portfolio volatility targeting (03-RISK.md s1)
+input group           "=== Volatility target ==="
+input bool            InpUseVolTarget    = true;
+input double          InpTargetVol       = 0.10;    // Annualised portfolio vol
+input double          InpVolScalarMin    = 0.5;
+input double          InpVolScalarMax    = 1.5;     // Cap matters -- see below
+
 //--- Execution
 input group           "=== Execution ==="
 input ulong           InpMagic           = 20260807;
@@ -75,6 +82,12 @@ double         g_peak_equity   = 0.0;
 double         g_day_start_eq  = 0.0;
 datetime       g_current_day   = 0;
 bool           g_halted        = false;
+
+//--- Rolling daily returns for the volatility scalar.
+#define VOL_WINDOW 20
+double         g_daily_returns[VOL_WINDOW];
+int            g_ret_count     = 0;
+int            g_ret_head      = 0;
 
 //+------------------------------------------------------------------+
 int OnInit()
@@ -237,6 +250,14 @@ void UpdateGovernors()
    datetime today = DayStart(TimeCurrent());
    if(today != g_current_day)
    {
+      // Record yesterday's return before resetting the day.
+      if(g_current_day != 0 && g_day_start_eq > 0.0)
+      {
+         g_daily_returns[g_ret_head] = equity / g_day_start_eq - 1.0;
+         g_ret_head = (g_ret_head + 1) % VOL_WINDOW;
+         if(g_ret_count < VOL_WINDOW)
+            g_ret_count++;
+      }
       g_current_day  = today;
       g_day_start_eq = equity;
    }
@@ -276,6 +297,40 @@ double RiskMultiplier()
       return 0.5;
 
    return 1.0;
+}
+
+//+------------------------------------------------------------------+
+//| Portfolio volatility scalar (03-RISK.md s1).                      |
+//|                                                                   |
+//| The upper cap is not cosmetic: uncapped vol targeting levers up    |
+//| hardest into quiet markets, which is exactly when volatility       |
+//| regimes tend to break.                                             |
+//+------------------------------------------------------------------+
+double VolScalar()
+{
+   if(!InpUseVolTarget || g_ret_count < 10)
+      return 1.0;
+
+   double sum = 0.0;
+   for(int i = 0; i < g_ret_count; i++)
+      sum += g_daily_returns[i];
+   double mean = sum / g_ret_count;
+
+   double sq = 0.0;
+   for(int i = 0; i < g_ret_count; i++)
+   {
+      double d = g_daily_returns[i] - mean;
+      sq += d * d;
+   }
+   if(g_ret_count < 2)
+      return 1.0;
+
+   double realised = MathSqrt(sq / (g_ret_count - 1)) * MathSqrt(252.0);
+   if(realised <= 1e-9)
+      return InpVolScalarMax;
+
+   double scalar = InpTargetVol / realised;
+   return MathMax(InpVolScalarMin, MathMin(InpVolScalarMax, scalar));
 }
 
 //+------------------------------------------------------------------+
@@ -497,7 +552,7 @@ double CalcLots(const string sym, const double stop_distance)
       return 0.0;
 
    double equity = AccountInfoDouble(ACCOUNT_EQUITY);
-   double risk   = equity * InpRiskPerTrade * RiskMultiplier();
+   double risk   = equity * InpRiskPerTrade * RiskMultiplier() * VolScalar();
    if(risk <= 0.0)
       return 0.0;
 

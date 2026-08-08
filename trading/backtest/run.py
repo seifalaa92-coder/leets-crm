@@ -19,6 +19,7 @@ from .engine import CostModel, run_backtest
 from .metrics import compute_metrics, regime_breakdown, walk_forward
 from .risk import RiskParams
 from .strategy import StrategyParams
+from .validate import daily_outcome_distribution, monte_carlo_trades, parameter_surface
 
 # Placeholder cost models. REPLACE WITH YOUR OWN MEASURED VALUES before
 # believing any output -- see 04-EXNESS-MT5-SETUP.md section 5. These assume a
@@ -88,6 +89,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--cost-multiplier", type=float, default=1.0,
                     help="stress test: 1.5 and 2.0 must not kill the strategy")
     ap.add_argument("--walk-forward", action="store_true")
+    ap.add_argument("--surface", action="store_true",
+                    help="parameter robustness: mesa vs spike")
+    ap.add_argument("--monte-carlo", type=int, default=0, metavar="N",
+                    help="resample the trade sequence over N paths")
     ap.add_argument("--smoke", action="store_true",
                     help="run on synthetic data (plumbing check only)")
     args = ap.parse_args(argv)
@@ -133,6 +138,11 @@ def main(argv: list[str] | None = None) -> int:
         print(walk_forward(data, costs, grid, rp, initial_equity=args.equity).report())
         return 0
 
+    if args.surface:
+        print("\nEvaluating parameter surface ...")
+        print(parameter_surface(data, costs, rp=rp, initial_equity=args.equity).report())
+        return 0
+
     print(f"\nUniverse: {', '.join(sorted(data))}")
     print(f"Params: n_entry={sp.n_entry} n_exit={sp.n_exit} atr_mult={sp.atr_mult}")
     print(f"Risk: {rp.risk_per_trade:.2%}/trade, vol target {rp.target_vol:.0%}\n")
@@ -146,6 +156,13 @@ def main(argv: list[str] | None = None) -> int:
         print("\nEntry rejections (risk caps working as intended):")
         for reason, n in sorted(res.rejections.items(), key=lambda kv: -kv[1]):
             print(f"  {reason:<28} {n}")
+
+    print()
+    print(daily_outcome_distribution(res))
+
+    if args.monte_carlo > 0 and res.trades:
+        print()
+        print(monte_carlo_trades(res, args.equity, n_paths=args.monte_carlo).report())
 
     regimes = regime_breakdown(res)
     if not regimes.empty:

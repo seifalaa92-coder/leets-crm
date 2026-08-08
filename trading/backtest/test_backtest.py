@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 
 from .data import synthetic_ohlc, validate_ohlc
-from .engine import CostModel, run_backtest
+from .engine import CostModel, Trade, run_backtest
 from .metrics import compute_metrics
 from .risk import (
     DrawdownGovernor,
@@ -294,6 +294,157 @@ def test_validate_ohlc_drops_inconsistent_bars():
     )
     out = validate_ohlc(df, "test")
     assert len(out) == 2
+
+
+# ------------------------------------------------------------------ validate
+
+def test_monte_carlo_drawdowns_ordered_by_severity():
+    """
+    Percentiles must be reported as depth, so a higher percentile is a WORSE
+    outcome. Storing drawdowns as negatives and taking percentile(95) silently
+    inverts this -- the 95th would be the mildest case.
+    """
+    from .validate import MonteCarloResult
+
+    dds = np.array([-0.05, -0.10, -0.15, -0.20, -0.40])
+    mc = MonteCarloResult(
+        final_equities=np.array([11_000.0, 10_500, 10_000, 9_000, 4_000]),
+        max_drawdowns=dds,
+        initial_equity=10_000.0,
+        ruin_threshold=0.5,
+    )
+    text = mc.report()
+
+    def pct(label):
+        line = [ln for ln in text.splitlines() if ln.strip().startswith(label)]
+        # take the drawdown block (second occurrence of the percentile labels)
+        return float(line[-1].split()[-1].rstrip("%"))
+
+    assert pct("median") < pct("95th pct"), "95th percentile must be deeper"
+    assert pct("worst") >= pct("95th pct")
+
+
+def test_monte_carlo_ruin_probability():
+    from .validate import MonteCarloResult
+
+    mc = MonteCarloResult(
+        final_equities=np.array([10_000.0, 4_000.0, 3_000.0, 12_000.0]),
+        max_drawdowns=np.array([-0.1, -0.7, -0.8, -0.05]),
+        initial_equity=10_000.0,
+        ruin_threshold=0.5,
+    )
+    assert abs(mc.risk_of_ruin - 0.5) < 1e-9      # two of four below 5,000
+    assert abs(mc.prob_loss - 0.5) < 1e-9         # two of four below 10,000
+
+
+def test_monte_carlo_preserves_edge_sign():
+    """A losing trade distribution must not resample into a winning one."""
+    from .engine import BacktestResult
+    from .validate import monte_carlo_trades
+
+    idx = pd.bdate_range("2020-01-01", periods=300)
+    eq = pd.Series(np.linspace(10_000, 9_000, len(idx)), index=idx)
+
+    losers = [
+        Trade("EURUSD", 1, idx[0], idx[1], 1.0, 1.0, 0.01,
+              -50.0, 5.0, 0.0, -55.0, "stop", 3)
+        for _ in range(40)
+    ]
+    res = BacktestResult(eq, losers, eq.pct_change().dropna())
+    mc = monte_carlo_trades(res, initial_equity=10_000, n_paths=200, seed=1)
+    assert mc.prob_loss > 0.95
+
+
+def test_plateau_score_detects_spike():
+    from .validate import _plateau_score
+
+    entry_range, exit_range, atr_range = (40, 55, 80), (10, 20, 30), (2.5, 3.0, 4.0)
+    rows = []
+    for ne in entry_range:
+        for nx in exit_range:
+            for am in atr_range:
+                # One isolated high point surrounded by near-zero: a spike.
+                sharpe = 2.0 if (ne, nx, am) == (55, 20, 3.0) else 0.05
+                rows.append({"n_entry": ne, "n_exit": nx, "atr_mult": am,
+                             "sharpe": sharpe})
+    table = pd.DataFrame(rows)
+    best = {"n_entry": 55, "n_exit": 20, "atr_mult": 3.0, "sharpe": 2.0}
+    assert _plateau_score(table, best, entry_range, exit_range, atr_range) == 0.0
+
+
+def test_plateau_score_detects_mesa():
+    from .validate import _plateau_score
+
+    entry_range, exit_range, atr_range = (40, 55, 80), (10, 20, 30), (2.5, 3.0, 4.0)
+    rows = [
+        {"n_entry": ne, "n_exit": nx, "atr_mult": am, "sharpe": 1.0}
+        for ne in entry_range for nx in exit_range for am in atr_range
+    ]
+    table = pd.DataFrame(rows)
+    best = {"n_entry": 55, "n_exit": 20, "atr_mult": 3.0, "sharpe": 1.0}
+    assert _plateau_score(table, best, entry_range, exit_range, atr_range) == 1.0
+
+
+# ----------------------------------------------------------------- reconcile
+
+def test_reconcile_computes_cost_ratio():
+    from .reconcile import reconcile
+
+    hist = pd.DataFrame(
+        {
+            "symbol": ["EURUSDm"] * 4,
+            "volume": [1.0, 1.0, 1.0, 1.0],
+            "profit": [100.0, -50.0, 30.0, -20.0],
+            "commission": [-7.0, -7.0, -7.0, -7.0],
+            "swap": [0.0, 0.0, 0.0, 0.0],
+            "price": [1.1, 1.1, 1.1, 1.1],
+        }
+    )
+    # $7 / (1 lot * 100000 * 0.00001) = 7 points
+    rep = reconcile(hist, "EURUSD", point_value=100_000, point_size=0.00001,
+                    assumed_cost_points=7.0)
+    assert abs(rep.realised_cost_points - 7.0) < 1e-6
+    assert abs(rep.cost_ratio - 1.0) < 1e-6
+    assert rep.verdict.startswith("OK")
+    assert abs(rep.net_pnl - (60.0 - 28.0)) < 1e-9
+
+
+def test_reconcile_flags_cost_blowout():
+    from .reconcile import reconcile
+
+    hist = pd.DataFrame(
+        {
+            "symbol": ["EURUSD"] * 3,
+            "volume": [1.0, 1.0, 1.0],
+            "profit": [10.0, 10.0, 10.0],
+            "commission": [-30.0, -30.0, -30.0],
+            "swap": [0.0, 0.0, 0.0],
+        }
+    )
+    rep = reconcile(hist, "EURUSD", 100_000, 0.00001, assumed_cost_points=7.0)
+    assert rep.cost_ratio > 4.0
+    assert rep.verdict.startswith("BROKEN")
+
+
+def test_reconcile_rejects_unknown_symbol():
+    from .reconcile import reconcile
+
+    hist = pd.DataFrame({"symbol": ["GBPUSD"], "volume": [1.0], "profit": [1.0],
+                         "commission": [0.0], "swap": [0.0]})
+    try:
+        reconcile(hist, "EURUSD", 100_000, 0.00001)
+    except ValueError:
+        return
+    raise AssertionError("expected ValueError for a symbol with no trades")
+
+
+def test_tracking_check_is_honest_about_short_horizons():
+    from .reconcile import tracking_check
+
+    rng = np.random.default_rng(0)
+    live = pd.Series(rng.normal(0.0004, 0.006, 60))
+    text = tracking_check(live, backtest_sharpe=0.7, backtest_vol=0.10)
+    assert "CI is very wide" in text
 
 
 def test_strategy_params_validation():
