@@ -3,7 +3,8 @@ import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
 import { COMPANY_PROFILE_INTRO, ABOUT_STATS, VENUES, CLUBS } from "@/data/company";
 
 export const metadata = {
-  title: "About Leets Sports — Sports Management Since 2017",
+  // 2019 per ABOUT_STATS — the 2017 here was left behind by the date change.
+  title: "About — Sports Management Since 2019",
   description:
     "Leets Sports builds, operates and runs sports facilities. Home of the first certified padel academy in the region. 600+ players coached, 4 venues built in Egypt.",
 };
@@ -12,7 +13,7 @@ export default function CompanyPage() {
   return (
     <div className="min-h-screen bg-[#0F172A] text-white">
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-4 py-16">
+      <main id="main" className="mx-auto max-w-6xl px-4 py-16">
         <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-[#EA553B]">
           Who we are
         </p>

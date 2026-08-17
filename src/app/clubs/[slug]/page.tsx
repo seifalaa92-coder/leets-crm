@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
+import { ClubVideo } from "@/components/leets/ClubVideo";
 import type { Club } from "@/data/company";
 
 const CLUBS: (Club & { localVideos?: string[]; localImages?: string[] })[] = [
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const club = CLUBS.find((c) => c.slug === slug);
   return {
-    title: club ? `${club.name} — Leets Sports` : "Club — Leets Sports",
+    title: club ? club.name : "Club",
     description: club?.short ?? "",
   };
 }
@@ -66,8 +67,11 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
   return (
     <div className="min-h-screen bg-[#0F172A] text-white">
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-4 py-16">
-        <Link href="/clubs" className="text-sm font-semibold text-[#EA553B] hover:underline">
+      <main id="main" className="mx-auto max-w-6xl px-4 py-16">
+        <Link
+          href="/clubs"
+          className="-my-3 inline-flex min-h-[44px] items-center py-3 text-sm font-semibold text-[#EA553B] transition-colors duration-100 hover:underline active:text-[#FF6B4F]"
+        >
           ← All facilities
         </Link>
 
@@ -98,38 +102,20 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
 
           {club.videoUrls && club.videoUrls.length > 0 && (
             <div className="mb-8 grid gap-6 md:grid-cols-2">
-              {club.videoUrls.map((url) => (
-                <video
-                  key={url}
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="w-full rounded-xl border border-white/10"
-                >
-                  <source src={url} />
-                </video>
+              {club.videoUrls.map((url, i) => (
+                <ClubVideo key={url} src={url} lead={i === 0} />
               ))}
             </div>
           )}
 
           {videos.length > 0 && (
             <div className="mb-8 grid gap-6 md:grid-cols-2">
-              {videos.map((v) => (
-                <video
+              {videos.map((v, i) => (
+                <ClubVideo
                   key={v}
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="w-full rounded-xl border border-white/10"
-                >
-                  <source src={`/clubs/${club.slug}/${v}`} />
-                </video>
+                  src={`/clubs/${club.slug}/${encodeURIComponent(v)}`}
+                  lead={i === 0 && !(club.videoUrls && club.videoUrls.length > 0)}
+                />
               ))}
             </div>
           )}
