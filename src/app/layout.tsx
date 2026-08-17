@@ -49,8 +49,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="ltr">
-      <body className={`${barlowCondensed.variable} ${sora.variable} font-body antialiased`}>
+    // The font variables live on <html> so :root can resolve them — declaring
+    // --font-body in :root while --font-sora sat on <body> made the whole
+    // declaration invalid, and every page fell back to the system UI font.
+    <html lang="en" dir="ltr" className={`${barlowCondensed.variable} ${sora.variable}`}>
+      <body className="font-body antialiased">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         {children}
         <LeadCaptureWidget />
       </body>

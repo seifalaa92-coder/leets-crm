@@ -3,7 +3,8 @@ import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
 import { CLUBS } from "@/data/company";
 
 export const metadata = {
-  title: "Our Clubs — Leets Sports",
+  // The root layout appends " | Leets Sports" via its title template.
+  title: "Our Clubs",
   description:
     "Padel clubs built and operated by Leets Sports: Pyramids Park View, Westmark Mall and Padel Ace across Cairo, Egypt.",
 };
@@ -12,7 +13,7 @@ export default function ClubsPage() {
   return (
     <div className="min-h-screen bg-[#0F172A] text-white">
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-4 py-16">
+      <main id="main" className="mx-auto max-w-6xl px-4 py-16">
         <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-[#EA553B]">
           Track record
         </p>
