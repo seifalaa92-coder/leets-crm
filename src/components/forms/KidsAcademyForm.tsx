@@ -28,6 +28,43 @@ const field =
   "outline-none transition-colors duration-100 placeholder:text-white/35 focus:border-[#EA553B]";
 const labelClass = "mb-2 block text-sm font-medium text-white/80";
 
+interface SelectProps {
+  name: keyof Form;
+  label: string;
+  options: string[];
+  placeholder: string;
+  value: string;
+  error?: string;
+  onChange: (key: keyof Form, value: string) => void;
+}
+
+function Select({ name, label, options, placeholder, value, error, onChange }: SelectProps) {
+  return (
+    <div>
+      <label className={labelClass} htmlFor={name}>
+        {label}
+      </label>
+      <select
+        id={name}
+        name={name}
+        value={value}
+        onChange={(e) => onChange(name, e.target.value)}
+        className={field}
+      >
+        <option value="" className="bg-[#0F172A]">
+          {placeholder}
+        </option>
+        {options.map((o) => (
+          <option key={o} value={o} className="bg-[#0F172A]">
+            {o}
+          </option>
+        ))}
+      </select>
+      {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
+    </div>
+  );
+}
+
 export default function KidsAcademyForm() {
   const [form, setForm] = useState<Form>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof Form, string>>>({});
@@ -98,43 +135,8 @@ export default function KidsAcademyForm() {
     );
   }
 
-  const Select = ({
-    name,
-    label,
-    options,
-    placeholder,
-  }: {
-    name: keyof Form;
-    label: string;
-    options: string[];
-    placeholder: string;
-  }) => (
-    <div>
-      <label className={labelClass} htmlFor={name}>
-        {label}
-      </label>
-      <select
-        id={name}
-        name={name}
-        value={form[name]}
-        onChange={(e) => set(name, e.target.value)}
-        className={field}
-      >
-        <option value="" className="bg-[#0F172A]">
-          {placeholder}
-        </option>
-        {options.map((o) => (
-          <option key={o} value={o} className="bg-[#0F172A]">
-            {o}
-          </option>
-        ))}
-      </select>
-      {errors[name] && <p className="mt-1.5 text-xs text-red-400">{errors[name]}</p>}
-    </div>
-  );
-
   return (
-    <form onSubmit={submit} noValidate className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+    <form onSubmit={submit} noValidate className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
       <div className="grid gap-5">
         <div>
           <label className={labelClass} htmlFor="childName">
@@ -152,8 +154,8 @@ export default function KidsAcademyForm() {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
-          <Select name="age" label="Age" options={AGES} placeholder="Select age" />
-          <Select name="gender" label="Boy or girl" options={GENDERS} placeholder="Select" />
+          <Select name="age" label="Age" options={AGES} placeholder="Select age" value={form.age} error={errors.age} onChange={set} />
+          <Select name="gender" label="Boy or girl" options={GENDERS} placeholder="Select" value={form.gender} error={errors.gender} onChange={set} />
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
@@ -210,11 +212,14 @@ export default function KidsAcademyForm() {
           label="Has your child played padel before?"
           options={EXPERIENCE}
           placeholder="Select"
+          value={form.experience}
+          error={errors.experience}
+          onChange={set}
         />
 
         <div className="grid gap-5 sm:grid-cols-2">
-          <Select name="days" label="Preferred days" options={DAYS} placeholder="Select" />
-          <Select name="time" label="Preferred time" options={TIMES} placeholder="Select" />
+          <Select name="days" label="Preferred days" options={DAYS} placeholder="Select" value={form.days} error={errors.days} onChange={set} />
+          <Select name="time" label="Preferred time" options={TIMES} placeholder="Select" value={form.time} error={errors.time} onChange={set} />
         </div>
 
         {/* Honeypot - hidden from people, irresistible to bots. */}
