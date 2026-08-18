@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
   // Honeypot: real people never fill a hidden field. Report success so bots
   // do not learn they were caught, but write nothing.
   if (data.website && data.website.length > 0) {
+    console.warn("Kids signup honeypot triggered. Payload:", JSON.stringify(data));
     return NextResponse.json({ ok: true });
   }
 
@@ -57,10 +58,17 @@ export async function POST(request: NextRequest) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data, token: secret }),
       redirect: "follow",
+      signal: AbortSignal.timeout(8000),
     });
 
     const text = await res.text();
-    if (!res.ok || !text.includes('"ok":true')) {
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      parsed = null;
+    }
+    if (!res.ok || !(parsed && typeof parsed === 'object' && (parsed as Record<string, unknown>).ok === true)) {
       console.error(
         "Kids signup not saved - sheet rejected it. Payload:",
         JSON.stringify(data),
