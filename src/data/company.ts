@@ -11,9 +11,8 @@ export const COMPANY = {
 };
 
 export const STATS = [
-  { value: "5", label: "Facilities delivered & operated" },
+  { value: "4", label: "Facilities delivered & operated" },
   { value: "2", label: "Countries" },
-
 ];
 
 export type Club = {
@@ -39,7 +38,7 @@ export const CLUBS: Club[] = [
     short: "Our flagship club in Sheikh Zayed — courts, coaching and community.",
     about:
       "Pyramids Park View is the Leets flagship in Sheikh Zayed, Cairo. Built and run end-to-end by Leets Sports, the club covers everything from court operations and maintenance to coaching programs, tournaments and a growing members' community.",
-    videoUrls: ["https://kvppvvsuynsyvxyzgadt.supabase.co/storage/v1/object/public/club-media/pyramids-main-video.mp4"],
+    videoUrls: [],
   },
   {
     slug: "westmark-mall",

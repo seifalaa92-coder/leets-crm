@@ -54,7 +54,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-[#EA553B]/20 pt-8">
+          <div className="mt-16 grid max-w-2xl grid-cols-2 gap-6 border-t border-[#EA553B]/20 pt-8">
             {STATS.map((s) => (
               <div key={s.label}>
                 <p className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl font-bold text-[#EA553B]">
