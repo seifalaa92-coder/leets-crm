@@ -34,8 +34,8 @@ export async function POST(request: NextRequest) {
 
   const data = parsed.data;
 
-  // Honeypot: real people never fill a hidden field. Report success so bots
-  // do not learn they were caught, but write nothing.
+  // Honeypot: real people never fill a hidden field. Bots get success so they
+  // do not learn they were caught. Log the hit so a spike is detectable.
   if (data.website && data.website.length > 0) {
     console.warn("Kids signup honeypot triggered. Payload:", JSON.stringify(data));
     return NextResponse.json({ ok: true });
