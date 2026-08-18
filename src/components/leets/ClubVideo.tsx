@@ -66,7 +66,7 @@ export function ClubVideo({ src, lead = false }: { src: string; lead?: boolean }
         playsInline
         preload="metadata"
         onError={() => setFailed(true)}
-        className="w-full rounded-xl border border-white/10"
+        className="aspect-video w-full rounded-xl border border-white/10 object-cover"
       >
         <source src={src} onError={() => setFailed(true)} />
       </video>
