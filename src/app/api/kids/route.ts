@@ -4,11 +4,11 @@ import { z } from "zod";
 export const dynamic = "force-dynamic";
 
 const submissionSchema = z.object({
-  childName: z.string().trim().min(2, "Child's name is required"),
+  childName: z.string().trim().min(2, "Child's name is required").max(100),
   age: z.string().regex(/^(5|6|7|8|9|10|11|12|13)$/, "Age must be between 5 and 13"),
   gender: z.enum(["Boy", "Girl"]),
-  parentName: z.string().trim().min(2, "Parent's name is required"),
-  whatsapp: z.string().trim().min(8, "A valid WhatsApp number is required"),
+  parentName: z.string().trim().min(2, "Parent's name is required").max(100),
+  whatsapp: z.string().trim().min(8, "A valid WhatsApp number is required").max(30),
   email: z.union([z.string().trim().email(), z.literal("")]).optional(),
   experience: z.enum(["Never played", "Played a little", "Plays regularly"]),
   days: z.enum(["Weekdays", "Weekends", "Either"]),
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
   const parsed = submissionSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
-      { error: "Validation failed", details: parsed.error.issues },
+      { error: "Validation failed" },
       { status: 400 }
     );
   }
