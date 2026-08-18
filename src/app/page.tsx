@@ -14,6 +14,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#0F172A] text-white">
       <SiteHeader />
 
+      <main id="main">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -21,7 +22,8 @@ export default function HomePage() {
             alt="Professional sports facility"
             fill
             priority
-            className="scale-105 object-cover transition-transform duration-[20s]"
+            fetchPriority="high"
+            className="hero-drift object-cover"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/90 via-[#0F172A]/60 to-[#0F172A]/95" />
@@ -32,7 +34,7 @@ export default function HomePage() {
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-32">
 
-          <h1 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-bold uppercase leading-[0.9] tracking-tight md:text-7xl">
+          <h1 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-bold uppercase leading-[0.9] tracking-[-0.01em] [font-optical-sizing:auto] md:text-7xl md:tracking-[-0.025em]">
             {COMPANY.heroLine1}
             <br />
             <span className="mt-2 block text-[#EA553B]">{COMPANY.heroLine2}</span>
@@ -42,13 +44,13 @@ export default function HomePage() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/clubs"
-              className="rounded-lg bg-[#EA553B] px-8 py-3.5 font-[family-name:var(--font-display,'Barlow_Condensed')] text-sm font-bold uppercase tracking-wide text-white shadow-[0_4px_24px_rgba(234,85,59,0.35)] transition hover:bg-[#FF6B4F] hover:shadow-[0_8px_40px_rgba(234,85,59,0.45)]"
+              className="min-h-[48px] rounded-lg bg-[#EA553B] px-8 py-3.5 font-[family-name:var(--font-display,'Barlow_Condensed')] text-sm font-bold uppercase tracking-wide text-white shadow-[0_4px_24px_rgba(234,85,59,0.35)] transition-[background-color,box-shadow,transform] duration-100 hover:bg-[#FF6B4F] hover:shadow-[0_8px_40px_rgba(234,85,59,0.45)] active:scale-[0.97] active:bg-[#D14028]"
             >
               Explore our facilities
             </Link>
             <Link
               href="/company"
-              className="rounded-lg border-2 border-white/50 px-8 py-3.5 font-[family-name:var(--font-display,'Barlow_Condensed')] text-sm font-bold uppercase tracking-wide text-white transition hover:border-white hover:bg-white/10"
+              className="min-h-[48px] rounded-lg border-2 border-white/50 px-8 py-3.5 font-[family-name:var(--font-display,'Barlow_Condensed')] text-sm font-bold uppercase tracking-wide text-white transition-[border-color,background-color,transform] duration-100 hover:border-white hover:bg-white/10 active:scale-[0.97] active:bg-white/20"
             >
               Company profile
             </Link>
@@ -73,7 +75,10 @@ export default function HomePage() {
             <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl font-bold uppercase tracking-tight">
               Our Facilities
             </h2>
-            <Link href="/clubs" className="text-sm font-semibold text-[#EA553B] hover:underline">
+            <Link
+              href="/clubs"
+              className="-my-3 flex min-h-[44px] items-center py-3 text-sm font-semibold text-[#EA553B] transition-colors duration-100 hover:underline active:text-[#FF6B4F]"
+            >
               View all →
             </Link>
           </div>
@@ -82,7 +87,7 @@ export default function HomePage() {
               <Link
                 key={club.slug}
                 href={`/clubs/${club.slug}`}
-                className="group rounded-xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-[#EA553B]/60 hover:bg-white/[0.06]"
+                className="group rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-[border-color,background-color,transform] duration-150 hover:border-[#EA553B]/60 hover:bg-white/[0.06] active:scale-[0.99] active:bg-white/[0.08]"
               >
                 <div className="mb-4 flex items-center justify-between">
                   <StatusBadge status={club.status} />
@@ -98,13 +103,19 @@ export default function HomePage() {
                 <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#EA553B]">
                   {club.role}
                 </p>
+                {/* A resting affordance: touch devices never see the hover state. */}
+                <p className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-[#EA553B]">
+                  View club
+                  <span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-1">
+                    →
+                  </span>
+                </p>
               </Link>
             ))}
           </div>
         </div>
       </section>
-
-
+      </main>
 
       <SiteFooter />
     </div>

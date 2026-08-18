@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const STEPS = [
   { key: "name", question: "What's your name?", placeholder: "Your name", emoji: "👋" },
@@ -16,10 +17,50 @@ export default function LeadCaptureWidget() {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (open) setStep(0);
   }, [open]);
+
+  // Escape closes, focus returns to the button that opened it, and Tab stays
+  // inside the sheet while it's up.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !sheetRef.current) return;
+      const focusable = sheetRef.current.querySelectorAll<HTMLElement>(
+        'button, input, [href], select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      (triggerRef.current ?? previouslyFocused)?.focus();
+    };
+  }, [open]);
+
+  function back() {
+    setError("");
+    setStep((prev) => Math.max(0, prev - 1));
+  }
 
   function update(field: string, value: string) {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -75,13 +116,37 @@ export default function LeadCaptureWidget() {
 
   return (
     <>
-      {open && (
-        <div className="fixed inset-0 bg-black/60 z-[99998] animate-fade-in" onClick={() => setOpen(false)} />
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="scrim"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/60 z-[99998]"
+            onClick={() => setOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
+      <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 pointer-events-none">
-          <div className="pointer-events-auto w-full max-w-[420px] max-[480px]:fixed max-[480px]:inset-0 max-[480px]:max-h-full max-[480px]:rounded-none rounded-[20px] bg-neutral-dark-alt border border-brand/20 shadow-xl flex flex-col overflow-hidden animate-slide-up">
+          <motion.div
+            key="sheet"
+            ref={sheetRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Get started with Leets Sports"
+            // Grows from the button that opened it, and shrinks back the same
+            // way. A tap carries no momentum, so the spring doesn't overshoot.
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 24 }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 24 }}
+            transition={reduceMotion ? { duration: 0.2 } : { type: "spring", bounce: 0, duration: 0.35 }}
+            style={{ transformOrigin: "bottom right" }}
+            className="pointer-events-auto w-full max-w-[420px] max-[480px]:fixed max-[480px]:inset-0 max-[480px]:max-h-full max-[480px]:rounded-none rounded-[20px] bg-neutral-dark-alt border border-brand/20 shadow-xl flex flex-col overflow-hidden">
             {/* Header */}
             <div className="bg-gradient-to-r from-neutral-dark-alt to-neutral-dark px-4 py-3.5 border-b border-brand/15">
               <div className="flex items-center gap-3">
@@ -93,7 +158,13 @@ export default function LeadCaptureWidget() {
                     <span className="text-brand-light text-[11px]">Get Started</span>
                   </div>
                 </div>
-                <button onClick={() => setOpen(false)} className="ml-auto bg-white/5 border-none text-brand-light rounded-lg w-7 h-7 text-lg cursor-pointer flex items-center justify-center hover:bg-white/10 transition-colors">×</button>
+                <button
+                  onClick={() => setOpen(false)}
+                  aria-label="Close"
+                  className="ml-auto bg-white/5 border-none text-brand-light rounded-lg w-11 h-11 text-xl cursor-pointer flex items-center justify-center hover:bg-white/10 active:bg-white/15 active:scale-[0.94] transition-[background-color,transform] duration-100"
+                >
+                  ×
+                </button>
               </div>
               {!done && (
                 <div className="mt-2 flex gap-1">
@@ -118,17 +189,32 @@ export default function LeadCaptureWidget() {
                     onKeyDown={handleKeyDown}
                     placeholder={current.placeholder}
                     type={current.key === "age" ? "number" : "text"}
-                    className="w-full bg-brand/10 border border-brand/20 rounded-xl px-4 py-3 text-[15px] text-brand-100 outline-none transition-colors duration-200 placeholder:text-[#6B2A1A] text-center mb-4"
-                    autoFocus
+                    className="w-full min-h-[48px] bg-brand/10 border border-brand/20 rounded-xl px-4 py-3 text-[16px] text-brand-100 outline-none focus:border-brand transition-colors duration-200 placeholder:text-[#8A4530] text-center mb-4"
+                    // No autoFocus on touch — it throws the keyboard up over the
+                    // question before the sheet has finished arriving.
+                    ref={(el) => {
+                      if (el && !window.matchMedia("(pointer: coarse)").matches) el.focus();
+                    }}
                   />
-                  {error && <p className="text-red-400 text-xs text-center mb-3">{error}</p>}
-                  <button
-                    onClick={next}
-                    disabled={submitting}
-                    className="w-full py-3 rounded-xl bg-brand hover:bg-brand-dark text-white font-semibold text-[14px] transition-all disabled:opacity-50"
-                  >
-                    {submitting ? "Sending..." : step < STEPS.length - 1 ? "Next" : "Send"}
-                  </button>
+                  {error && <p className="text-red-400 text-xs text-center mb-3" role="alert">{error}</p>}
+                  <div className="flex gap-2">
+                    {step > 0 && (
+                      <button
+                        onClick={back}
+                        disabled={submitting}
+                        className="min-h-[48px] px-5 rounded-xl border border-brand/25 text-brand-light font-semibold text-[14px] transition-[background-color,transform] duration-100 hover:bg-brand/10 active:scale-[0.97] active:bg-brand/20 disabled:opacity-50"
+                      >
+                        Back
+                      </button>
+                    )}
+                    <button
+                      onClick={next}
+                      disabled={submitting}
+                      className="flex-1 min-h-[48px] rounded-xl bg-brand hover:bg-brand-dark text-white font-semibold text-[14px] transition-[background-color,transform] duration-100 active:scale-[0.98] disabled:opacity-50"
+                    >
+                      {submitting ? "Sending..." : step < STEPS.length - 1 ? "Next" : "Send"}
+                    </button>
+                  </div>
                 </>
               ) : (
                 /* Success */
@@ -147,24 +233,31 @@ export default function LeadCaptureWidget() {
                     ))}
                   </div>
 
-                  <button onClick={() => { setDone(false); setOpen(false); }} className="bg-transparent border border-brand/25 text-brand-light rounded-lg py-1.5 px-4 text-xs cursor-pointer w-full">Close</button>
+                  <button
+                    onClick={() => { setDone(false); setOpen(false); }}
+                    className="bg-transparent border border-brand/25 text-brand-light rounded-lg min-h-[44px] px-4 text-xs cursor-pointer w-full transition-[background-color,transform] duration-100 hover:bg-brand/10 active:scale-[0.98] active:bg-brand/20"
+                  >
+                    Close
+                  </button>
                 </div>
               )}
             </div>
 
             {!done && (
-              <p className="text-center text-[#5B2010] text-[10px] pb-3">We&apos;ll reach out on WhatsApp — no spam</p>
+              <p className="text-center text-[#7A3520] text-[10px] pb-3">We&apos;ll reach out on WhatsApp — no spam</p>
             )}
-          </div>
+          </motion.div>
         </div>
       )}
+      </AnimatePresence>
 
       {!open && (
         <button
+          ref={triggerRef}
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-[99999] flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-brand hover:bg-brand-dark border border-brand/40 shadow-brand transition-all hover:shadow-brand-lg animate-fade-in"
+          className="fixed bottom-6 right-6 z-[99999] flex min-h-[48px] items-center gap-2.5 px-4 py-2.5 rounded-full bg-brand hover:bg-brand-dark border border-brand/40 shadow-brand transition-[background-color,box-shadow,transform] duration-100 hover:shadow-brand-lg active:scale-[0.95] active:bg-brand-dark"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
           <span className="text-white text-sm font-semibold">Get Started</span>
         </button>
       )}

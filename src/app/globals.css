@@ -330,11 +330,72 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Reduced motion means a gentler equivalent, not the absence of feedback:
+   movement and looping animation go, colour and opacity feedback stays. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-property: opacity, color, background-color, border-color, box-shadow !important;
+    transition-duration: 150ms !important;
+  }
+}
+
+/* Frostier, not see-through, when the user has asked for less transparency. */
+@media (prefers-reduced-transparency: reduce) {
+  .card-stat {
+    background: var(--color-charcoal);
+    backdrop-filter: none;
+  }
+}
+
+/* The site leans on low-opacity white for real content; lift it when asked. */
+@media (prefers-contrast: more) {
+  .text-white\/40, .text-white\/50, .text-white\/60 {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+  .text-white\/70, .text-white\/75 {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: var(--radius-md);
+  transition: top var(--duration-base) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* A slow full-viewport drift is exactly what reduced motion exists to suppress. */
+@keyframes heroDrift {
+  from { transform: scale(1.0); }
+  to   { transform: scale(1.08); }
+}
+
+.hero-drift {
+  animation: heroDrift 20s var(--ease-out) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-drift {
+    animation: none;
+    transform: scale(1.02);
   }
 }
 
