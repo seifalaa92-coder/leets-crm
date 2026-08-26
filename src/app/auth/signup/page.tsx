@@ -61,6 +61,17 @@ export default function SignupPage() {
           email: formData.email,
           phone: formData.phone,
         });
+
+        // Notify admin + log to Google Sheets
+        await fetch("/api/signup-notify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+          }),
+        });
       }
 
       setMessage("Account created! Please check your email to verify.");
