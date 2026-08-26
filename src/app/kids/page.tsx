@@ -132,25 +132,6 @@ export default function KidsPage() {
               </p>
             </div>
 
-            {/* Image stack */}
-            <div className="grid grid-cols-2 gap-3">
-              <img
-                src="/images/padel-court-2.jpg"
-                alt="Kids padel training"
-                className="aspect-[4/3] w-full rounded-xl object-cover"
-              />
-              <img
-                src="/images/padel-court-3.jpg"
-                alt="Leets padel court"
-                className="aspect-[4/3] w-full rounded-xl object-cover"
-              />
-              <img
-                src="/images/padel-court-4.jpg"
-                alt="Padel coaching"
-                className="col-span-2 aspect-video w-full rounded-xl object-cover"
-              />
-            </div>
-
             {/* Trust note */}
             <div className="flex items-start gap-3 rounded-xl border border-[#EA553B]/20 bg-[#EA553B]/5 p-4">
               <svg className="mt-0.5 h-5 w-5 shrink-0 text-[#EA553B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
