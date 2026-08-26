@@ -48,9 +48,9 @@ export default function KidsPage() {
         {/* Hero content */}
         <div className="relative z-10 mx-auto max-w-5xl px-6 py-24 text-center">
           <h1 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-6xl font-bold uppercase leading-[0.9] tracking-[-0.02em] sm:text-7xl md:text-8xl">
-            Your child&apos;s first
+            Raise the next
             <br />
-            <span className="text-[#EA553B]">padel racket</span>
+            <span className="text-[#EA553B]">padel superstar</span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70 sm:text-xl">
