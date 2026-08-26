@@ -27,9 +27,9 @@ const FEATURES = [
 ];
 
 const HERO_IMAGES = [
-  "/images/kids-promo-1.jpg",
-  "/images/kids-promo-2.jpg",
-  "/images/kids-promo-3.jpg",
+  "/images/kids-promo-1.webp",
+  "/images/kids-promo-2.webp",
+  "/images/kids-promo-3.webp",
 ];
 
 export default function KidsPage() {
