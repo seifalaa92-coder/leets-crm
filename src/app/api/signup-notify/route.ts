@@ -12,14 +12,12 @@ export async function POST(request: NextRequest) {
 
     const signedUpAt = new Date().toLocaleString("en-GB", { timeZone: "Asia/Riyadh" });
 
-    // Log to Google Sheets
     try {
       await appendSignupToSheet({ name, email, phone, signedUpAt });
     } catch (sheetErr) {
       console.error("Google Sheets error:", sheetErr);
     }
 
-    // Send email notification
     const smtpUser = process.env.SMTP_USER;
     const smtpPassword = process.env.SMTP_PASSWORD;
 
@@ -47,6 +45,9 @@ export async function POST(request: NextRequest) {
                 <tr><td style="padding:10px;border-bottom:1px solid #ddd;font-weight:bold;color:#555;">Phone</td><td style="padding:10px;border-bottom:1px solid #ddd;">${phone}</td></tr>
                 <tr><td style="padding:10px;border-bottom:1px solid #ddd;font-weight:bold;color:#555;">Time</td><td style="padding:10px;border-bottom:1px solid #ddd;">${signedUpAt}</td></tr>
               </table>
+            </div>
+            <div style="padding:15px;text-align:center;background:#333;color:white;font-size:12px;">
+              <p style="margin:0;">Leets Sports CRM - Automated Notification</p>
             </div>
           </div>
         `,

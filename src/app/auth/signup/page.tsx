@@ -8,7 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 export default function SignupPage() {
   const router = useRouter();
   const supabase = createClient();
-  
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -38,7 +38,6 @@ export default function SignupPage() {
     }
 
     try {
-      // Sign up with Supabase Auth
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -49,7 +48,6 @@ export default function SignupPage() {
       }
 
       if (authData.user) {
-        // Save to clients table
         const nameParts = formData.fullName.split(" ");
         const firstName = nameParts.slice(0, -1).join(" ") || formData.fullName;
         const lastName = nameParts.slice(-1).join("") || "";
@@ -62,7 +60,6 @@ export default function SignupPage() {
           phone: formData.phone,
         });
 
-        // Notify admin + log to Google Sheets
         await fetch("/api/signup-notify", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
