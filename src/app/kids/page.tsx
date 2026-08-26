@@ -1,5 +1,6 @@
 import { SiteHeader, SiteFooter } from "@/components/leets/Shell";
 import KidsAcademyForm from "@/components/forms/KidsAcademyForm";
+import HeroSlideshow from "@/components/kids/HeroSlideshow";
 
 export const metadata = {
   title: "Kids Academy",
@@ -25,6 +26,12 @@ const FEATURES = [
   },
 ];
 
+const HERO_IMAGES = [
+  "/images/kids-promo-1.jpg",
+  "/images/kids-promo-2.jpg",
+  "/images/kids-promo-3.jpg",
+];
+
 export default function KidsPage() {
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
@@ -32,15 +39,8 @@ export default function KidsPage() {
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden">
-        {/* Video background */}
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src="/Videos/dunes-kids-academy.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
+        {/* Photo slideshow background */}
+        <HeroSlideshow images={HERO_IMAGES} />
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B1220]/70 via-[#0B1220]/40 to-[#0B1220]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B1220]/60 via-transparent to-transparent" />
