@@ -47,12 +47,6 @@ export default function KidsPage() {
 
         {/* Hero content */}
         <div className="relative z-10 mx-auto max-w-5xl px-6 py-24 text-center">
-          {/* Location badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#EA553B]/40 bg-[#EA553B]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#EA553B]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#EA553B]" />
-            Now open · Egypt &amp; Jeddah
-          </div>
-
           <h1 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-6xl font-bold uppercase leading-[0.9] tracking-[-0.02em] sm:text-7xl md:text-8xl">
             Your child&apos;s first
             <br />
@@ -101,12 +95,6 @@ export default function KidsPage() {
 
       {/* ── FEATURES ─────────────────────────────────────────── */}
       <section className="mx-auto max-w-5xl px-6 py-20">
-        <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.3em] text-[#EA553B]">
-          Why Leets
-        </p>
-        <h2 className="mb-12 text-center font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl font-bold uppercase tracking-tight">
-          Built for kids, not adults
-        </h2>
         <div className="grid gap-6 sm:grid-cols-3">
           {FEATURES.map((f) => (
             <div
