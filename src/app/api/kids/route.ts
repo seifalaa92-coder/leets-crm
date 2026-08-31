@@ -81,20 +81,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Also log to the main signups sheet
+    // Also log to the main signups sheet (must be awaited — Vercel kills fire-and-forget on response)
     const mainSheetUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
     if (mainSheetUrl) {
       const signedUpAt = new Date().toLocaleString("en-GB", { timeZone: "Asia/Riyadh" });
-      fetch(mainSheetUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          signedUpAt,
-          name: `${data.childName} (${data.age}y ${data.gender}) — Parent: ${data.parentName}`,
-          email: data.email || "-",
-          phone: data.whatsapp,
-        }),
-      }).catch((e) => console.error("Main sheet log failed:", e));
+      try {
+        await fetch(mainSheetUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            signedUpAt,
+            name: `${data.childName} (${data.age}y ${data.gender}) — Parent: ${data.parentName}`,
+            email: data.email || "-",
+            phone: data.whatsapp,
+          }),
+          signal: AbortSignal.timeout(8000),
+        });
+      } catch (e) {
+        console.error("Main sheet log failed:", e);
+      }
     }
 
     return NextResponse.json({ ok: true });
