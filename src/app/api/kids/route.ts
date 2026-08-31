@@ -94,6 +94,9 @@ export async function POST(request: NextRequest) {
             name: `${data.childName} (${data.age}y ${data.gender}) — Parent: ${data.parentName}`,
             email: data.email || "-",
             phone: data.whatsapp,
+            experience: data.experience,
+            days: data.days,
+            time: data.time,
           }),
           signal: AbortSignal.timeout(8000),
         });
