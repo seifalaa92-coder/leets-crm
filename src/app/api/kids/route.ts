@@ -12,7 +12,7 @@ const submissionSchema = z.object({
   email: z.union([z.string().trim().email(), z.literal("")]).optional(),
   experience: z.enum(["Never played", "Played a little", "Plays regularly"]),
   days: z.enum(["Weekdays", "Weekends", "Either"]),
-  time: z.enum(["Morning", "Afternoon", "Evening"]),
+  time: z.enum(["2:00 PM – 3:00 PM", "3:00 PM – 4:00 PM", "4:00 PM – 5:00 PM", "5:00 PM – 6:00 PM"]),
   website: z.string().optional(),
 });
 

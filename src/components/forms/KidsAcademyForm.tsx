@@ -6,7 +6,7 @@ const AGES = ["5", "6", "7", "8", "9", "10", "11", "12", "13"];
 const GENDERS = ["Boy", "Girl"];
 const EXPERIENCE = ["Never played", "Played a little", "Plays regularly"];
 const DAYS = ["Weekdays", "Weekends", "Either"];
-const TIMES = ["Morning", "Afternoon", "Evening"];
+const TIMES = ["2:00 PM – 3:00 PM", "3:00 PM – 4:00 PM", "4:00 PM – 5:00 PM", "5:00 PM – 6:00 PM"];
 
 const EMPTY = {
   childName: "",
