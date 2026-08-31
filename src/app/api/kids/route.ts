@@ -81,6 +81,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Also log to the main signups sheet
+    const mainSheetUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+    if (mainSheetUrl) {
+      const signedUpAt = new Date().toLocaleString("en-GB", { timeZone: "Asia/Riyadh" });
+      fetch(mainSheetUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          signedUpAt,
+          name: `${data.childName} (${data.age}y ${data.gender}) — Parent: ${data.parentName}`,
+          email: data.email || "-",
+          phone: data.whatsapp,
+        }),
+      }).catch((e) => console.error("Main sheet log failed:", e));
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error(
