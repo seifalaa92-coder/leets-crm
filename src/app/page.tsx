@@ -1,7 +1,12 @@
 import Link from "next/link";
-import Image from "next/image";
-import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
-import { COMPANY, STATS, CLUBS } from "@/data/company";
+import { SiteHeader, SiteFooter } from "@/components/leets/Shell";
+import { HeroVideo } from "@/components/leets/HeroVideo";
+import { ClubCardVisual } from "@/components/leets/ClubCardVisual";
+import { LifestyleBento } from "@/components/leets/LifestyleBento";
+import { VideoShowcase } from "@/components/leets/VideoShowcase";
+import { KidsSpotlight } from "@/components/leets/KidsSpotlight";
+import { CreativeCTA } from "@/components/leets/CreativeCTA";
+import { STATS, CLUBS } from "@/data/company";
 
 export const metadata = {
   title: "Leets Sports — Sports Management Company | Egypt & KSA",
@@ -11,110 +16,58 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#0F172A] text-white">
+    <div className="min-h-screen bg-[#0F172A] text-white selection:bg-[#EA553B] selection:text-white">
       <SiteHeader />
 
       <main id="main">
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero-new.jpg"
-            alt="Professional sports facility"
-            fill
-            priority
-            fetchPriority="high"
-            className="hero-drift object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/90 via-[#0F172A]/60 to-[#0F172A]/95" />
-        </div>
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute left-[-12rem] top-1/4 h-[600px] w-[600px] rounded-full bg-[#EA553B]/20 blur-[120px]" />
-          <div className="absolute bottom-1/4 right-[-12rem] h-[600px] w-[600px] rounded-full bg-[#EA553B]/10 blur-[120px]" />
-        </div>
-        <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-32">
+        {/* 1. Cinematic Hero with Ambient Video & Controls */}
+        <HeroVideo stats={STATS} />
 
-          <h1 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-bold uppercase leading-[0.9] tracking-[-0.01em] [font-optical-sizing:auto] md:text-7xl md:tracking-[-0.025em]">
-            {COMPANY.heroLine1}
-            <br />
-            <span className="mt-2 block text-[#EA553B]">{COMPANY.heroLine2}</span>
-
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-white/80">{COMPANY.heroSub}</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="/clubs"
-              className="min-h-[48px] rounded-lg bg-[#EA553B] px-8 py-3.5 font-[family-name:var(--font-display,'Barlow_Condensed')] text-sm font-bold uppercase tracking-wide text-white shadow-[0_4px_24px_rgba(234,85,59,0.35)] transition-[background-color,box-shadow,transform] duration-100 hover:bg-[#FF6B4F] hover:shadow-[0_8px_40px_rgba(234,85,59,0.45)] active:scale-[0.97] active:bg-[#D14028]"
-            >
-              Explore our facilities
-            </Link>
-            <Link
-              href="/company"
-              className="min-h-[48px] rounded-lg border-2 border-white/50 px-8 py-3.5 font-[family-name:var(--font-display,'Barlow_Condensed')] text-sm font-bold uppercase tracking-wide text-white transition-[border-color,background-color,transform] duration-100 hover:border-white hover:bg-white/10 active:scale-[0.97] active:bg-white/20"
-            >
-              Company profile
-            </Link>
-          </div>
-
-          <div className="mt-16 grid max-w-2xl grid-cols-2 gap-6 border-t border-[#EA553B]/20 pt-8">
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <p className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl font-bold text-[#EA553B]">
-                  {s.value}
+        {/* 2. Visual Facilities Showcase with Video Previews on Hover */}
+        <section id="facilities" className="relative border-t border-white/10 bg-[#0A0F1E] py-24">
+          <div className="mx-auto max-w-6xl px-4">
+            <div className="mb-14 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-md bg-[#EA553B]/15 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#EA553B] mb-3">
+                  Track Record & Venues
+                </span>
+                <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-white">
+                  Our Facilities
+                </h2>
+                <p className="mt-2 text-sm sm:text-base text-white/60 max-w-xl">
+                  Built and operated end-to-end by Leets Sports — covering court construction, daily club management, academies, and community events.
                 </p>
-                <p className="mt-1 text-sm text-white/50">{s.label}</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="border-t border-[#EA553B]/20 bg-[#0A0F1E]">
-        <div className="mx-auto max-w-6xl px-4 py-20">
-          <div className="mb-10 flex items-end justify-between">
-            <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl font-bold uppercase tracking-tight">
-              Our Facilities
-            </h2>
-            <Link
-              href="/clubs"
-              className="-my-3 flex min-h-[44px] items-center py-3 text-sm font-semibold text-[#EA553B] transition-colors duration-100 hover:underline active:text-[#FF6B4F]"
-            >
-              View all →
-            </Link>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {CLUBS.map((club) => (
               <Link
-                key={club.slug}
-                href={`/clubs/${club.slug}`}
-                className="group rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-[border-color,background-color,transform] duration-150 hover:border-[#EA553B]/60 hover:bg-white/[0.06] active:scale-[0.99] active:bg-white/[0.08]"
+                href="/clubs"
+                className="group -my-2 flex items-center gap-2 py-2 text-sm font-bold uppercase tracking-wider text-[#EA553B] transition hover:text-[#FF6B4F]"
               >
-                <div className="mb-4 flex items-center justify-between">
-                  <StatusBadge status={club.status} />
-                  <span className="text-xs uppercase tracking-wider text-white/40">
-                    {club.country}
-                  </span>
-                </div>
-                <h3 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-2xl font-bold uppercase group-hover:text-[#EA553B]">
-                  {club.name}
-                </h3>
-                <p className="mt-1 text-sm text-white/50">{club.city}</p>
-                <p className="mt-3 text-sm text-white/70">{club.short}</p>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#EA553B]">
-                  {club.role}
-                </p>
-                {/* A resting affordance: touch devices never see the hover state. */}
-                <p className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-[#EA553B]">
-                  View club
-                  <span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-1">
-                    →
-                  </span>
-                </p>
+                <span>View All Facilities</span>
+                <span className="transition-transform duration-150 group-hover:translate-x-1">→</span>
               </Link>
-            ))}
+            </div>
+
+            {/* Visual Cards Grid */}
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {CLUBS.map((club, idx) => (
+                <ClubCardVisual key={club.slug} club={club} priority={idx === 0} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* 3. The Leets Lifestyle Bento Grid */}
+        <LifestyleBento />
+
+        {/* 4. "Experience Leets in Motion" Video Reel */}
+        <VideoShowcase />
+
+        {/* 5. Kids Academy Spotlight */}
+        <KidsSpotlight />
+
+        {/* 6. Creative CTA */}
+        <CreativeCTA />
       </main>
 
       <SiteFooter />

@@ -11,8 +11,10 @@ export const COMPANY = {
 };
 
 export const STATS = [
-  { value: "4", label: "Facilities delivered & operated" },
-  { value: "2", label: "Countries" },
+  { value: "2019", label: "In the market since" },
+  { value: "4", label: "Facilities delivered" },
+  { value: "600+", label: "Players coached" },
+  { value: "2", label: "Countries (Egypt & KSA)" },
 ];
 
 export type Club = {
@@ -25,6 +27,9 @@ export type Club = {
   short: string;
   about: string;
   videoUrls?: string[];
+  previewVideo?: string;
+  posterImage?: string;
+  highlights?: string[];
 };
 
 export const CLUBS: Club[] = [
@@ -39,6 +44,9 @@ export const CLUBS: Club[] = [
     about:
       "Pyramids Park View is the Leets flagship in Sheikh Zayed, Cairo. Built and run end-to-end by Leets Sports, the club covers everything from court operations and maintenance to coaching programs, tournaments and a growing members' community.",
     videoUrls: [],
+    previewVideo: "/clubs/pyramids-park-view/Pyramids%20Main%20Video.mp4",
+    posterImage: "/clubs/pyramids-park-view/poster.jpg",
+    highlights: ["Flagship Facility", "2 Courts + Gym & Pool", "Pro Academy"],
   },
   {
     slug: "westmark-mall",
@@ -51,6 +59,9 @@ export const CLUBS: Club[] = [
     about:
       "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation — bookings, coaching staff, academies and events — turning a mall location into a destination for the local padel community.",
     videoUrls: [],
+    previewVideo: "/clubs/westmark-mall/Westmark%201.mp4",
+    posterImage: "/clubs/westmark-mall/poster.jpg",
+    highlights: ["Commercial Hub", "Full Operations", "Leagues & Events"],
   },
   {
     slug: "padel-ace",
@@ -63,6 +74,73 @@ export const CLUBS: Club[] = [
     about:
       "Padel Ace in New Cairo was operated by Leets Sports, with our team handling day-to-day club management, coaching programs and player development across all levels.",
     videoUrls: [],
+    previewVideo: "/clubs/padel-ace/Padel%20ACe%201.mp4",
+    posterImage: "/clubs/padel-ace/poster.jpg",
+    highlights: ["East Cairo Destination", "Academy Sessions", "Player Coaching"],
+  },
+];
+
+export interface LifestylePillar {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  href: string;
+  ctaText: string;
+  badge?: string;
+  featured?: boolean;
+}
+
+export const LIFESTYLE_PILLARS: LifestylePillar[] = [
+  {
+    id: "padel",
+    title: "Championship Padel Courts & Academies",
+    category: "Performance Sports",
+    description: "World-class panoramic glass courts, certified coach instruction, social leagues, and tournament play for all skill brackets.",
+    image: "/images/lifestyle/padel-action.webp",
+    href: "/clubs",
+    ctaText: "Explore Facilities",
+    badge: "Signature Sport",
+    featured: true,
+  },
+  {
+    id: "pilates",
+    title: "Reformer Pilates & Mobility Studio",
+    category: "Movement & Tone",
+    description: "Precision reformer sessions engineered to unlock core strength, spinal flexibility, and athletic balance.",
+    image: "/images/lifestyle/pilates-studio.webp",
+    href: "/company",
+    ctaText: "Discover Studio",
+  },
+  {
+    id: "physio",
+    title: "Sports Physio & High-Performance Recovery",
+    category: "Athletic Wellness",
+    description: "Targeted sports therapy, cold immersion, and recovery protocols keeping athletes resilient, pain-free, and game-ready.",
+    image: "/images/lifestyle/physio-recovery.webp",
+    href: "/company",
+    ctaText: "View Recovery Hub",
+  },
+  {
+    id: "kids",
+    title: "Leets Kids Academy (Ages 5–13)",
+    category: "Youth Development",
+    description: "Small groups (max 6), WPT certified coaches, and fun skill drills designed to raise confident players.",
+    image: "/images/kids-promo-1.webp",
+    href: "/kids",
+    ctaText: "Register Free Session",
+    badge: "1st Session Free",
+    featured: true,
+  },
+  {
+    id: "wellness",
+    title: "Sunset Rooftop Yoga & Social Hub",
+    category: "Community & Lifestyle",
+    description: "Breathwork, community coffee lounge, and family recreation fostering a vibrant social sporty lifestyle.",
+    image: "/images/lifestyle/yoga-rooftop.webp",
+    href: "/company",
+    ctaText: "Our Vision",
   },
 ];
 
