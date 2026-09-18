@@ -57,17 +57,17 @@ export function HeroVideo({ stats }: HeroVideoProps) {
           muted
           loop
           playsInline
-          poster="/clubs/pyramids-park-view/hero-poster.jpg"
+          poster="/clubs/pyramids-park-view/hero-poster.jpg?v=20260918"
           onLoadedData={() => setVideoLoaded(true)}
           className={`h-full w-full object-cover transition-opacity duration-500 ${
-            videoLoaded ? "opacity-95" : "opacity-0"
+            videoLoaded ? "opacity-100" : "opacity-0"
           }`}
         >
-          <source src="/clubs/pyramids-park-view/pyramids-hero.mp4" type="video/mp4" />
+          <source src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=2" type="video/mp4" />
         </video>
 
-        {/* Clean, Crisp Gradient Scrim — Keeps video sharp & visible while guaranteeing text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/25 to-[#0A0F1E]/60 pointer-events-none" />
+        {/* Clean, Crisp Scrim — Preserves high contrast and sharp details while ensuring text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/20 to-black/30 pointer-events-none" />
       </div>
 
       {/* Hero Interactive Content */}
