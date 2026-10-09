@@ -10,6 +10,7 @@ interface HeroVideoProps {
 
 export function HeroVideo({ stats }: HeroVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const userPausedRef = useRef(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -18,15 +19,88 @@ export function HeroVideo({ stats }: HeroVideoProps) {
     const video = videoRef.current;
     if (!video) return;
 
+    // Force DOM attributes for Safari / iOS / low-power mobile autoplay
+    video.defaultMuted = true;
     video.muted = true;
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => setIsPlaying(true))
-        .catch(() => {
-          setIsPlaying(false);
-        });
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    // If video frame is already ready in browser cache
+    if (video.readyState >= 2) {
+      setVideoLoaded(true);
     }
+
+    let removeInteractionListeners: (() => void) | null = null;
+
+    const startPlayback = () => {
+      if (userPausedRef.current || !video) return;
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+            setVideoLoaded(true);
+          })
+          .catch(() => {
+            // Browser policy blocked unprompted autoplay (e.g. mobile battery saver).
+            // Start seamlessly on the first touch, click, or scroll anywhere on screen.
+            setIsPlaying(false);
+
+            const onFirstInteraction = () => {
+              if (video && !userPausedRef.current) {
+                video.muted = true;
+                video.play()
+                  .then(() => {
+                    setIsPlaying(true);
+                    setVideoLoaded(true);
+                  })
+                  .catch(() => {});
+              }
+              cleanup();
+            };
+
+            const events = ["touchstart", "touchend", "click", "scroll", "keydown"];
+            const cleanup = () => {
+              events.forEach((evt) => window.removeEventListener(evt, onFirstInteraction));
+              removeInteractionListeners = null;
+            };
+            events.forEach((evt) => {
+              window.addEventListener(evt, onFirstInteraction, { passive: true, once: true });
+            });
+            removeInteractionListeners = cleanup;
+          });
+      }
+    };
+
+    startPlayback();
+
+    // Auto-resume if tab visibility changes or user returns to window
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible" && !userPausedRef.current && video.paused) {
+        startPlayback();
+      }
+    };
+
+    const handlePageShow = () => {
+      if (!userPausedRef.current && video.paused) {
+        startPlayback();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("focus", handleVisibility);
+    window.addEventListener("pageshow", handlePageShow);
+
+    return () => {
+      if (removeInteractionListeners) {
+        removeInteractionListeners();
+      }
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("focus", handleVisibility);
+      window.removeEventListener("pageshow", handlePageShow);
+    };
   }, []);
 
   const toggleMute = () => {
@@ -39,9 +113,10 @@ export function HeroVideo({ stats }: HeroVideoProps) {
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
-      videoRef.current.play();
-      setIsPlaying(true);
+      userPausedRef.current = false;
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
     } else {
+      userPausedRef.current = true;
       videoRef.current.pause();
       setIsPlaying(false);
     }
@@ -49,21 +124,53 @@ export function HeroVideo({ stats }: HeroVideoProps) {
 
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
-      {/* Background Video with Poster Fallback */}
-      <div className="absolute inset-0 z-0">
+      {/* Background Video with Instant Poster Fallback */}
+      <div className="absolute inset-0 z-0 bg-[#0A0F1E]">
+        {/* Instant static poster background so page never has a black/blank gap */}
+        <img
+          src="/clubs/pyramids-park-view/hero-poster.jpg?v=20260918"
+          alt=""
+          role="presentation"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+
         <video
           ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           poster="/clubs/pyramids-park-view/hero-poster.jpg?v=20260918"
+          onLoadedMetadata={() => setVideoLoaded(true)}
           onLoadedData={() => setVideoLoaded(true)}
-          className={`h-full w-full object-cover transition-opacity duration-500 ${
+          onCanPlay={() => setVideoLoaded(true)}
+          onPlaying={() => {
+            setIsPlaying(true);
+            setVideoLoaded(true);
+          }}
+          onPause={() => {
+            if (videoRef.current?.paused) setIsPlaying(false);
+          }}
+          onEnded={() => {
+            if (videoRef.current && !userPausedRef.current) {
+              videoRef.current.currentTime = 0;
+              videoRef.current.play().catch(() => {});
+            }
+          }}
+          onError={() => {
+            if (videoRef.current) {
+              videoRef.current.load();
+              videoRef.current.play().catch(() => {});
+            }
+          }}
+          className={`h-full w-full object-cover transition-opacity duration-700 ${
             videoLoaded ? "opacity-100" : "opacity-0"
           }`}
         >
-          <source src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=2" type="video/mp4" />
+          <source src="/clubs/pyramids-park-view/pyramids-hero-mobile.mp4?v=20261009" media="(max-width: 767px)" type="video/mp4" />
+          <source src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=20261009" type="video/mp4" />
         </video>
 
         {/* Clean, Crisp Scrim - Preserves high contrast and sharp details while ensuring text readability */}

@@ -19,8 +19,11 @@ export function ClubCardVisual({ club, priority = false }: ClubCardVisualProps) 
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (videoRef.current) {
+      if (videoRef.current.readyState >= 2) {
+        setVideoLoaded(true);
+      }
       videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().then(() => setVideoLoaded(true)).catch(() => {});
     }
   };
 
@@ -60,7 +63,10 @@ export function ClubCardVisual({ club, priority = false }: ClubCardVisualProps) 
             loop
             playsInline
             preload="metadata"
+            onLoadedMetadata={() => setVideoLoaded(true)}
             onLoadedData={() => setVideoLoaded(true)}
+            onCanPlay={() => setVideoLoaded(true)}
+            onPlaying={() => setVideoLoaded(true)}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
               isHovered ? "opacity-100 scale-105" : "opacity-0"
             }`}
