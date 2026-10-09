@@ -40,6 +40,16 @@ export const metadata: Metadata = {
     title: "Leets Sports — Sports Management Company",
     description: "Leets Sports builds, owns and operates padel clubs across Egypt and Saudi Arabia.",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   robots: { index: true, follow: true },
 };
 
