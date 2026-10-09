@@ -190,7 +190,7 @@ export default function LeadCaptureWidget() {
                     placeholder={current.placeholder}
                     type={current.key === "age" ? "number" : "text"}
                     className="w-full min-h-[48px] bg-brand/10 border border-brand/20 rounded-xl px-4 py-3 text-[16px] text-brand-100 outline-none focus:border-brand transition-colors duration-200 placeholder:text-[#8A4530] text-center mb-4"
-                    // No autoFocus on touch — it throws the keyboard up over the
+                    // No autoFocus on touch - it throws the keyboard up over the
                     // question before the sheet has finished arriving.
                     ref={(el) => {
                       if (el && !window.matchMedia("(pointer: coarse)").matches) el.focus();
@@ -228,7 +228,7 @@ export default function LeadCaptureWidget() {
                     {[["👤", "Name", form.name], ["🎂", "Age", form.age], ["🏋️", "Interest", form.interest], ["📱", "Phone", form.phone]].map(([icon, label, val]) => (
                       <div key={label as string} className="flex justify-between text-[11.5px] mb-1 last:mb-0">
                         <span className="text-brand-light">{icon} {label as string}</span>
-                        <span className="text-white/95 font-medium">{val || "—"}</span>
+                        <span className="text-white/95 font-medium">{val || "-"}</span>
                       </div>
                     ))}
                   </div>
@@ -244,7 +244,7 @@ export default function LeadCaptureWidget() {
             </div>
 
             {!done && (
-              <p className="text-center text-[#7A3520] text-[10px] pb-3">We&apos;ll reach out on WhatsApp — no spam</p>
+              <p className="text-center text-[#7A3520] text-[10px] pb-3">We&apos;ll reach out on WhatsApp - no spam</p>
             )}
           </motion.div>
         </div>

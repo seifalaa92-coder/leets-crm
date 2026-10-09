@@ -19,17 +19,12 @@ export function LifestyleBento() {
 
       <div className="relative mx-auto max-w-6xl px-4">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-md bg-[#EA553B]/15 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#EA553B] mb-3">
-              The Complete Ecosystem
-            </div>
-            <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-white">
-              More Than Just Courts.
-              <span className="block text-white/50">A Social Sporty Lifestyle.</span>
-            </h2>
-          </div>
-          <p className="max-w-md text-sm sm:text-base text-white/70">
+        <div className="max-w-2xl mb-12">
+          <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-white">
+            More Than Just Courts.
+            <span className="block text-white/50">A Social Sporty Lifestyle.</span>
+          </h2>
+          <p className="mt-3 text-sm sm:text-base text-white/70">
             From tournament-ready padel to reformer pilates and athlete recovery, Leets designs and operates full-service athletic destinations.
           </p>
         </div>

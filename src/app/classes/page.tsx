@@ -39,15 +39,15 @@ export default function ClassesPage() {
           <CardContent className="space-y-4">
             <div className="flex justify-between">
               <span className="text-gray-600">Today&apos;s Classes</span>
-              <span className="font-semibold">—</span>
+              <span className="font-semibold">-</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Total Bookings</span>
-              <span className="font-semibold">—</span>
+              <span className="font-semibold">-</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Available Courts</span>
-              <span className="font-semibold">—</span>
+              <span className="font-semibold">-</span>
             </div>
           </CardContent>
         </Card>

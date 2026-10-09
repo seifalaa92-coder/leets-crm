@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useScroll } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 const NAV = [
@@ -20,15 +20,16 @@ export function SiteHeader() {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
+  const { scrollY } = useScroll();
 
-  // Scroll edge effect: the divider and the material only appear once content
+  // Scroll edge effect: the divider and material only appear once content
   // actually passes under the header.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    setScrolled(scrollY.get() > 8);
+    return scrollY.on("change", (latest) => {
+      setScrolled(latest > 8);
+    });
+  }, [scrollY]);
 
   // Close on route change, and never leave the menu open behind a resize to desktop.
   useEffect(() => {
@@ -53,7 +54,7 @@ export function SiteHeader() {
     };
   }, [menuOpen]);
 
-  // Tap carries no momentum, so the spring is critically damped — no overshoot.
+  // Tap carries no momentum, so the spring is critically damped - no overshoot.
   const spring = reduceMotion
     ? { duration: 0.15 }
     : { type: "spring" as const, bounce: 0, duration: 0.34 };

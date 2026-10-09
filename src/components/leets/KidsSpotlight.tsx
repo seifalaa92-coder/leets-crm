@@ -14,8 +14,8 @@ export function KidsSpotlight() {
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#EA553B]/40 bg-[#EA553B]/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#EA553B] mb-4">
                 <span>Leets Kids Academy</span>
-                <span className="h-1 w-1 rounded-full bg-[#EA553B]" />
-                <span>Ages 5–13</span>
+                <span className="text-white/40">·</span>
+                <span>Ages 5-13</span>
               </div>
 
               <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-white leading-[0.92]">

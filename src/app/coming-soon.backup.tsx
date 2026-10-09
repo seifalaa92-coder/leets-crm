@@ -25,7 +25,7 @@ export default function ComingSoon() {
         </h1>
         <p style={{ fontSize: '15px', color: '#666', lineHeight: 1.7, marginBottom: '2rem' }}>
           Leets Sports is undergoing scheduled maintenance.<br />
-          We&apos;ll be back shortly — bigger and better than ever.
+          We&apos;ll be back shortly - bigger and better than ever.
         </p>
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',

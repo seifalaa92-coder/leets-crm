@@ -16,17 +16,13 @@ export function CreativeCTA() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#EA553B] mb-6 backdrop-blur-sm">
-          PRACTICE &gt; ACHIEVE &gt; INSPIRE
-        </div>
-
         <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl sm:text-6xl md:text-7xl font-extrabold uppercase tracking-tight text-white leading-[0.9]">
           Step Onto The Court.
-          <span className="block text-[#EA553B] mt-2">Elevate Your Lifestyle.</span>
+          <span className="block text-[#EA553B] mt-2">Play, Train, and Compete.</span>
         </h2>
 
         <p className="mx-auto mt-6 max-w-xl text-base sm:text-lg text-white/70">
-          Whether booking court time with friends, enrolling your child in our youth academy, or exploring facility partnership opportunities — Leets is your home for sports.
+          Whether booking court time with friends, enrolling your child in our youth academy, or exploring facility partnership opportunities - Leets is your home for sports.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">

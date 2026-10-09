@@ -9,9 +9,9 @@ import { CreativeCTA } from "@/components/leets/CreativeCTA";
 import { STATS, CLUBS } from "@/data/company";
 
 export const metadata = {
-  title: "Leets Sports — Sports Management Company | Egypt & KSA",
+  title: "Leets Sports | Sports Management Company | Egypt & KSA",
   description:
-    "Leets Sports owns and operates sports facilities across Egypt and Saudi Arabia — padel clubs, academies and boutique fitness studios.",
+    "Leets Sports owns and operates sports facilities across Egypt and Saudi Arabia: padel clubs, academies and boutique fitness studios.",
 };
 
 export default function HomePage() {
@@ -28,14 +28,11 @@ export default function HomePage() {
           <div className="mx-auto max-w-6xl px-4">
             <div className="mb-14 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div>
-                <span className="inline-flex items-center gap-2 rounded-md bg-[#EA553B]/15 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#EA553B] mb-3">
-                  Track Record & Venues
-                </span>
                 <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-white">
                   Our Facilities
                 </h2>
                 <p className="mt-2 text-sm sm:text-base text-white/60 max-w-xl">
-                  Built and operated end-to-end by Leets Sports — covering court construction, daily club management, academies, and community events.
+                  Built and operated end-to-end by Leets Sports, covering court construction, daily club management, academies, and community events.
                 </p>
               </div>
 

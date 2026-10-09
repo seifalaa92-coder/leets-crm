@@ -35,10 +35,10 @@ const interestOptions = [
 
 const levelOptions = [
   { value: "", label: "Select your level" },
-  { value: "beginner", label: "Beginner — Never played" },
-  { value: "novice", label: "Novice — Played a few times" },
-  { value: "intermediate", label: "Intermediate — Can rally and keep score" },
-  { value: "advanced", label: "Advanced — Competitive player" },
+  { value: "beginner", label: "Beginner - Never played" },
+  { value: "novice", label: "Novice - Played a few times" },
+  { value: "intermediate", label: "Intermediate - Can rally and keep score" },
+  { value: "advanced", label: "Advanced - Competitive player" },
 ];
 
 export function KidsRegistrationForm() {

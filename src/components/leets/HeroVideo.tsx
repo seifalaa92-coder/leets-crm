@@ -48,7 +48,7 @@ export function HeroVideo({ stats }: HeroVideoProps) {
   };
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
       {/* Background Video with Poster Fallback */}
       <div className="absolute inset-0 z-0">
         <video
@@ -66,33 +66,29 @@ export function HeroVideo({ stats }: HeroVideoProps) {
           <source src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=2" type="video/mp4" />
         </video>
 
-        {/* Clean, Crisp Scrim — Preserves high contrast and sharp details while ensuring text readability */}
+        {/* Clean, Crisp Scrim - Preserves high contrast and sharp details while ensuring text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/20 to-black/30 pointer-events-none" />
       </div>
 
       {/* Hero Interactive Content */}
-      <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 md:py-28 text-center flex flex-col items-center">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 md:py-24 text-center flex flex-col items-center">
         {/* Brand Energy Pill */}
-        <div className="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 backdrop-blur-md shadow-xl transition hover:border-[#EA553B]/50 hover:bg-black/60">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EA553B] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#EA553B]"></span>
-          </span>
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 backdrop-blur-md shadow-xl transition hover:border-[#EA553B]/50 hover:bg-black/60">
           <span className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-xs font-bold uppercase tracking-[0.25em] text-white/95">
             Est. 2019 · Egypt & Saudi Arabia
           </span>
         </div>
 
-        {/* Main Headline with drop shadow */}
-        <h1 className="mt-8 font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-extrabold uppercase leading-[0.88] tracking-[-0.02em] sm:text-7xl md:text-8xl lg:text-9xl text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
-          Elevate Your Sports
-          <span className="mt-2 block bg-gradient-to-r from-[#EA553B] via-[#FF7A5C] to-[#FFA07A] bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(234,85,59,0.4)]">
-            Experience Every Day.
+        {/* Main Headline */}
+        <h1 className="mt-8 font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-extrabold uppercase leading-[0.88] tracking-[-0.02em] sm:text-7xl md:text-8xl lg:text-9xl text-white">
+          Championship Padel
+          <span className="mt-2 block text-[#EA553B]">
+            &amp; Sports Management.
           </span>
         </h1>
 
-        {/* Subtitle with drop shadow */}
-        <p className="mt-6 max-w-2xl text-base text-white/95 sm:text-lg md:text-xl font-medium leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+        {/* Subtitle */}
+        <p className="mt-6 max-w-2xl text-base text-white/90 sm:text-lg md:text-xl font-medium leading-relaxed">
           {COMPANY.heroSub}
         </p>
 
@@ -132,7 +128,7 @@ export function HeroVideo({ stats }: HeroVideoProps) {
         </div>
 
         {/* Stats Strip */}
-        <div className="mt-16 w-full max-w-4xl grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6 border-t border-white/10 pt-8">
+        <div className="mt-14 w-full max-w-4xl grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6 border-t border-white/10 pt-8">
           {stats.map((s) => (
             <div
               key={s.label}
@@ -186,25 +182,6 @@ export function HeroVideo({ stats }: HeroVideoProps) {
           )}
         </button>
       </div>
-
-      {/* Down Scroll Prompt */}
-      <a
-        href="#facilities"
-        aria-label="Scroll to facilities"
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40 transition hover:text-[#EA553B] group"
-      >
-        <span className="text-[10px] font-semibold tracking-widest uppercase font-[family-name:var(--font-display,'Barlow_Condensed')]">
-          Scroll
-        </span>
-        <svg
-          className="h-5 w-5 animate-bounce group-hover:text-[#EA553B]"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </a>
     </section>
   );
 }

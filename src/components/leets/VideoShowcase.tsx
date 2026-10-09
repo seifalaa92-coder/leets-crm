@@ -97,9 +97,6 @@ export function VideoShowcase() {
       <div className="relative mx-auto max-w-6xl px-4">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#EA553B]/30 bg-[#EA553B]/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-[#EA553B] mb-3">
-            Real Action · Real Venues
-          </span>
           <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-white">
             Experience Leets in Motion
           </h2>
@@ -125,7 +122,7 @@ export function VideoShowcase() {
               >
                 <span
                   className={`h-2 w-2 rounded-full ${
-                    isSelected ? "bg-white animate-pulse" : "bg-white/30"
+                    isSelected ? "bg-white" : "bg-white/30"
                   }`}
                 />
                 <span className="font-[family-name:var(--font-display,'Barlow_Condensed')] tracking-wide uppercase">

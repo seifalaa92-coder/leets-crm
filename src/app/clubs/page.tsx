@@ -21,7 +21,7 @@ export default function ClubsPage() {
             Our Facilities
           </h1>
           <p className="mt-4 text-base sm:text-lg text-white/70 leading-relaxed">
-            Every facility below was built or operated end-to-end by Leets Sports — operations, coaching staff, booking systems, tournaments, and member communities.
+            Every facility below was built or operated end-to-end by Leets Sports: operations, coaching staff, booking systems, tournaments, and member communities.
           </p>
         </div>
 

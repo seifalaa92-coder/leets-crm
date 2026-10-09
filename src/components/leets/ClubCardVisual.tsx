@@ -87,7 +87,7 @@ export function ClubCardVisual({ club, priority = false }: ClubCardVisualProps) 
               isHovered ? "opacity-100" : "opacity-0"
             }`}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-[#EA553B] animate-ping" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#EA553B]" />
             Live Preview
           </div>
         )}

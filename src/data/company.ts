@@ -1,10 +1,10 @@
 export const COMPANY = {
   name: "Leets Sports",
   tagline: "A Social Sporty Lifestyle for All the Family",
-  heroLine1: "Elevate your sports",
-  heroLine2: "experience every day.",
+  heroLine1: "Championship padel",
+  heroLine2: "and sports management.",
   heroSub:
-    "Leets Sports delivers a social and active lifestyle experience across Egypt — padel clubs, academies and boutique fitness studios for the whole family. Now expanding to Saudi Arabia in 2026",
+    "Leets Sports delivers an active lifestyle experience across Egypt and Saudi Arabia: padel clubs, certified academies, and athletic facilities for the whole family.",
   email: "info@leetssports.com",
   instagram: "https://instagram.com/leets.sports",
   locations: "Jeddah, KSA · Cairo, Egypt",
@@ -40,7 +40,7 @@ export const CLUBS: Club[] = [
     country: "Egypt",
     status: "active",
     role: "Owned & Operated by Leets",
-    short: "Our flagship club in Sheikh Zayed — courts, coaching and community.",
+    short: "Our flagship club in Sheikh Zayed: courts, coaching and community.",
     about:
       "Pyramids Park View is the Leets flagship in Sheikh Zayed, Cairo. Built and run end-to-end by Leets Sports, the club covers everything from court operations and maintenance to coaching programs, tournaments and a growing members' community.",
     videoUrls: [],
@@ -57,7 +57,7 @@ export const CLUBS: Club[] = [
     role: "Operated by Leets",
     short: "Full club operation inside Westmark Mall, Sheikh Zayed.",
     about:
-      "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation — bookings, coaching staff, academies and events — turning a mall location into a destination for the local padel community.",
+      "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation (bookings, coaching staff, academies and events), turning a mall location into a destination for the local padel community.",
     videoUrls: [],
     previewVideo: "/clubs/westmark-mall/Westmark%201.mp4",
     posterImage: "/clubs/westmark-mall/poster.jpg",
@@ -124,7 +124,7 @@ export const LIFESTYLE_PILLARS: LifestylePillar[] = [
   },
   {
     id: "kids",
-    title: "Leets Kids Academy (Ages 5–13)",
+    title: "Leets Kids Academy (Ages 5-13)",
     category: "Youth Development",
     description: "Small groups (max 6), WPT certified coaches, and fun skill drills designed to raise confident players.",
     image: "/images/kids-promo-1.webp",
@@ -144,9 +144,9 @@ export const LIFESTYLE_PILLARS: LifestylePillar[] = [
   },
 ];
 
-export const COMPANY_PROFILE_INTRO = `Leets Sports is a sports management company. We build, operate and run sports facilities — designing them from the ground up, then running them day to day: coaching, programming, and operations.
+export const COMPANY_PROFILE_INTRO = `Leets Sports is a sports management company. We build, operate and run sports facilities - designing them from the ground up, then running them day to day: coaching, programming, and operations.
 
-In the market since 2019, Leets is home of the first certified padel academy in the region, with more than 600 players coached and four venues built across Egypt. Some we built for partners, some we run ourselves — all carry the same standard.`;
+In the market since 2019, Leets is home of the first certified padel academy in the region, with more than 600 players coached and four venues built across Egypt. Some we built for partners, some we run ourselves: all carry the same standard.`;
 
 export const ABOUT_STATS = [
   { value: "2019", label: "In the market since" },

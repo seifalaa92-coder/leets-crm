@@ -12,7 +12,7 @@ const CLUBS: (Club & { localVideos?: string[]; localImages?: string[] })[] = [
     country: "Egypt",
     status: "active",
     role: "Owned & Operated by Leets",
-    short: "Our flagship club in Sheikh Zayed — courts, coaching and community.",
+    short: "Our flagship club in Sheikh Zayed: courts, coaching and community.",
     about: "Pyramids Park View is the Leets flagship in Sheikh Zayed, Cairo. Built and run end-to-end by Leets Sports, the club covers everything from court operations and maintenance to coaching programs, tournaments and a growing members' community.",
     videoUrls: [],
     localVideos: ["Pyramids Main Video.mp4", "Pyramids Park Video 1.mp4"],
@@ -25,7 +25,7 @@ const CLUBS: (Club & { localVideos?: string[]; localImages?: string[] })[] = [
     status: "delivered",
     role: "Operated by Leets",
     short: "Full club operation inside Westmark Mall, Sheikh Zayed.",
-    about: "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation — bookings, coaching staff, academies and events — turning a mall location into a destination for the local padel community.",
+    about: "At Westmark Mall in Sheikh Zayed, Leets Sports ran the complete padel operation (bookings, coaching staff, academies and events), turning a mall location into a destination for the local padel community.",
     videoUrls: [],
     localVideos: ["Westmark 1.mp4", "Westmark 2.mp4", "westmark 3.mp4"],
   },
@@ -127,7 +127,7 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
                 <img
                   key={img}
                   src={`/clubs/${club.slug}/${img}`}
-                  alt={`${club.name} — ${img}`}
+                  alt={`${club.name} - ${img}`}
                   loading="lazy"
                   className="aspect-[4/3] w-full rounded-xl border border-white/10 object-cover"
                 />

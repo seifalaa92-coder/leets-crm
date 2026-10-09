@@ -4,7 +4,7 @@ import { SiteHeader, SiteFooter } from "@/components/leets/Shell";
 export const metadata = {
   title: "Book a Court",
   description:
-    "Court booking at Leets Sports clubs is powered by the Padel Finder app — browse availability and reserve your court.",
+    "Court booking at Leets Sports clubs is powered by the Padel Finder app - browse availability and reserve your court.",
 };
 
 export default function BookCourtPage() {
@@ -21,7 +21,7 @@ export default function BookCourtPage() {
           Book a Court
         </h1>
         <p className="mt-4 max-w-lg text-white/70">
-          Court booking is powered by <strong className="text-white">Padel Finder</strong> — download the app to browse availability and reserve your court.
+          Court booking is powered by <strong className="text-white">Padel Finder</strong> - download the app to browse availability and reserve your court.
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">

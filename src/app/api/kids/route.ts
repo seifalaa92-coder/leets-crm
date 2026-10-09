@@ -12,7 +12,7 @@ const submissionSchema = z.object({
   email: z.union([z.string().trim().email(), z.literal("")]).optional(),
   experience: z.enum(["Never played", "Played a little", "Plays regularly"]),
   days: z.enum(["Weekdays", "Weekends", "Either"]),
-  time: z.enum(["2:00 PM – 3:00 PM", "3:00 PM – 4:00 PM", "4:00 PM – 5:00 PM", "5:00 PM – 6:00 PM"]),
+  time: z.enum(["2:00 PM - 3:00 PM", "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM", "5:00 PM - 6:00 PM"]),
   website: z.string().optional(),
 });
 
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Also log to the main signups sheet (must be awaited — Vercel kills fire-and-forget on response)
+    // Also log to the main signups sheet (must be awaited - Vercel kills fire-and-forget on response)
     const mainSheetUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
     if (mainSheetUrl) {
       const signedUpAt = new Date().toLocaleString("en-GB", { timeZone: "Asia/Riyadh" });
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             signedUpAt,
-            name: `${data.childName} (${data.age}y ${data.gender}) — Parent: ${data.parentName}`,
+            name: `${data.childName} (${data.age}y ${data.gender}) - Parent: ${data.parentName}`,
             email: data.email || "-",
             phone: data.whatsapp,
             experience: data.experience,

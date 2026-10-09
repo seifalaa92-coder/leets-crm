@@ -273,7 +273,7 @@ export function DeviceSimulator({ children }: DeviceSimulatorProps) {
 
           {/* Device Label */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-sm font-body">
-            {device.name} — {orientation === "portrait" ? "Portrait" : "Landscape"}
+            {device.name} - {orientation === "portrait" ? "Portrait" : "Landscape"}
           </div>
         </div>
       ) : (

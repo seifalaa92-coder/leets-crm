@@ -22,7 +22,7 @@ const FEATURES = [
   {
     icon: "🎾",
     title: "All Levels Welcome",
-    body: "From first-time players to kids ready to compete — we meet them where they are.",
+    body: "From first-time players to kids ready to compete - we meet them where they are.",
   },
 ];
 
@@ -38,7 +38,7 @@ export default function KidsPage() {
       <SiteHeader />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden">
         {/* Photo slideshow background */}
         <HeroSlideshow images={HERO_IMAGES} />
         {/* Gradient overlays */}
@@ -55,7 +55,7 @@ export default function KidsPage() {
 
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70 sm:text-xl">
             Small groups, certified coaches, and a court they&apos;ll look forward to every week.
-            Ages&nbsp;5–13.
+            Ages&nbsp;5-13.
           </p>
 
           {/* Scroll CTA */}
@@ -65,13 +65,6 @@ export default function KidsPage() {
           >
             Register My Child
           </a>
-        </div>
-
-        {/* Scroll arrow */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M7 10l5 5 5-5" />
-          </svg>
         </div>
       </section>
 
@@ -139,7 +132,7 @@ export default function KidsPage() {
               </svg>
               <p className="text-sm text-white/70">
                 <span className="font-semibold text-white">First session is free.</span>{" "}
-                No commitment needed — just come and try.
+                No commitment needed - just come and try.
               </p>
             </div>
           </div>

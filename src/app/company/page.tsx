@@ -3,8 +3,8 @@ import { SiteHeader, SiteFooter, StatusBadge } from "@/components/leets/Shell";
 import { COMPANY_PROFILE_INTRO, ABOUT_STATS, VENUES, CLUBS } from "@/data/company";
 
 export const metadata = {
-  // 2019 per ABOUT_STATS — the 2017 here was left behind by the date change.
-  title: "About — Sports Management Since 2019",
+  // 2019 per ABOUT_STATS - the 2017 here was left behind by the date change.
+  title: "About | Sports Management Since 2019",
   description:
     "Leets Sports builds, operates and runs sports facilities. Home of the first certified padel academy in the region. 600+ players coached, 4 venues built in Egypt.",
 };
