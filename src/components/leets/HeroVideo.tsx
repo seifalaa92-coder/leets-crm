@@ -13,7 +13,6 @@ export function HeroVideo({ stats }: HeroVideoProps) {
   const userPausedRef = useRef(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -22,84 +21,51 @@ export function HeroVideo({ stats }: HeroVideoProps) {
     // Force DOM attributes for Safari / iOS / low-power mobile autoplay
     video.defaultMuted = true;
     video.muted = true;
+    video.playsInline = true;
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
 
-    // If video frame is already ready in browser cache
-    if (video.readyState >= 2) {
-      setVideoLoaded(true);
-    }
-
-    let removeInteractionListeners: (() => void) | null = null;
-
-    const startPlayback = () => {
+    const playVideo = () => {
       if (userPausedRef.current || !video) return;
       video.muted = true;
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-            setVideoLoaded(true);
-          })
-          .catch(() => {
-            // Browser policy blocked unprompted autoplay (e.g. mobile battery saver).
-            // Start seamlessly on the first touch, click, or scroll anywhere on screen.
-            setIsPlaying(false);
+        playPromise.catch(() => {
+          // Browser policy blocked unprompted autoplay (e.g. mobile battery saver).
+          // Start seamlessly on the first touch, click, or scroll anywhere on screen.
+          const onFirstInteraction = () => {
+            if (video && !userPausedRef.current) {
+              video.muted = true;
+              video.play().catch(() => {});
+            }
+          };
 
-            const onFirstInteraction = () => {
-              if (video && !userPausedRef.current) {
-                video.muted = true;
-                video.play()
-                  .then(() => {
-                    setIsPlaying(true);
-                    setVideoLoaded(true);
-                  })
-                  .catch(() => {});
-              }
-              cleanup();
-            };
-
-            const events = ["touchstart", "touchend", "click", "scroll", "keydown"];
-            const cleanup = () => {
-              events.forEach((evt) => window.removeEventListener(evt, onFirstInteraction));
-              removeInteractionListeners = null;
-            };
-            events.forEach((evt) => {
-              window.addEventListener(evt, onFirstInteraction, { passive: true, once: true });
-            });
-            removeInteractionListeners = cleanup;
+          const events = ["touchstart", "touchend", "click", "scroll"];
+          events.forEach((evt) => {
+            window.addEventListener(evt, onFirstInteraction, { passive: true, once: true });
           });
+        });
       }
     };
 
-    startPlayback();
+    playVideo();
 
-    // Auto-resume if tab visibility changes or user returns to window
+    // Auto-resume if tab visibility changes or user returns to window (or bfcache back-navigation)
     const handleVisibility = () => {
       if (document.visibilityState === "visible" && !userPausedRef.current && video.paused) {
-        startPlayback();
-      }
-    };
-
-    const handlePageShow = () => {
-      if (!userPausedRef.current && video.paused) {
-        startPlayback();
+        playVideo();
       }
     };
 
     document.addEventListener("visibilitychange", handleVisibility);
     window.addEventListener("focus", handleVisibility);
-    window.addEventListener("pageshow", handlePageShow);
+    window.addEventListener("pageshow", handleVisibility);
 
     return () => {
-      if (removeInteractionListeners) {
-        removeInteractionListeners();
-      }
       document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("focus", handleVisibility);
-      window.removeEventListener("pageshow", handlePageShow);
+      window.removeEventListener("pageshow", handleVisibility);
     };
   }, []);
 
@@ -135,43 +101,18 @@ export function HeroVideo({ stats }: HeroVideoProps) {
           className="absolute inset-0 h-full w-full object-cover"
         />
 
+        {/* Direct src prevents React child source reconciliation resets */}
         <video
           ref={videoRef}
+          src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=20261009_v2"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
           poster="/clubs/pyramids-park-view/hero-poster.jpg?v=20260918"
-          onLoadedMetadata={() => setVideoLoaded(true)}
-          onLoadedData={() => setVideoLoaded(true)}
-          onCanPlay={() => setVideoLoaded(true)}
-          onPlaying={() => {
-            setIsPlaying(true);
-            setVideoLoaded(true);
-          }}
-          onPause={() => {
-            if (videoRef.current?.paused) setIsPlaying(false);
-          }}
-          onEnded={() => {
-            if (videoRef.current && !userPausedRef.current) {
-              videoRef.current.currentTime = 0;
-              videoRef.current.play().catch(() => {});
-            }
-          }}
-          onError={() => {
-            if (videoRef.current) {
-              videoRef.current.load();
-              videoRef.current.play().catch(() => {});
-            }
-          }}
-          className={`h-full w-full object-cover transition-opacity duration-700 ${
-            videoLoaded ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <source src="/clubs/pyramids-park-view/pyramids-hero-mobile.mp4?v=20261009" media="(max-width: 767px)" type="video/mp4" />
-          <source src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=20261009" type="video/mp4" />
-        </video>
+          className="h-full w-full object-cover"
+        />
 
         {/* Clean, Crisp Scrim - Preserves high contrast and sharp details while ensuring text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/20 to-black/30 pointer-events-none" />
