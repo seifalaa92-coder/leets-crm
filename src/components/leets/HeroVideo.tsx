@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { COMPANY } from "@/data/company";
 
@@ -8,122 +8,88 @@ interface HeroVideoProps {
   stats: { value: string; label: string }[];
 }
 
+const HERO_SLIDES = [
+  {
+    src: "/clubs/pyramids-park-view/hero-slides/slide-1.jpg?v=20261011_v1",
+    alt: "Pyramids Park View Flagship Championship Padel Courts",
+    label: "Championship Courts",
+  },
+  {
+    src: "/clubs/pyramids-park-view/hero-slides/slide-2.jpg?v=20261011_v1",
+    alt: "Pyramids Park View Resort and Giza Pyramids Skyline",
+    label: "Pyramids Skyline View",
+  },
+  {
+    src: "/clubs/pyramids-park-view/hero-slides/slide-3.jpg?v=20261011_v1",
+    alt: "Pro Padel Match Gear & Court Turf",
+    label: "Pro Coaching & Gear",
+  },
+  {
+    src: "/clubs/pyramids-park-view/hero-slides/slide-4.jpg?v=20261011_v1",
+    alt: "Overhead Panoramic Perspective of Padel Courts",
+    label: "Panoramic View",
+  },
+];
+
 export function HeroVideo({ stats }: HeroVideoProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const userPausedRef = useRef(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Natural flow slideshow auto-advance every 6.5 seconds
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 6500);
 
-    // Force DOM attributes for Safari / iOS / low-power mobile autoplay
-    video.defaultMuted = true;
-    video.muted = true;
-    video.playsInline = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
-
-    const playVideo = () => {
-      if (userPausedRef.current || !video) return;
-      video.muted = true;
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Browser policy blocked unprompted autoplay (e.g. mobile battery saver).
-          // Start seamlessly on the first touch, click, or scroll anywhere on screen.
-          const onFirstInteraction = () => {
-            if (video && !userPausedRef.current) {
-              video.muted = true;
-              video.play().catch(() => {});
-            }
-          };
-
-          const events = ["touchstart", "touchend", "click", "scroll"];
-          events.forEach((evt) => {
-            window.addEventListener(evt, onFirstInteraction, { passive: true, once: true });
-          });
-        });
-      }
-    };
-
-    playVideo();
-
-    // Auto-resume if tab visibility changes or user returns to window (or bfcache back-navigation)
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible" && !userPausedRef.current && video.paused) {
-        playVideo();
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibility);
-    window.addEventListener("focus", handleVisibility);
-    window.addEventListener("pageshow", handleVisibility);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibility);
-      window.removeEventListener("focus", handleVisibility);
-      window.removeEventListener("pageshow", handleVisibility);
-    };
+    return () => clearInterval(timer);
   }, []);
 
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    const newMuted = !videoRef.current.muted;
-    videoRef.current.muted = newMuted;
-    setIsMuted(newMuted);
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
   };
 
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      userPausedRef.current = false;
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-    } else {
-      userPausedRef.current = true;
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   };
 
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
-      {/* Background Video with Instant Poster Fallback */}
+      {/* Background Natural Flow Slideshow */}
       <div className="absolute inset-0 z-0 bg-[#0A0F1E]">
-        {/* Instant static poster background so page never has a black/blank gap */}
-        <img
-          src="/clubs/pyramids-park-view/hero-poster.jpg?v=20261010_cas_v3"
-          alt=""
-          role="presentation"
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-
-        {/* Direct src prevents React child source reconciliation resets */}
-        <video
-          ref={videoRef}
-          src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=20261010_cas_v3"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/clubs/pyramids-park-view/hero-poster.jpg?v=20261010_cas_v3"
-          className="h-full w-full object-cover"
-        />
+        {HERO_SLIDES.map((slide, index) => {
+          const isActive = index === currentSlide;
+          return (
+            <div
+              key={slide.src}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                role="presentation"
+                className={`h-full w-full object-cover transform transition-transform duration-[7000ms] ease-out ${
+                  isActive ? "scale-105" : "scale-100"
+                }`}
+              />
+            </div>
+          );
+        })}
 
         {/* Clean, Crisp Scrim - Preserves high contrast and sharp details while ensuring text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/20 to-black/30 pointer-events-none" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/25 to-black/35 pointer-events-none" />
       </div>
 
       {/* Hero Interactive Content */}
-      <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 md:py-24 text-center flex flex-col items-center">
+      <div className="relative z-20 mx-auto max-w-6xl px-4 py-20 md:py-24 text-center flex flex-col items-center">
         {/* Brand Energy Pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 backdrop-blur-md shadow-xl transition hover:border-[#EA553B]/50 hover:bg-black/60">
           <span className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-xs font-bold uppercase tracking-[0.25em] text-white/95">
-            Est. 2019 · Egypt & Saudi Arabia
+            Est. 2019 · Egypt &amp; Saudi Arabia
           </span>
         </div>
 
@@ -191,43 +157,48 @@ export function HeroVideo({ stats }: HeroVideoProps) {
         </div>
       </div>
 
-      {/* Floating Media Controls (Mute / Pause) */}
-      <div className="absolute bottom-6 right-6 z-20 flex items-center gap-2">
+      {/* Floating Slideshow Controls & Progress Indicator */}
+      <div className="absolute bottom-6 right-6 z-30 flex items-center gap-2">
         <button
           type="button"
-          onClick={toggleMute}
-          aria-label={isMuted ? "Unmute court audio" : "Mute audio"}
-          title={isMuted ? "Unmute court audio" : "Mute audio"}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-[#0F172A]/70 text-white/80 backdrop-blur-md transition hover:border-white/50 hover:text-white active:scale-95"
+          onClick={prevSlide}
+          aria-label="Previous slide"
+          title="Previous slide"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-[#0F172A]/70 text-white/80 backdrop-blur-md transition hover:border-white/50 hover:text-white active:scale-95"
         >
-          {isMuted ? (
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-            </svg>
-          ) : (
-            <svg className="h-4 w-4 text-[#EA553B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-            </svg>
-          )}
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+          </svg>
         </button>
+
+        {/* Slide Dots / Indicators */}
+        <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#0F172A]/70 border border-white/15 backdrop-blur-md">
+          {HERO_SLIDES.map((slide, idx) => (
+            <button
+              key={slide.src}
+              type="button"
+              onClick={() => goToSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}: ${slide.label}`}
+              title={slide.label}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                idx === currentSlide
+                  ? "w-6 bg-[#EA553B]"
+                  : "w-2 bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
 
         <button
           type="button"
-          onClick={togglePlay}
-          aria-label={isPlaying ? "Pause video" : "Play video"}
-          title={isPlaying ? "Pause video" : "Play video"}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-[#0F172A]/70 text-white/80 backdrop-blur-md transition hover:border-white/50 hover:text-white active:scale-95"
+          onClick={nextSlide}
+          aria-label="Next slide"
+          title="Next slide"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-[#0F172A]/70 text-white/80 backdrop-blur-md transition hover:border-white/50 hover:text-white active:scale-95"
         >
-          {isPlaying ? (
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6" />
-            </svg>
-          ) : (
-            <svg className="h-4 w-4 text-[#EA553B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-            </svg>
-          )}
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+          </svg>
         </button>
       </div>
     </section>
