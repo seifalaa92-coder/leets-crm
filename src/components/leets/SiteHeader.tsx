@@ -72,7 +72,7 @@ export function SiteHeader() {
         </Link>
 
         {/* Minimal Central Navigation */}
-        <nav className="hidden items-center gap-[30px] md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-[34px] md:flex" aria-label="Main navigation">
           {NAV_LINKS.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
             return (
@@ -80,8 +80,8 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`text-[10px] font-normal tracking-[0.1px] uppercase transition-colors duration-150 ${
-                  isActive ? "text-[#111F35] font-medium" : "text-[#111F35]/75 hover:text-[#111F35]"
+                className={`text-[13px] sm:text-[14px] font-bold tracking-[0.5px] uppercase transition-colors duration-150 ${
+                  isActive ? "text-[#111F35]" : "text-[#111F35]/85 hover:text-[#111F35]"
                 }`}
               >
                 {item.label}
@@ -159,7 +159,7 @@ export function SiteHeader() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="flex min-h-[44px] items-center border-b border-[#E7E8EC]/60 text-[11px] font-normal tracking-wide text-[#111F35] active:text-[#172D4D]"
+                    className="flex min-h-[48px] items-center border-b border-[#E7E8EC]/60 text-[14px] font-bold tracking-wide text-[#111F35] active:text-[#172D4D]"
                   >
                     {item.label}
                   </Link>
