@@ -474,12 +474,18 @@ body {
    ───────────────────────────────────────────────────────────── */
 
 html.has-custom-cursor,
-html.has-custom-cursor body,
+html.has-custom-cursor body {
+  cursor: none !important;
+}
+
+/* Over interactive elements, booking elements, buttons, and links: restore standard pointer */
 html.has-custom-cursor a,
 html.has-custom-cursor button,
 html.has-custom-cursor [role="button"],
-html.has-custom-cursor label {
-  cursor: none !important;
+html.has-custom-cursor label,
+html.has-custom-cursor summary,
+html.has-custom-cursor [data-cursor-interactive] {
+  cursor: pointer !important;
 }
 
 /* Preserve normal text cursor for inputs, textareas, and editable content */

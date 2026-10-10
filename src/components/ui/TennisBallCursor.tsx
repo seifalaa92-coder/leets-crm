@@ -89,7 +89,10 @@ export function TennisBallCursor() {
     const updateCursor = () => {
       if (!cursorRef.current || !ballRef.current) return;
 
-      if (!isImageReady || !isVisible || isOverTextInput) {
+      // Disappear when user is trying to book, click, press, or interact with anything
+      const shouldHide = !isImageReady || !isVisible || isOverTextInput || isHoveringInteractive || isPressed;
+
+      if (shouldHide) {
         cursorRef.current.style.opacity = "0";
       } else {
         cursorRef.current.style.opacity = "1";
@@ -101,22 +104,8 @@ export function TennisBallCursor() {
         currentRotation += (targetRotation - currentRotation) * 0.15;
         targetRotation *= 0.88; // decay impulse
 
-        // Scale: default ~1 (28px base), ~1.28 on hover (36px / 28px = 1.285)
-        // Compression on press: multiply by 0.88
-        const baseScale = isHoveringInteractive ? 1.285 : 1.0;
-        const pressScale = isPressed ? 0.88 : 1.0;
-        const finalScale = baseScale * pressScale;
-
-        ballRef.current.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg) scale(${finalScale})`;
-
-        // Visual styling for hover: subtle navy outline/drop shadow
-        if (isHoveringInteractive) {
-          ballRef.current.style.filter =
-            "drop-shadow(0 0 1px #172D4D) drop-shadow(0 4px 10px rgba(23, 45, 77, 0.45))";
-        } else {
-          ballRef.current.style.filter =
-            "drop-shadow(0 2px 5px rgba(17, 31, 53, 0.25))";
-        }
+        ballRef.current.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg) scale(1.0)`;
+        ballRef.current.style.filter = "drop-shadow(0 2px 5px rgba(17, 31, 53, 0.25))";
       }
 
       rafId = requestAnimationFrame(updateCursor);
@@ -149,15 +138,12 @@ export function TennisBallCursor() {
       );
       isOverTextInput = !!textInput;
 
-      // Detect disabled elements
-      const isDisabled = target.closest(':disabled, [aria-disabled="true"]');
-
-      // Detect interactive elements (links, buttons, interactive parents)
+      // Detect interactive elements (links, buttons, booking CTAs, interactive parents)
       const interactive = target.closest(
-        'a, button, [role="button"], input[type="submit"], input[type="button"], label, select, summary, [data-cursor-interactive]'
+        'a, button, [role="button"], input[type="submit"], input[type="button"], label, select, summary, [data-cursor-interactive], [onclick], [tabindex]:not([tabindex="-1"])'
       );
 
-      isHoveringInteractive = !!interactive && !isDisabled && !isOverTextInput;
+      isHoveringInteractive = !!interactive && !isOverTextInput;
     };
 
     const onPointerDown = (e: PointerEvent) => {
