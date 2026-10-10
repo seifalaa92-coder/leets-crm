@@ -129,9 +129,9 @@ export function HeroVideo({ stats }: HeroVideoProps) {
 
         {/* Main Headline */}
         <h1 className="mt-8 font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-extrabold uppercase leading-[0.88] tracking-[-0.02em] sm:text-7xl md:text-8xl lg:text-9xl text-white">
-          Championship Padel
+          A Social Sporty Lifestyle
           <span className="mt-2 block text-[#EA553B]">
-            &amp; Sports Management.
+            For All The Family.
           </span>
         </h1>
 

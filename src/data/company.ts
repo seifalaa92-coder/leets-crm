@@ -1,8 +1,8 @@
 export const COMPANY = {
   name: "Leets Sports",
   tagline: "A Social Sporty Lifestyle for All the Family",
-  heroLine1: "Championship padel",
-  heroLine2: "and sports management.",
+  heroLine1: "A Social Sporty Lifestyle",
+  heroLine2: "For All The Family.",
   heroSub:
     "Leets Sports delivers an active lifestyle experience across Egypt and Saudi Arabia: padel clubs, certified academies, and athletic facilities for the whole family.",
   email: "info@leetssports.com",
