@@ -94,7 +94,7 @@ export function HeroVideo({ stats }: HeroVideoProps) {
       <div className="absolute inset-0 z-0 bg-[#0A0F1E]">
         {/* Instant static poster background so page never has a black/blank gap */}
         <img
-          src="/clubs/pyramids-park-view/hero-poster.jpg?v=20261009_clean"
+          src="/clubs/pyramids-park-view/hero-poster.jpg?v=20261010_cas_v3"
           alt=""
           role="presentation"
           aria-hidden="true"
@@ -104,13 +104,13 @@ export function HeroVideo({ stats }: HeroVideoProps) {
         {/* Direct src prevents React child source reconciliation resets */}
         <video
           ref={videoRef}
-          src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=20261009_clean"
+          src="/clubs/pyramids-park-view/pyramids-hero-hd.mp4?v=20261010_cas_v3"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          poster="/clubs/pyramids-park-view/hero-poster.jpg?v=20261009_clean"
+          poster="/clubs/pyramids-park-view/hero-poster.jpg?v=20261010_cas_v3"
           className="h-full w-full object-cover"
         />
 
