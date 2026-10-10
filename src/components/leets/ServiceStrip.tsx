@@ -13,7 +13,7 @@ export function ServiceStrip() {
         {SERVICES.map((service, idx) => (
           <span
             key={idx}
-            className="text-[9px] sm:text-[10px] font-normal tracking-[0.5px] text-[#667080] uppercase"
+            className="text-[12px] sm:text-[14px] font-semibold tracking-[1px] text-[#475467] uppercase"
           >
             {service}
           </span>

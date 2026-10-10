@@ -38,31 +38,31 @@ export function KidsAcademySection() {
 
           {/* Copy and Registration Action on Right */}
           <div className="flex flex-col justify-center">
-            <p className="text-[9px] font-medium tracking-[1.5px] uppercase text-[#758191]">
+            <p className="text-[11px] sm:text-[12px] font-semibold tracking-[1.8px] uppercase text-[#707D8F]">
               LEETS KIDS ACADEMY · AGES 5–13
             </p>
 
-            <h2 className="mt-3 text-[32px] sm:text-[38px] font-medium leading-[1.12] tracking-[-1px] text-[#111F35]">
+            <h2 className="mt-3 text-[34px] sm:text-[42px] font-medium leading-[1.12] tracking-[-1px] text-[#111F35]">
               Small beginnings.
               <br />
-              <em className="not-italic text-[#708197]">Big possibilities.</em>
+              <em className="not-italic text-[#61768D]">Big possibilities.</em>
             </h2>
 
-            <p className="mt-4 text-[13px] sm:text-[14px] leading-[1.7] text-[#6B7584]">
+            <p className="mt-4 text-[15px] sm:text-[16px] leading-[1.7] text-[#5F6B7C]">
               A place for young players to learn the game, grow in confidence and have fun on court.
               Led by certified instructors trained specifically in children&apos;s athletic and motor development.
             </p>
 
-            <div className="mt-6 space-y-2 text-[12px] font-normal leading-[1.8] text-[#6B7584]">
-              <div className="flex items-center gap-2">
+            <div className="mt-6 space-y-2.5 text-[14px] font-normal leading-[1.8] text-[#5F6B7C]">
+              <div className="flex items-center gap-2.5">
                 <span className="text-[#172D4D] font-bold">↗</span>
                 <span>Small-group coaching (maximum 6 children per group)</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <span className="text-[#172D4D] font-bold">↗</span>
                 <span>Skills, athletic movement, and tactical match play</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <span className="text-[#172D4D] font-bold">↗</span>
                 <span>A welcoming, family-first padel community</span>
               </div>
@@ -71,13 +71,13 @@ export function KidsAcademySection() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="/kids#register"
-                className="rounded-full bg-[#172D4D] px-6 py-3.5 text-[11px] font-medium tracking-[0.2px] text-white shadow-sm transition-all duration-200 hover:bg-[#304865] hover:-translate-y-0.5 active:translate-y-0"
+                className="rounded-full bg-[#172D4D] px-7 py-3.5 text-[13px] font-semibold tracking-[0.2px] text-white shadow-sm transition-all duration-200 hover:bg-[#304865] hover:-translate-y-0.5 active:translate-y-0"
               >
                 REGISTER FOR ACADEMY ↗
               </Link>
               <Link
                 href="/kids"
-                className="text-[10px] font-medium tracking-[0.5px] uppercase text-[#6B7584] hover:text-[#111F35] transition-colors"
+                className="text-[12px] sm:text-[13px] font-semibold tracking-[0.5px] uppercase text-[#5F6B7C] hover:text-[#111F35] transition-colors"
               >
                 VIEW FULL PROGRAM →
               </Link>

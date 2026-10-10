@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 
 const submissionSchema = z.object({
   childName: z.string().trim().min(2, "Child's name is required").max(100),
+  country: z.enum(["Egypt", "Saudi Arabia - Jeddah"]).default("Egypt"),
   age: z.string().regex(/^(5|6|7|8|9|10|11|12|13)$/, "Age must be between 5 and 13"),
   gender: z.enum(["Boy", "Girl"]),
   parentName: z.string().trim().min(2, "Parent's name is required").max(100),
@@ -91,12 +92,13 @@ export async function POST(request: NextRequest) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             signedUpAt,
-            name: `${data.childName} (${data.age}y ${data.gender}) - Parent: ${data.parentName}`,
+            name: `${data.childName} (${data.age}y ${data.gender}) [${data.country}] - Parent: ${data.parentName}`,
             email: data.email || "-",
             phone: data.whatsapp,
             experience: data.experience,
             days: data.days,
             time: data.time,
+            location: data.country,
           }),
           signal: AbortSignal.timeout(8000),
         });

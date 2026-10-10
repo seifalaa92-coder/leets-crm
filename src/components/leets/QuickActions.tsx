@@ -46,14 +46,14 @@ export function QuickActions() {
             >
               <div className="flex flex-col items-center">
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#273C57] mb-3.5 transition-transform duration-200 group-hover:scale-110" />
-                <h3 className="text-[12px] sm:text-[13px] font-medium tracking-[-0.2px] text-[#111F35] uppercase mb-1.5">
+                <h3 className="text-[14px] sm:text-[15px] font-semibold tracking-[-0.2px] text-[#111F35] uppercase mb-1.5">
                   {item.title}
                 </h3>
-                <p className="text-[11px] leading-relaxed text-[#7A8390] min-h-[34px] max-w-[200px]">
+                <p className="text-[12px] sm:text-[13px] leading-relaxed text-[#667085] min-h-[38px] max-w-[210px]">
                   {item.desc}
                 </p>
               </div>
-              <span className="mt-3 text-[9px] font-medium tracking-[0.5px] uppercase text-[#344F72] transition-colors group-hover:text-[#172D4D]">
+              <span className="mt-3 text-[11px] sm:text-[12px] font-semibold tracking-[0.5px] uppercase text-[#172D4D] transition-colors group-hover:text-[#304865]">
                 {item.cta}
               </span>
             </Link>

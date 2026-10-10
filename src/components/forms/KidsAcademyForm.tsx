@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+const COUNTRIES = ["Egypt", "Saudi Arabia - Jeddah"];
 const AGES = ["5", "6", "7", "8", "9", "10", "11", "12", "13"];
 const GENDERS = ["Boy", "Girl"];
 const EXPERIENCE = ["Never played", "Played a little", "Plays regularly"];
@@ -10,6 +11,7 @@ const TIMES = ["2:00 PM - 3:00 PM", "3:00 PM - 4:00 PM", "4:00 PM - 5:00 PM", "5
 
 const EMPTY = {
   childName: "",
+  country: "Egypt",
   age: "",
   gender: "",
   parentName: "",
@@ -80,6 +82,7 @@ export default function KidsAcademyForm() {
 
   function validate(): boolean {
     const next: Partial<Record<keyof Form, string>> = {};
+    if (!form.country) next.country = "Please select a location";
     if (form.childName.trim().length < 2) next.childName = "Please enter your child's name";
     if (!form.age) next.age = "Please choose an age";
     if (!form.gender) next.gender = "Please choose one";
@@ -128,7 +131,7 @@ export default function KidsAcademyForm() {
           Thanks, {form.parentName.trim().split(" ")[0]}
         </h2>
         <p className="mx-auto mt-3 max-w-md text-[#687383]">
-          We&apos;ve got {form.childName.trim().split(" ")[0]}&apos;s details. Our team will message
+          We&apos;ve got {form.childName.trim().split(" ")[0]}&apos;s details for {form.country}. Our team will message
           you on WhatsApp shortly to arrange a first session.
         </p>
       </div>
@@ -138,6 +141,32 @@ export default function KidsAcademyForm() {
   return (
     <form onSubmit={submit} noValidate className="relative rounded-[24px] border border-[#E7E8EC] bg-white p-6 sm:p-8 shadow-sm">
       <div className="grid gap-5">
+        {/* Country / Location Selector */}
+        <div>
+          <label className={labelClass}>Location / Country</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {COUNTRIES.map((c) => {
+              const isSelected = form.country === c;
+              return (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => set("country", c)}
+                  className={`flex items-center justify-between rounded-xl px-4 py-3.5 border text-sm font-medium transition-all ${
+                    isSelected
+                      ? "border-[#172D4D] bg-[#172D4D] text-white shadow-sm"
+                      : "border-[#E7E8EC] bg-[#F5F5F7] text-[#111F35] hover:border-[#CBD5E1] hover:bg-white"
+                  }`}
+                >
+                  <span>{c}</span>
+                  {isSelected && <span className="text-xs">✓</span>}
+                </button>
+              );
+            })}
+          </div>
+          {errors.country && <p className="mt-1.5 text-xs text-red-500">{errors.country}</p>}
+        </div>
+
         <div>
           <label className={labelClass} htmlFor="childName">
             Child&apos;s full name
