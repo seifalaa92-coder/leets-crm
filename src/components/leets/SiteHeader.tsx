@@ -68,7 +68,7 @@ export function SiteHeader() {
           className="flex items-center transition-opacity hover:opacity-85"
           aria-label="Leets Sports Home"
         >
-          <LeetsWordmark variant="dark" width={92} priority />
+          <LeetsWordmark variant="dark" width={76} priority />
         </Link>
 
         {/* Minimal Central Navigation */}

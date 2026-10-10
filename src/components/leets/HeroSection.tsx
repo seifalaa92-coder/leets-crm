@@ -71,17 +71,17 @@ export function HeroSection() {
         </p>
 
         {/* Headline */}
-        <h1 className="mx-auto mt-5 mb-5 max-w-[780px] text-[38px] sm:text-[54px] md:text-[68px] font-semibold leading-[1.08] tracking-[-2px] text-[#111F35]">
-          Your game.
+        <h1 className="mx-auto mt-5 mb-5 max-w-[840px] text-[36px] sm:text-[52px] md:text-[64px] font-semibold leading-[1.08] tracking-[-2px] text-[#111F35]">
+          The hub of a
           <br />
-          <em className="not-italic text-[#61768D]">Elevated.</em>
+          <em className="not-italic text-[#61768D]">complete lifestyle.</em>
         </h1>
 
         {/* Supporting Copy */}
-        <p className="mx-auto mb-8 max-w-[560px] text-[15px] sm:text-[16px] leading-[1.65] text-[#687383]">
-          From your first rally to your next big win.
+        <p className="mx-auto mb-8 max-w-[620px] text-[15px] sm:text-[16px] leading-[1.65] text-[#687383]">
+          From concept and design to world-class coaching programs.
           <br className="hidden sm:inline" />
-          {" "}Courts, coaching and a community to call your own.
+          {" "}It’s our game — we do it all.
         </p>
 
         {/* Actions */}

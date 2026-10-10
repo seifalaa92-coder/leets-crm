@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Tektur } from "next/font/google";
 import "./globals.css";
 import LeadCaptureWidget from "@/components/LeadCaptureWidget";
+import TennisBallCursor from "@/components/ui/TennisBallCursor";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -58,6 +59,7 @@ export default function RootLayout({
         </a>
         {children}
         <LeadCaptureWidget />
+        <TennisBallCursor />
       </body>
     </html>
   );
