@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { COMPANY } from "@/data/company";
 
@@ -8,86 +7,33 @@ interface HeroVideoProps {
   stats: { value: string; label: string }[];
 }
 
-const HERO_SLIDES = [
-  {
-    src: "/clubs/pyramids-park-view/hero-slides/slide-1.jpg?v=20261011_v1",
-    alt: "Pyramids Park View Flagship Championship Padel Courts",
-    label: "Championship Courts",
-  },
-  {
-    src: "/clubs/pyramids-park-view/hero-slides/slide-2.jpg?v=20261011_v1",
-    alt: "Pyramids Park View Resort and Giza Pyramids Skyline",
-    label: "Pyramids Skyline View",
-  },
-  {
-    src: "/clubs/pyramids-park-view/hero-slides/slide-3.jpg?v=20261011_v1",
-    alt: "Pro Padel Match Gear & Court Turf",
-    label: "Pro Coaching & Gear",
-  },
-  {
-    src: "/clubs/pyramids-park-view/hero-slides/slide-4.jpg?v=20261011_v1",
-    alt: "Overhead Panoramic Perspective of Padel Courts",
-    label: "Panoramic View",
-  },
-];
-
 export function HeroVideo({ stats }: HeroVideoProps) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Natural flow slideshow auto-advance every 6.5 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 6500);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-  };
-
   return (
-    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
-      {/* Background Natural Flow Slideshow */}
-      <div className="absolute inset-0 z-0 bg-[#0A0F1E]">
-        {HERO_SLIDES.map((slide, index) => {
-          const isActive = index === currentSlide;
-          return (
-            <div
-              key={slide.src}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-              }`}
-            >
-              <img
-                src={slide.src}
-                alt={slide.alt}
-                role="presentation"
-                className={`h-full w-full object-cover transform transition-transform duration-[7000ms] ease-out ${
-                  isActive ? "scale-105" : "scale-100"
-                }`}
-              />
-            </div>
-          );
-        })}
+    <section className="relative min-h-[92vh] md:min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#0A0F1E]">
+      {/* Still Signature Navy Blue Background Design */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {/* Deep Slate / Midnight Navy Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A] via-[#0A0F1E] to-[#0A0F1E]" />
 
-        {/* Clean, Crisp Scrim - Preserves high contrast and sharp details while ensuring text readability */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/25 to-black/35 pointer-events-none" />
+        {/* Ambient Brand & Stadium Atmospheric Radial Glows */}
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[900px] rounded-full bg-[#EA553B]/10 blur-[150px]" />
+        <div className="absolute top-1/3 -left-40 h-[450px] w-[450px] rounded-full bg-[#1E293B]/60 blur-[130px]" />
+        <div className="absolute bottom-10 -right-40 h-[500px] w-[500px] rounded-full bg-[#EA553B]/8 blur-[160px]" />
+
+        {/* Subtle Athletic Grid Texture */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+            backgroundSize: "36px 36px",
+          }}
+        />
       </div>
 
-      {/* Hero Interactive Content */}
-      <div className="relative z-20 mx-auto max-w-6xl px-4 py-20 md:py-24 text-center flex flex-col items-center">
+      {/* Hero Content */}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 md:py-24 text-center flex flex-col items-center">
         {/* Brand Energy Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 backdrop-blur-md shadow-xl transition hover:border-[#EA553B]/50 hover:bg-black/60">
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-1.5 backdrop-blur-md shadow-xl transition hover:border-[#EA553B]/50 hover:bg-white/[0.07]">
           <span className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-xs font-bold uppercase tracking-[0.25em] text-white/95">
             Est. 2019 · Egypt &amp; Saudi Arabia
           </span>
@@ -155,51 +101,6 @@ export function HeroVideo({ stats }: HeroVideoProps) {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Floating Slideshow Controls & Progress Indicator */}
-      <div className="absolute bottom-6 right-6 z-30 flex items-center gap-2">
-        <button
-          type="button"
-          onClick={prevSlide}
-          aria-label="Previous slide"
-          title="Previous slide"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-[#0F172A]/70 text-white/80 backdrop-blur-md transition hover:border-white/50 hover:text-white active:scale-95"
-        >
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        {/* Slide Dots / Indicators */}
-        <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#0F172A]/70 border border-white/15 backdrop-blur-md">
-          {HERO_SLIDES.map((slide, idx) => (
-            <button
-              key={slide.src}
-              type="button"
-              onClick={() => goToSlide(idx)}
-              aria-label={`Go to slide ${idx + 1}: ${slide.label}`}
-              title={slide.label}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                idx === currentSlide
-                  ? "w-6 bg-[#EA553B]"
-                  : "w-2 bg-white/40 hover:bg-white/70"
-              }`}
-            />
-          ))}
-        </div>
-
-        <button
-          type="button"
-          onClick={nextSlide}
-          aria-label="Next slide"
-          title="Next slide"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-[#0F172A]/70 text-white/80 backdrop-blur-md transition hover:border-white/50 hover:text-white active:scale-95"
-        >
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
       </div>
     </section>
   );
