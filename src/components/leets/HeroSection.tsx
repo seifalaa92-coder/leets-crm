@@ -64,24 +64,16 @@ export function HeroSection() {
   return (
     <section className="relative bg-[#F5F5F7] pt-12 pb-16 sm:pt-16 sm:pb-24 overflow-hidden">
       <div className="mx-auto max-w-5xl px-4 text-center">
-        {/* Eyebrow */}
-        <p className="text-[10px] font-medium tracking-[1.5px] uppercase text-[#697789]">
-          EST. 2019 <span className="mx-2 text-[#9BA8B8]">/</span> EGYPT & KSA{" "}
-          <span className="mx-2 text-[#9BA8B8]">/</span> SPORT. PEOPLE. COMMUNITY.
-        </p>
-
         {/* Headline */}
-        <h1 className="mx-auto mt-5 mb-5 max-w-[840px] text-[36px] sm:text-[52px] md:text-[64px] font-semibold leading-[1.08] tracking-[-2px] text-[#111F35]">
-          The hub of a
+        <h1 className="mx-auto mb-5 max-w-[860px] text-[36px] sm:text-[52px] md:text-[66px] font-semibold leading-[1.08] tracking-[-2px] text-[#111F35]">
+          Your complete world of
           <br />
-          <em className="not-italic text-[#61768D]">complete lifestyle.</em>
+          <em className="not-italic text-[#61768D]">padel, clubs &amp; performance.</em>
         </h1>
 
         {/* Supporting Copy */}
-        <p className="mx-auto mb-8 max-w-[620px] text-[15px] sm:text-[16px] leading-[1.65] text-[#687383]">
-          From concept and design to world-class coaching programs.
-          <br className="hidden sm:inline" />
-          {" "}It’s our game — we do it all.
+        <p className="mx-auto mb-8 max-w-[660px] text-[15px] sm:text-[17px] leading-[1.65] text-[#687383]">
+          From championship padel courts and high-performance gyms to boutique wellness spaces and certified academies. We build, manage, and operate it all end-to-end.
         </p>
 
         {/* Actions */}
