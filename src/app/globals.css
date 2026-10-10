@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #EA553B;
-  --color-primary-light: #FF6B4F;
-  --color-primary-dark: #D14028;
-  --color-primary-10: rgba(234, 85, 59, 0.1);
-  --color-primary-20: rgba(234, 85, 59, 0.2);
-  --color-secondary: #F97316;
-  --color-secondary-10: rgba(249, 115, 22, 0.1);
+  --color-primary: #172D4D;
+  --color-primary-light: #304865;
+  --color-primary-dark: #111F35;
+  --color-primary-10: rgba(23, 45, 77, 0.1);
+  --color-primary-20: rgba(23, 45, 77, 0.2);
+  --color-secondary: #61768D;
+  --color-secondary-10: rgba(97, 118, 141, 0.1);
 
   --color-white: #FFFFFF;
-  --color-off-white: #F5F5F5;
+  --color-off-white: #F5F5F7;
   --color-cream: #E8E4DF;
-  --color-dark: #0F172A;
-  --color-dark-alt: #0A0F1E;
-  --color-charcoal: #1E293B;
-  --color-gray: #64748B;
+  --color-dark: #111F35;
+  --color-dark-alt: #101D32;
+  --color-charcoal: #111F35;
+  --color-gray: #667080;
   --color-gray-light: #94A3B8;
 
   --color-success: #22C55E;
@@ -25,11 +25,11 @@
   --color-error: #EF4444;
   --color-info: #3B82F6;
 
-  --color-border: #E2E8F0;
-  --color-border-dark: #1E293B;
+  --color-border: #E7E8EC;
+  --color-border-dark: #23344D;
 
-  --font-display: var(--font-barlow), 'Barlow Condensed', system-ui, sans-serif;
-  --font-body: var(--font-sora), 'Sora', system-ui, sans-serif;
+  --font-display: var(--font-tektur), 'Tektur', sans-serif;
+  --font-body: var(--font-tektur), 'Tektur', sans-serif;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -51,15 +51,15 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-2xl: 24px;
-  --radius-3xl: 32px;
+  --radius-3xl: 28px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.12);
-  --shadow-xl: 0 20px 60px rgba(15, 23, 42, 0.16);
-  --shadow-brand: 0 4px 24px rgba(234, 85, 59, 0.35);
-  --shadow-brand-lg: 0 8px 40px rgba(234, 85, 59, 0.45);
+  --shadow-sm: 0 1px 2px rgba(17, 31, 53, 0.04);
+  --shadow-md: 0 4px 12px rgba(17, 31, 53, 0.06);
+  --shadow-lg: 0 10px 30px rgba(17, 31, 53, 0.08);
+  --shadow-xl: 0 20px 60px rgba(17, 31, 53, 0.12);
+  --shadow-brand: 0 4px 24px rgba(23, 45, 77, 0.25);
+  --shadow-brand-lg: 0 8px 40px rgba(23, 45, 77, 0.35);
 
   --duration-fast: 150ms;
   --duration-base: 200ms;
@@ -83,18 +83,18 @@ html {
 body {
   font-family: var(--font-body);
   line-height: 1.6;
-  color: var(--color-charcoal);
-  background: var(--color-off-white);
+  color: #111F35;
+  background: #F5F5F7;
   min-height: 100vh;
 }
 
 ::selection {
-  background: var(--color-primary-20);
-  color: var(--color-dark);
+  background: #172D4D;
+  color: #FFFFFF;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid #172D4D;
   outline-offset: 2px;
 }
 
@@ -404,3 +404,67 @@ body {
     display: none !important;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Approved Leets Sports Design System Helpers
+   ───────────────────────────────────────────────────────────── */
+
+.brand-art {
+  display: inline-block;
+  background-size: 122.4% 192.4%;
+  background-position: 50% 56.5%;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+
+.brand-art-dark {
+  background-image: url('/draft-logo.png');
+  filter: grayscale(1) contrast(100) invert(1);
+  mix-blend-mode: multiply;
+}
+
+.brand-art-white {
+  background-image: url('/draft-logo.png');
+  filter: grayscale(1) contrast(100);
+  mix-blend-mode: screen;
+}
+
+.leets-pill-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #172D4D;
+  color: #FFFFFF;
+  padding: 13px 24px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.leets-pill-primary:hover {
+  background-color: #304865;
+  transform: translateY(-2px);
+}
+
+.leets-pill-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid #172D4D;
+  background-color: transparent;
+  color: #172D4D;
+  padding: 13px 24px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.leets-pill-outline:hover {
+  background-color: #172D4D;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}

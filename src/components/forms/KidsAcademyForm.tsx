@@ -24,9 +24,9 @@ const EMPTY = {
 type Form = typeof EMPTY;
 
 const field =
-  "w-full min-h-[48px] rounded-lg border border-white/15 bg-white/[0.04] px-4 text-[16px] text-white " +
-  "outline-none transition-colors duration-100 placeholder:text-white/35 focus:border-[#EA553B]";
-const labelClass = "mb-2 block text-sm font-medium text-white/80";
+  "w-full min-h-[48px] rounded-xl border border-[#E7E8EC] bg-[#F5F5F7] px-4 text-[15px] text-[#111F35] " +
+  "outline-none transition-colors duration-150 placeholder:text-[#94A3B8] focus:border-[#172D4D] focus:bg-white";
+const labelClass = "mb-2 block text-xs font-medium uppercase tracking-wider text-[#111F35]";
 
 interface SelectProps {
   name: keyof Form;
@@ -51,16 +51,16 @@ function Select({ name, label, options, placeholder, value, error, onChange }: S
         onChange={(e) => onChange(name, e.target.value)}
         className={field}
       >
-        <option value="" className="bg-[#0F172A]">
+        <option value="" className="bg-white text-[#667080]">
           {placeholder}
         </option>
         {options.map((o) => (
-          <option key={o} value={o} className="bg-[#0F172A]">
+          <option key={o} value={o} className="bg-white text-[#111F35]">
             {o}
           </option>
         ))}
       </select>
-      {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
+      {error && <p className="mt-1.5 text-xs text-red-500">{error}</p>}
     </div>
   );
 }
@@ -120,14 +120,14 @@ export default function KidsAcademyForm() {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-[#EA553B]/30 bg-white/[0.04] p-8 text-center">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#EA553B] text-2xl">
+      <div className="rounded-[24px] border border-[#E7E8EC] bg-white p-8 text-center shadow-sm">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#172D4D] text-white text-2xl">
           ✓
         </div>
-        <h2 className="font-[family-name:var(--font-display,'Barlow_Condensed')] text-3xl font-bold uppercase tracking-tight text-white">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#111F35]">
           Thanks, {form.parentName.trim().split(" ")[0]}
         </h2>
-        <p className="mx-auto mt-3 max-w-md text-white/70">
+        <p className="mx-auto mt-3 max-w-md text-[#687383]">
           We&apos;ve got {form.childName.trim().split(" ")[0]}&apos;s details. Our team will message
           you on WhatsApp shortly to arrange a first session.
         </p>
@@ -136,7 +136,7 @@ export default function KidsAcademyForm() {
   }
 
   return (
-    <form onSubmit={submit} noValidate className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+    <form onSubmit={submit} noValidate className="relative rounded-[24px] border border-[#E7E8EC] bg-white p-6 sm:p-8 shadow-sm">
       <div className="grid gap-5">
         <div>
           <label className={labelClass} htmlFor="childName">
@@ -236,7 +236,7 @@ export default function KidsAcademyForm() {
         </div>
 
         {failure && (
-          <p role="alert" className="rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
+          <p role="alert" className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-600">
             {failure}
           </p>
         )}
@@ -244,12 +244,12 @@ export default function KidsAcademyForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="min-h-[52px] w-full rounded-lg bg-[#EA553B] font-[family-name:var(--font-display,'Barlow_Condensed')] text-base font-bold uppercase tracking-wide text-white shadow-[0_4px_24px_rgba(234,85,59,0.35)] transition-[background-color,transform,box-shadow] duration-100 hover:bg-[#FF6B4F] active:scale-[0.98] active:bg-[#D14028] disabled:opacity-60"
+          className="min-h-[50px] w-full rounded-full bg-[#172D4D] text-sm font-medium tracking-wide text-white shadow-sm transition-all duration-200 hover:bg-[#304865] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60"
         >
-          {submitting ? "Sending..." : "Register my child"}
+          {submitting ? "Sending..." : "Register my child ↗"}
         </button>
 
-        <p className="text-center text-xs text-white/50">
+        <p className="text-center text-xs text-[#758191]">
           We&apos;ll only use these details to contact you about the academy.
         </p>
       </div>

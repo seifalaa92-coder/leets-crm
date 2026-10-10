@@ -66,37 +66,37 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
   const hasMedia = images.length > 0 || videos.length > 0 || (club.videoUrls?.length ?? 0) > 0;
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-white">
+    <div className="min-h-screen bg-[#F5F5F7] text-[#111F35]">
       <SiteHeader />
       <main id="main" className="mx-auto max-w-6xl px-4 py-16">
         <Link
           href="/clubs"
-          className="-my-3 inline-flex min-h-[44px] items-center py-3 text-sm font-semibold text-[#EA553B] transition-colors duration-100 hover:underline active:text-[#FF6B4F]"
+          className="-my-3 inline-flex min-h-[44px] items-center py-3 text-xs font-medium uppercase tracking-wider text-[#172D4D] transition-colors duration-100 hover:underline"
         >
           ← All facilities
         </Link>
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <StatusBadge status={club.status} />
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#EA553B]">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#172D4D]">
             {club.role}
           </span>
         </div>
-        <h1 className="mt-3 font-[family-name:var(--font-display,'Barlow_Condensed')] text-5xl font-bold uppercase tracking-tight">
+        <h1 className="mt-3 text-4xl sm:text-5xl font-semibold tracking-[-1px] text-[#111F35]">
           {club.name}
         </h1>
-        <p className="mt-2 text-white/50">
+        <p className="mt-2 text-sm text-[#667080]">
           {club.city} · {club.country}
         </p>
-        <p className="mt-6 max-w-3xl text-lg text-white/75">{club.about}</p>
+        <p className="mt-6 max-w-3xl text-base sm:text-lg text-[#687383] leading-relaxed">{club.about}</p>
 
         <section className="mt-14">
-          <h2 className="mb-6 font-[family-name:var(--font-display,'Barlow_Condensed')] text-3xl font-bold uppercase tracking-tight">
-            Gallery
+          <h2 className="mb-6 text-2xl sm:text-3xl font-medium tracking-tight text-[#111F35]">
+            Gallery & Media
           </h2>
 
           {!hasMedia && (
-            <div className="rounded-xl border border-dashed border-white/15 p-10 text-center text-white/50">
+            <div className="rounded-2xl border border-dashed border-[#E7E8EC] bg-white p-10 text-center text-[#758191]">
               Media coming soon.
             </div>
           )}
@@ -129,7 +129,7 @@ export default async function ClubPage({ params }: { params: Promise<{ slug: str
                   src={`/clubs/${club.slug}/${img}`}
                   alt={`${club.name} - ${img}`}
                   loading="lazy"
-                  className="aspect-[4/3] w-full rounded-xl border border-white/10 object-cover"
+                  className="aspect-[4/3] w-full rounded-2xl border border-[#E7E8EC] object-cover"
                 />
               ))}
             </div>

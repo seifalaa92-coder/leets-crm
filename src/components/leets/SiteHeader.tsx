@@ -1,17 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, useScroll } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { LeetsWordmark } from "@/components/ui/LeetsWordmark";
 
-const NAV = [
-  { href: "/", label: "Home" },
-  { href: "/clubs", label: "Clubs" },
-  { href: "/company", label: "Company" },
-  { href: "/kids", label: "Kids Academy" },
-  { href: "/classes/book-court", label: "Book a Court" },
+const NAV_LINKS = [
+  { href: "/clubs", label: "FACILITIES" },
+  { href: "/kids", label: "ACADEMY" },
+  { href: "/company", label: "COMMUNITY" },
 ];
 
 export function SiteHeader() {
@@ -22,16 +20,13 @@ export function SiteHeader() {
   const reduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
 
-  // Scroll edge effect: the divider and material only appear once content
-  // actually passes under the header.
   useEffect(() => {
-    setScrolled(scrollY.get() > 8);
+    setScrolled(scrollY.get() > 6);
     return scrollY.on("change", (latest) => {
-      setScrolled(latest > 8);
+      setScrolled(latest > 6);
     });
   }, [scrollY]);
 
-  // Close on route change, and never leave the menu open behind a resize to desktop.
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
@@ -54,114 +49,136 @@ export function SiteHeader() {
     };
   }, [menuOpen]);
 
-  // Tap carries no momentum, so the spring is critically damped - no overshoot.
   const spring = reduceMotion
     ? { duration: 0.15 }
-    : { type: "spring" as const, bounce: 0, duration: 0.34 };
+    : { type: "spring" as const, bounce: 0, duration: 0.3 };
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-200 ${
-        scrolled || menuOpen
-          ? "border-b border-white/10 bg-[#0F172A]/70 backdrop-blur-xl backdrop-saturate-150"
-          : "border-b border-transparent bg-[#0F172A]/95"
+      className={`sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-200 border-b border-[#E7E8EC] ${
+        scrolled
+          ? "bg-[#FAFAFC]/90 backdrop-blur-md"
+          : "bg-[#FAFAFC]"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <div className="mx-auto flex h-[62px] max-w-7xl items-center justify-between px-[5%] sm:px-[6%]">
+        {/* Authentic Leets wordmark on left */}
         <Link
           href="/"
-          className="flex items-center gap-2 font-[family-name:var(--font-display,'Barlow_Condensed')] text-2xl font-bold uppercase tracking-widest text-white transition-transform duration-100 active:scale-[0.97]"
+          className="flex items-center transition-opacity hover:opacity-85"
+          aria-label="Leets Sports Home"
         >
-          <Image
-            src="/leets-logo.png"
-            alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8 object-contain"
-            priority
-          />
-          Leets<span className="text-[#EA553B]">Sports</span>
+          <LeetsWordmark variant="dark" width={92} priority />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={pathname === item.href ? "page" : undefined}
-              className={`-my-3 py-3 text-sm font-medium transition-colors duration-100 hover:text-white active:text-[#EA553B] ${
-                pathname === item.href ? "text-white" : "text-white/70"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            href="/auth/login"
-            className="rounded-md bg-[#EA553B] px-4 py-2 text-sm font-semibold text-white transition-[background-color,transform] duration-100 hover:bg-[#FF6B4F] active:scale-[0.97] active:bg-[#D14028]"
-          >
-            Log in
-          </Link>
+        {/* Minimal Central Navigation */}
+        <nav className="hidden items-center gap-[30px] md:flex" aria-label="Main navigation">
+          {NAV_LINKS.map((item) => {
+            const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`text-[10px] font-normal tracking-[0.1px] uppercase transition-colors duration-150 ${
+                  isActive ? "text-[#111F35] font-medium" : "text-[#111F35]/75 hover:text-[#111F35]"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
-        <button
-          ref={triggerRef}
-          type="button"
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          className="-mr-2 flex h-12 w-12 items-center justify-center rounded-md text-white transition-[background-color,transform] duration-100 active:scale-[0.94] active:bg-white/10 md:hidden"
-        >
-          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-            <motion.line
-              x1="2" x2="20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-              animate={menuOpen ? { y1: 11, y2: 11, rotate: 45 } : { y1: 6, y2: 6, rotate: 0 }}
-              transition={spring}
-              style={{ originX: "11px", originY: "11px" }}
-            />
-            <motion.line
-              x1="2" x2="20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-              animate={menuOpen ? { y1: 11, y2: 11, rotate: -45 } : { y1: 16, y2: 16, rotate: 0 }}
-              transition={spring}
-              style={{ originX: "11px", originY: "11px" }}
-            />
-          </svg>
-        </button>
+        {/* Right Actions: Login & Navy Pill Booking Button */}
+        <div className="flex items-center gap-2 sm:gap-3.5">
+          <Link
+            href="/auth/login"
+            className="hidden text-[10px] font-normal tracking-[0.1px] uppercase text-[#667080] transition-colors hover:text-[#111F35] sm:inline-block"
+          >
+            LOG IN
+          </Link>
+
+          <Link
+            href="/classes/book-court"
+            className="rounded-full bg-[#172D4D] px-3.5 sm:px-[17px] py-[8px] sm:py-[9px] text-[9px] font-medium tracking-[0.2px] text-white transition-all duration-200 hover:bg-[#304865] hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
+          >
+            BOOK NOW ↗
+          </Link>
+
+          {/* Accessible Mobile Hamburger */}
+          <button
+            ref={triggerRef}
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-[#111F35] transition-colors hover:bg-black/5 md:hidden"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+              <motion.line
+                x1="2"
+                x2="18"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                animate={menuOpen ? { y1: 10, y2: 10, rotate: 45 } : { y1: 6, y2: 6, rotate: 0 }}
+                transition={spring}
+                style={{ originX: "10px", originY: "10px" }}
+              />
+              <motion.line
+                x1="2"
+                x2="18"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                animate={menuOpen ? { y1: 10, y2: 10, rotate: -45 } : { y1: 14, y2: 14, rotate: 0 }}
+                transition={spring}
+                style={{ originX: "10px", originY: "10px" }}
+              />
+            </svg>
+          </button>
+        </div>
       </div>
 
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
             id="mobile-nav"
             key="mobile-nav"
-            // Enters and exits along the same path, anchored to the header it came from.
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={spring}
-            className="overflow-hidden border-t border-white/10 md:hidden"
+            className="overflow-hidden border-t border-[#E7E8EC] bg-[#FAFAFC] md:hidden"
           >
-            <ul className="mx-auto max-w-6xl px-4 py-2">
-              {NAV.map((item) => (
+            <ul className="flex flex-col px-[6%] py-4 space-y-1">
+              {NAV_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    aria-current={pathname === item.href ? "page" : undefined}
-                    className={`flex min-h-[48px] items-center border-b border-white/5 text-[15px] font-medium transition-colors duration-100 active:text-[#EA553B] ${
-                      pathname === item.href ? "text-white" : "text-white/75"
-                    }`}
+                    className="flex min-h-[44px] items-center border-b border-[#E7E8EC]/60 text-[11px] font-normal tracking-wide text-[#111F35] active:text-[#172D4D]"
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
-              <li className="pb-3 pt-4">
+              <li>
+                <Link
+                  href="/classes/book-court"
+                  className="flex min-h-[44px] items-center border-b border-[#E7E8EC]/60 text-[11px] font-medium tracking-wide text-[#172D4D]"
+                >
+                  BOOK A COURT ↗
+                </Link>
+              </li>
+              <li>
                 <Link
                   href="/auth/login"
-                  className="flex min-h-[48px] items-center justify-center rounded-md bg-[#EA553B] text-sm font-semibold text-white transition-[background-color,transform] duration-100 active:scale-[0.98] active:bg-[#D14028]"
+                  className="flex min-h-[44px] items-center text-[11px] font-normal tracking-wide text-[#667080]"
                 >
-                  Log in
+                  LOG IN
                 </Link>
               </li>
             </ul>

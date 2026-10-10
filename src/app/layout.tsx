@@ -1,22 +1,14 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Sora } from "next/font/google";
+import { Tektur } from "next/font/google";
 import "./globals.css";
 import LeadCaptureWidget from "@/components/LeadCaptureWidget";
 
-const barlowCondensed = Barlow_Condensed({
+const tektur = Tektur({
   subsets: ["latin"],
-  variable: "--font-barlow",
+  variable: "--font-tektur",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
-  fallback: ["Arial Narrow", "sans-serif"],
-});
-
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-sora",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
-  fallback: ["Segoe UI", "sans-serif"],
+  weight: ["400", "500", "600", "700"],
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -59,11 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // The font variables live on <html> so :root can resolve them - declaring
-    // --font-body in :root while --font-sora sat on <body> made the whole
-    // declaration invalid, and every page fell back to the system UI font.
-    <html lang="en" dir="ltr" className={`${barlowCondensed.variable} ${sora.variable}`}>
-      <body className="font-body antialiased">
+    <html lang="en" dir="ltr" className={tektur.variable}>
+      <body className="font-sans antialiased bg-[#F5F5F7] text-[#111F35]">
         <a href="#main" className="skip-link">
           Skip to content
         </a>

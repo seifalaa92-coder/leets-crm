@@ -39,10 +39,10 @@ export function ClubCardVisual({ club, priority = false }: ClubCardVisualProps) 
       href={`/clubs/${club.slug}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#EA553B]/60 hover:bg-white/[0.06] hover:shadow-[0_12px_40px_rgba(234,85,59,0.2)] active:scale-[0.99]"
+      className="group relative flex flex-col overflow-hidden rounded-[24px] border border-[#E7E8EC] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(17,31,53,0.06)] active:scale-[0.99]"
     >
       {/* Visual Media Header (Video on hover / Poster) */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0A0F1E]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#101D32]">
         {club.posterImage && (
           <Image
             src={club.posterImage}
@@ -76,12 +76,12 @@ export function ClubCardVisual({ club, priority = false }: ClubCardVisualProps) 
         )}
 
         {/* Gradient Scrim for Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
         {/* Top Badges */}
         <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
           <StatusBadge status={club.status} />
-          <span className="rounded-full bg-black/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/90 backdrop-blur-md border border-white/10">
+          <span className="rounded-full bg-white/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md">
             {club.country}
           </span>
         </div>
@@ -89,31 +89,31 @@ export function ClubCardVisual({ club, priority = false }: ClubCardVisualProps) 
         {/* Live Video Indicator on Hover */}
         {club.previewVideo && (
           <div
-            className={`absolute bottom-3 right-3 z-10 flex items-center gap-1.5 rounded-md bg-[#0F172A]/80 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-[#EA553B] backdrop-blur-md transition-opacity duration-200 ${
+            className={`absolute bottom-3 right-3 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1 text-[9px] font-medium uppercase tracking-wider text-white backdrop-blur-md transition-opacity duration-200 ${
               isHovered ? "opacity-100" : "opacity-0"
             }`}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-[#EA553B]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             Live Preview
           </div>
         )}
       </div>
 
       {/* Card Body */}
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#EA553B]">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[#172D4D]">
             {club.role}
           </span>
         </div>
 
-        <h3 className="mt-2 font-[family-name:var(--font-display,'Barlow_Condensed')] text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white transition-colors duration-150 group-hover:text-[#EA553B]">
+        <h3 className="mt-2 text-2xl font-semibold tracking-[-0.5px] text-[#111F35] transition-colors duration-150 group-hover:text-[#172D4D]">
           {club.name}
         </h3>
 
-        <p className="mt-1 text-xs sm:text-sm text-white/50">{club.city}</p>
+        <p className="mt-1 text-xs text-[#667080]">{club.city}</p>
 
-        <p className="mt-3 text-sm text-white/70 line-clamp-2 leading-relaxed">
+        <p className="mt-3 text-sm text-[#687383] line-clamp-2 leading-relaxed">
           {club.short}
         </p>
 
@@ -123,7 +123,7 @@ export function ClubCardVisual({ club, priority = false }: ClubCardVisualProps) 
             {club.highlights.map((tag) => (
               <span
                 key={tag}
-                className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-white/60"
+                className="rounded-full border border-[#E7E8EC] bg-[#F5F5F7] px-2.5 py-1 text-[10px] font-medium text-[#667080]"
               >
                 {tag}
               </span>
@@ -132,14 +132,14 @@ export function ClubCardVisual({ club, priority = false }: ClubCardVisualProps) 
         )}
 
         {/* Card Footer CTA */}
-        <div className="mt-auto pt-6 flex items-center justify-between border-t border-white/5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-white/40 group-hover:text-white/70 transition-colors">
-            Full Operations & Media
+        <div className="mt-auto pt-6 flex items-center justify-between border-t border-[#E7E8EC]">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-[#758191]">
+            Project Overview
           </span>
-          <span className="flex items-center gap-1.5 text-sm font-bold text-[#EA553B]">
-            View Club
-            <span className="transition-transform duration-200 group-hover:translate-x-1.5">
-              →
+          <span className="flex items-center gap-1.5 text-xs font-semibold text-[#172D4D]">
+            Explore
+            <span className="transition-transform duration-200 group-hover:translate-x-1">
+              ↗
             </span>
           </span>
         </div>

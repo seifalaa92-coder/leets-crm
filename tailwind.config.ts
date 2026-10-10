@@ -73,8 +73,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['var(--font-barlow)', 'Barlow Condensed', 'system-ui', 'sans-serif'],
-        body: ['var(--font-sora)', 'Sora', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-tektur)', 'Tektur', 'sans-serif'],
+        tektur: ['var(--font-tektur)', 'Tektur', 'sans-serif'],
+        display: ['var(--font-tektur)', 'Tektur', 'sans-serif'],
+        body: ['var(--font-tektur)', 'Tektur', 'sans-serif'],
         arabic: ['Noto Sans Arabic', 'system-ui', 'sans-serif'],
       },
       fontSize: {

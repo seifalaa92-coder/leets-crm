@@ -146,22 +146,22 @@ export default function LeadCaptureWidget() {
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 24 }}
             transition={reduceMotion ? { duration: 0.2 } : { type: "spring", bounce: 0, duration: 0.35 }}
             style={{ transformOrigin: "bottom right" }}
-            className="pointer-events-auto w-full max-w-[420px] max-[480px]:fixed max-[480px]:inset-0 max-[480px]:max-h-full max-[480px]:rounded-none rounded-[20px] bg-neutral-dark-alt border border-brand/20 shadow-xl flex flex-col overflow-hidden">
+            className="pointer-events-auto w-full max-w-[420px] max-[480px]:fixed max-[480px]:inset-0 max-[480px]:max-h-full max-[480px]:rounded-none rounded-[20px] bg-[#101D32] border border-white/10 shadow-2xl flex flex-col overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-neutral-dark-alt to-neutral-dark px-4 py-3.5 border-b border-brand/15">
+            <div className="bg-[#0B1524] px-4 py-3.5 border-b border-white/10">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-dark to-brand flex items-center justify-center text-xl shadow-[0_0_14px_rgba(234,85,59,0.4)] flex-shrink-0">🎾</div>
+                <div className="w-10 h-10 rounded-full bg-[#172D4D] border border-white/10 flex items-center justify-center text-xl flex-shrink-0">🎾</div>
                 <div className="flex-1 min-w-0">
                   <div className="text-white/95 font-semibold text-[14px] truncate">Leets Sports</div>
                   <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_5px_#EA553B] inline-block" />
-                    <span className="text-brand-light text-[11px]">Get Started</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
+                    <span className="text-[#A2B3C7] text-[11px]">Get Started</span>
                   </div>
                 </div>
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close"
-                  className="ml-auto bg-white/5 border-none text-brand-light rounded-lg w-11 h-11 text-xl cursor-pointer flex items-center justify-center hover:bg-white/10 active:bg-white/15 active:scale-[0.94] transition-[background-color,transform] duration-100"
+                  className="ml-auto bg-white/5 border-none text-[#A2B3C7] rounded-lg w-11 h-11 text-xl cursor-pointer flex items-center justify-center hover:bg-white/10 active:bg-white/15 active:scale-[0.94] transition-[background-color,transform] duration-100"
                 >
                   ×
                 </button>
@@ -169,7 +169,7 @@ export default function LeadCaptureWidget() {
               {!done && (
                 <div className="mt-2 flex gap-1">
                   {STEPS.map((_, i) => (
-                    <div key={i} className={`h-1 flex-1 rounded-full transition-colors ${i <= step ? "bg-brand" : "bg-white/10"}`} />
+                    <div key={i} className={`h-1 flex-1 rounded-full transition-colors ${i <= step ? "bg-white" : "bg-white/15"}`} />
                   ))}
                 </div>
               )}
@@ -189,7 +189,7 @@ export default function LeadCaptureWidget() {
                     onKeyDown={handleKeyDown}
                     placeholder={current.placeholder}
                     type={current.key === "age" ? "number" : "text"}
-                    className="w-full min-h-[48px] bg-brand/10 border border-brand/20 rounded-xl px-4 py-3 text-[16px] text-brand-100 outline-none focus:border-brand transition-colors duration-200 placeholder:text-[#8A4530] text-center mb-4"
+                    className="w-full min-h-[48px] bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-[16px] text-white outline-none focus:border-white/40 transition-colors duration-200 placeholder:text-white/40 text-center mb-4"
                     // No autoFocus on touch - it throws the keyboard up over the
                     // question before the sheet has finished arriving.
                     ref={(el) => {
@@ -202,7 +202,7 @@ export default function LeadCaptureWidget() {
                       <button
                         onClick={back}
                         disabled={submitting}
-                        className="min-h-[48px] px-5 rounded-xl border border-brand/25 text-brand-light font-semibold text-[14px] transition-[background-color,transform] duration-100 hover:bg-brand/10 active:scale-[0.97] active:bg-brand/20 disabled:opacity-50"
+                        className="min-h-[48px] px-5 rounded-xl border border-white/20 text-white font-medium text-[14px] transition-[background-color,transform] duration-100 hover:bg-white/10 active:scale-[0.97] disabled:opacity-50"
                       >
                         Back
                       </button>
@@ -210,7 +210,7 @@ export default function LeadCaptureWidget() {
                     <button
                       onClick={next}
                       disabled={submitting}
-                      className="flex-1 min-h-[48px] rounded-xl bg-brand hover:bg-brand-dark text-white font-semibold text-[14px] transition-[background-color,transform] duration-100 active:scale-[0.98] disabled:opacity-50"
+                      className="flex-1 min-h-[48px] rounded-xl bg-white hover:bg-white/90 text-[#101D32] font-semibold text-[14px] transition-[background-color,transform] duration-100 active:scale-[0.98] disabled:opacity-50"
                     >
                       {submitting ? "Sending..." : step < STEPS.length - 1 ? "Next" : "Send"}
                     </button>
@@ -219,15 +219,15 @@ export default function LeadCaptureWidget() {
               ) : (
                 /* Success */
                 <div className="text-center">
-                  <div className="w-14 h-14 rounded-full mx-auto mb-3 bg-gradient-to-br from-brand-dark to-brand flex items-center justify-center text-2xl shadow-[0_0_28px_rgba(234,85,59,0.5)]">✓</div>
+                  <div className="w-14 h-14 rounded-full mx-auto mb-3 bg-white/10 border border-white/20 flex items-center justify-center text-2xl text-white">✓</div>
                   <h3 className="text-white/95 text-[17px] font-bold mb-1">Thanks, {form.name}!</h3>
-                  <p className="text-brand-light text-xs mb-4 leading-relaxed">
+                  <p className="text-[#A2B3C7] text-xs mb-4 leading-relaxed">
                     We&apos;ll reach out to you soon on WhatsApp to help you get started.
                   </p>
-                  <div className="bg-brand/15 border border-brand/25 rounded-xl px-3.5 py-2.5 mb-4 text-left">
+                  <div className="bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 mb-4 text-left">
                     {[["👤", "Name", form.name], ["🎂", "Age", form.age], ["🏋️", "Interest", form.interest], ["📱", "Phone", form.phone]].map(([icon, label, val]) => (
                       <div key={label as string} className="flex justify-between text-[11.5px] mb-1 last:mb-0">
-                        <span className="text-brand-light">{icon} {label as string}</span>
+                        <span className="text-[#A2B3C7]">{icon} {label as string}</span>
                         <span className="text-white/95 font-medium">{val || "-"}</span>
                       </div>
                     ))}
@@ -235,7 +235,7 @@ export default function LeadCaptureWidget() {
 
                   <button
                     onClick={() => { setDone(false); setOpen(false); }}
-                    className="bg-transparent border border-brand/25 text-brand-light rounded-lg min-h-[44px] px-4 text-xs cursor-pointer w-full transition-[background-color,transform] duration-100 hover:bg-brand/10 active:scale-[0.98] active:bg-brand/20"
+                    className="bg-transparent border border-white/20 text-white rounded-lg min-h-[44px] px-4 text-xs cursor-pointer w-full transition-[background-color,transform] duration-100 hover:bg-white/10 active:scale-[0.98]"
                   >
                     Close
                   </button>
@@ -244,7 +244,7 @@ export default function LeadCaptureWidget() {
             </div>
 
             {!done && (
-              <p className="text-center text-[#7A3520] text-[10px] pb-3">We&apos;ll reach out on WhatsApp - no spam</p>
+              <p className="text-center text-[#A2B3C7]/60 text-[10px] pb-3">We&apos;ll reach out on WhatsApp - no spam</p>
             )}
           </motion.div>
         </div>
@@ -255,10 +255,10 @@ export default function LeadCaptureWidget() {
         <button
           ref={triggerRef}
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-[99999] flex min-h-[48px] items-center gap-2.5 px-4 py-2.5 rounded-full bg-brand hover:bg-brand-dark border border-brand/40 shadow-brand transition-[background-color,box-shadow,transform] duration-100 hover:shadow-brand-lg active:scale-[0.95] active:bg-brand-dark"
+          className="fixed bottom-6 right-6 z-[99999] flex min-h-[48px] items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#172D4D] hover:bg-[#304865] border border-white/10 shadow-lg transition-[background-color,box-shadow,transform] duration-200 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 text-white"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
-          <span className="text-white text-sm font-semibold">Get Started</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+          <span className="text-white text-xs font-medium tracking-wide uppercase">Get Started</span>
         </button>
       )}
     </>
