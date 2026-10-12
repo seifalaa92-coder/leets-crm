@@ -1,0 +1,28 @@
+{
+  "name": "Leets Sports",
+  "short_name": "Leets Sports",
+  "description": "Leets Sports builds, owns and operates padel clubs and sports facilities across Egypt and Saudi Arabia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#172D4D",
+  "theme_color": "#172D4D",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

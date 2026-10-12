@@ -33,17 +33,24 @@ export const metadata: Metadata = {
     title: "Leets Sports | Sports Management Company",
     description: "Leets Sports builds, owns and operates padel clubs across Egypt and Saudi Arabia.",
   },
+  manifest: "/manifest.json",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
       { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
     ],
     apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
       { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
     ],
     shortcut: "/favicon.ico",
   },
   robots: { index: true, follow: true },
+};
+
+export const viewport = {
+  themeColor: "#172D4D",
 };
 
 export default function RootLayout({
@@ -53,6 +60,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="ltr" className={tektur.variable}>
+      <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png" />
+        <meta name="apple-mobile-web-app-title" content="Leets Sports" />
+        <meta name="application-name" content="Leets Sports" />
+        <meta name="msapplication-TileColor" content="#172D4D" />
+        <meta name="theme-color" content="#172D4D" />
+      </head>
       <body className="font-sans antialiased bg-[#F5F5F7] text-[#111F35]">
         <a href="#main" className="skip-link">
           Skip to content
